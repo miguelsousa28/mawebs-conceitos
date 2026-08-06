@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MA Webs / 01 / Noir Cinema</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#070707;
+  --panel:#0D0D0D;
+  --bone:#E8E3D9;
+  --bone-dim:rgba(232,227,217,.5);
+  --sand:#C0A176;
+  --hair:rgba(232,227,217,.10);
+  --e:cubic-bezier(.22,.61,.20,1);
+  --pad:clamp(1.25rem,5vw,6rem);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--bone);font-family:'Archivo',system-ui,sans-serif;font-weight:300;
+  overflow-x:hidden;width:100%;max-width:100%;-webkit-font-smoothing:antialiased;line-height:1.6}
+::selection{background:var(--sand);color:var(--ink)}
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:300;letter-spacing:-.025em;line-height:1.02}
+a{color:inherit;text-decoration:none}
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:1.6rem var(--pad);transition:background .8s var(--e),backdrop-filter .8s var(--e),padding .8s var(--e)}
+.nav.stuck{background:rgba(7,7,7,.72);backdrop-filter:blur(20px);padding-block:1rem;border-bottom:1px solid var(--hair)}
+.mark{display:flex;align-items:center;gap:.75rem;font-family:'Fraunces';font-size:1.05rem;letter-spacing:.02em}
+.mark i{width:30px;height:30px;border:1px solid var(--sand);color:var(--sand);border-radius:2px;display:grid;place-items:center;
+  font-family:'Archivo';font-style:normal;font-size:.6rem;font-weight:500;letter-spacing:.08em}
+.nav nav{display:flex;gap:2.5rem;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim)}
+.nav nav a{position:relative;transition:color .7s var(--e)}
+.nav nav a::after{content:'';position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--sand);transition:width .7s var(--e)}
+.nav nav a:hover{color:var(--bone)}.nav nav a:hover::after{width:100%}
+.lnk{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid var(--sand);padding-bottom:4px;
+  transition:color .7s var(--e)}
+.lnk:hover{color:var(--sand)}
+@media(max-width:960px){.nav nav{display:none}}
+
+.hero{position:relative;min-height:100dvh;display:flex;align-items:flex-end;padding:0 var(--pad) clamp(2.5rem,7vh,5rem);overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:0}
+.hero-media::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,var(--ink) 2%,rgba(7,7,7,.55) 45%,rgba(7,7,7,.72) 100%)}
+.plate{position:absolute;inset:-5%;background:
+  radial-gradient(50% 45% at 30% 35%,rgba(192,161,118,.16),transparent 62%),
+  radial-gradient(45% 50% at 74% 62%,rgba(120,110,100,.16),transparent 66%),
+  linear-gradient(150deg,#151412,#070707 62%);
+  animation:drift 34s ease-in-out infinite alternate}
+@keyframes drift{to{transform:scale(1.08) translate3d(-1.5%,-1.5%,0)}}
+.slot{position:absolute;z-index:2;top:46%;left:50%;transform:translate(-50%,-50%);
+  width:min(58vw,660px);aspect-ratio:16/9;border:1px solid rgba(232,227,217,.16);display:grid;place-items:center;
+  text-align:center;padding:1.5rem}
+.slot p{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-dim);line-height:2.2}
+.slot p b{display:block;font-family:'Fraunces';font-weight:300;text-transform:none;letter-spacing:0;
+  font-size:clamp(1rem,1.7vw,1.35rem);color:var(--bone);margin-bottom:.7rem}
+.hero-in{position:relative;z-index:4;width:100%;max-width:1440px;margin:0 auto}
+.hero-top{position:absolute;top:clamp(6.5rem,15vh,10rem);left:0;font-size:.68rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--bone-dim);display:flex;align-items:center;gap:.7rem}
+.hero-top b{width:5px;height:5px;border-radius:99px;background:var(--sand)}
+.hero h1{font-size:clamp(2.9rem,8vw,8rem);max-width:15ch}
+.hero h1 em{font-style:italic;color:var(--sand)}
+.hero-foot{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:2.5rem;margin-top:clamp(2rem,5vh,3.5rem);
+  border-top:1px solid var(--hair);padding-top:2rem}
+.hero-foot p{max-width:40ch;font-size:1rem;color:var(--bone-dim)}
+.btns{display:flex;gap:1.6rem;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:1rem;padding:1rem 1.6rem;font-size:.76rem;letter-spacing:.16em;
+  text-transform:uppercase;transition:background .8s var(--e),color .8s var(--e),transform .8s var(--e)}
+.btn i{font-style:normal;transition:transform .8s var(--e)}
+.btn:hover i{transform:translateX(5px)}
+.btn:active{transform:scale(.985)}
+.btn-p{background:var(--bone);color:var(--ink)}
+.btn-p:hover{background:var(--sand)}
+.btn-s{border:1px solid var(--hair)}
+.btn-s:hover{border-color:var(--sand);color:var(--sand)}
+
+[data-anim]{opacity:0;transform:translate3d(0,44px,0);filter:blur(8px);
+  transition:opacity 1.4s var(--e),transform 1.4s var(--e),filter 1.4s var(--e)}
+[data-anim].in{opacity:1;transform:none;filter:none}
+[data-d="1"]{transition-delay:.12s}[data-d="2"]{transition-delay:.24s}[data-d="3"]{transition-delay:.36s}[data-d="4"]{transition-delay:.48s}
+
+.strip{border-block:1px solid var(--hair);padding:1.1rem 0;overflow:hidden;white-space:nowrap}
+.strip div{display:inline-flex;gap:4rem;padding-right:4rem;animation:slide 46s linear infinite}
+.strip span{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--bone-dim)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:clamp(6rem,16vh,13rem) var(--pad);position:relative}
+.wrap{max-width:1440px;margin:0 auto}
+.eyebrow{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--sand);margin-bottom:1.8rem;display:block}
+.h2{font-size:clamp(2rem,5vw,4.4rem);max-width:20ch}
+.lead{color:var(--bone-dim);max-width:48ch;margin-top:1.6rem}
+
+.list{margin-top:clamp(3rem,7vh,5rem);border-top:1px solid var(--hair)}
+.row{display:grid;grid-template-columns:5rem 1fr 1.1fr;gap:2rem;padding:2.6rem 0;border-bottom:1px solid var(--hair);
+  align-items:baseline;transition:padding .9s var(--e),color .9s var(--e)}
+.row:hover{padding-left:1.2rem}
+.row .n{font-size:.68rem;letter-spacing:.2em;color:var(--bone-dim)}
+.row h3{font-size:clamp(1.5rem,2.6vw,2.4rem)}
+.row p{color:var(--bone-dim);font-size:.95rem;max-width:44ch}
+@media(max-width:860px){.row{grid-template-columns:1fr;gap:.9rem;padding:2rem 0}}
+
+.rail-outer{height:360vh;position:relative}
+.rail-stick{position:sticky;top:0;height:100dvh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.rail-head{padding:0 var(--pad);display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:3rem}
+.rail{display:flex;gap:1.5rem;padding-left:var(--pad);will-change:transform}
+.card{flex:0 0 clamp(270px,30vw,430px);position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--panel)}
+.card .ph{position:absolute;inset:0;background-size:cover;background-position:center;
+  filter:grayscale(1) brightness(.62);transform:scale(1.02);transition:transform 1.6s var(--e),filter 1.6s var(--e)}
+.card:hover .ph{transform:scale(1.07);filter:grayscale(.25) brightness(.78)}
+.card .meta{position:absolute;inset:auto 0 0 0;padding:1.6rem;z-index:2;
+  background:linear-gradient(transparent,rgba(7,7,7,.9))}
+.card h4{font-size:1.35rem;margin-top:.4rem}
+.card small{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sand)}
+.prog{height:1px;background:var(--hair);margin:3rem var(--pad) 0;position:relative}
+.prog b{position:absolute;inset:0 auto 0 0;background:var(--sand);width:0}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,6rem);align-items:center}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.shot{border:1px solid rgba(232,227,217,.14);aspect-ratio:1;display:grid;place-items:center;text-align:center;
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-dim);
+  background:linear-gradient(155deg,rgba(232,227,217,.04),transparent);transition:border-color 1s var(--e)}
+.shot:hover{border-color:var(--sand)}
+.shot:first-child{grid-column:span 2;aspect-ratio:16/10}
+.ticks{margin-top:2.5rem;display:grid;gap:1.1rem}
+.tick{display:flex;gap:1rem;color:var(--bone-dim);font-size:.95rem;padding-bottom:1.1rem;border-bottom:1px solid var(--hair)}
+.tick b{color:var(--sand);font-weight:400}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--hair)}
+.stat{padding:clamp(2rem,4vw,3.2rem) 0;border-right:1px solid var(--hair);padding-right:2rem}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:'Fraunces';font-weight:300;font-size:clamp(2.4rem,5vw,4rem);letter-spacing:-.03em}
+.stat small{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-dim)}
+@media(max-width:800px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}}
+
+.cta{text-align:center}
+.cta h2{font-size:clamp(2.4rem,8vw,7rem);letter-spacing:-.035em}
+.cta h2 em{font-style:italic;color:var(--sand)}
+.cta .btns{justify-content:center;margin-top:3rem}
+footer{padding:3.5rem var(--pad);border-top:1px solid var(--hair);display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:1.5rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim)}
+footer a:hover{color:var(--sand)}
+.badge{position:fixed;left:1rem;bottom:1rem;z-index:70;border:1px solid var(--sand);color:var(--sand);
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;padding:.5rem .8rem;background:rgba(7,7,7,.8);backdrop-filter:blur(8px)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}[data-anim]{opacity:1;transform:none;filter:none}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="badge">01 / Noir Cinema</div>
+
+<header class="nav" id="nav">
+  <a href="#" class="mark"><i>MA</i> MA Webs</a>
+  <nav>
+    <a href="#servicos">Serviços</a>
+    <a href="#trabalho">Trabalho</a>
+    <a href="#nfc">Placas NFC</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a href="#contacto" class="lnk">Começar projeto</a>
+</header>
+
+<section class="hero">
+  <div class="hero-media"><div class="plate"></div></div>
+  <div class="slot">
+    <p><b>Hero, o teu vídeo aqui</b>
+      Loop de 8s, sem som, plano fixo<br>
+      Sugestão: balcão escuro, mão a encostar telemóvel<br>
+      numa placa NFC, luz quente lateral
+    </p>
+  </div>
+  <div class="hero-in">
+    <div class="hero-top"><b></b> Estúdio de web e conteúdo, Portugal</div>
+    <h1 data-anim>Presença digital<br>para negócios que<br><em>levam a sério.</em></h1>
+    <div class="hero-foot">
+      <p data-anim data-d="1">Desenhamos e construímos websites, menus digitais e placas NFC. Depois tratamos do conteúdo que os mantém vivos.</p>
+      <div class="btns" data-anim data-d="2">
+        <a href="#contacto" class="btn btn-p">Marcar chamada <i>&#8594;</i></a>
+        <a href="#trabalho" class="btn btn-s">Ver trabalho <i>&#8594;</i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div>
+    <span>Websites</span><span>Menus digitais</span><span>Placas NFC</span><span>Fotografia</span><span>Conteúdo social</span><span>Manutenção</span>
+    <span>Websites</span><span>Menus digitais</span><span>Placas NFC</span><span>Fotografia</span><span>Conteúdo social</span><span>Manutenção</span>
+  </div>
+</div>
+
+<section id="servicos">
+  <div class="wrap">
+    <div data-anim>
+      <span class="eyebrow">Serviços</span>
+      <h2 class="h2">Uma equipa pequena a tratar de tudo o que aparece ao cliente.</h2>
+    </div>
+    <div class="list">
+      <div class="row" data-anim><div class="n">01</div><h3>Websites à medida</h3><p>Sites institucionais, landing pages e menus digitais. Rápidos, feitos à mão, preparados para reservas e pedidos de orçamento.</p></div>
+      <div class="row" data-anim><div class="n">02</div><h3>Placas NFC</h3><p>Um toque leva o cliente às avaliações, ao menu ou ao Instagram. Placa desenhada com a tua identidade e link editável a qualquer momento.</p></div>
+      <div class="row" data-anim><div class="n">03</div><h3>Conteúdo</h3><p>Fotografia, vídeo e publicações. Produzido, aprovado por ti e agendado por nós.</p></div>
+      <div class="row" data-anim><div class="n">04</div><h3>Identidade</h3><p>Logo, paleta e tipografia. A base para que tudo o resto encaixe sem esforço.</p></div>
+      <div class="row" data-anim><div class="n">05</div><h3>Manutenção</h3><p>Alterações, backups e monitorização. O site nunca fica parado no tempo.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="rail-outer" id="trabalho">
+  <div class="rail-stick">
+    <div class="rail-head">
+      <div>
+        <span class="eyebrow">Trabalho selecionado</span>
+        <h2 class="h2" style="font-size:clamp(1.8rem,4vw,3.2rem)">Negócios reais, do primeiro esboço ao ar.</h2>
+      </div>
+      <p style="color:var(--bone-dim);max-width:22ch;font-size:.8rem;letter-spacing:.06em">Continua a fazer scroll</p>
+    </div>
+    <div class="rail">
+      <article class="card"><div class="ph" style="background-image:url('https://picsum.photos/seed/mrburger/900/1200')"></div><div class="meta"><small>Restauração</small><h4>Mr. Burger</h4></div></article>
+      <article class="card"><div class="ph" style="background-image:url('https://picsum.photos/seed/sobreiro/900/1200')"></div><div class="meta"><small>Restaurante</small><h4>Raízes do Sobreiro</h4></div></article>
+      <article class="card"><div class="ph" style="background-image:url('https://picsum.photos/seed/gamabarber/900/1200')"></div><div class="meta"><small>Barbearia e conteúdo</small><h4>Gama Barbearia</h4></div></article>
+      <article class="card"><div class="ph" style="background-image:url('https://picsum.photos/seed/malveira/900/1200')"></div><div class="meta"><small>Plataforma</small><h4>Escola de Música da Malveira</h4></div></article>
+      <article class="card"><div class="ph" style="background-image:url('https://picsum.photos/seed/zenith/900/1200')"></div><div class="meta"><small>Estética</small><h4>Zenith Beauty Space</h4></div></article>
+      <article class="card"><div class="ph" style="background-image:url('https://picsum.photos/seed/casarocha/900/1200')"></div><div class="meta"><small>Construção</small><h4>Casa da Rocha</h4></div></article>
+      <article class="card"><div class="ph" style="background-image:url('https://picsum.photos/seed/brahe/900/1200')"></div><div class="meta"><small>Ericeira</small><h4>Brah</h4></div></article>
+    </div>
+    <div class="prog"><b id="prog"></b></div>
+  </div>
+</div>
+
+<section id="nfc">
+  <div class="wrap split">
+    <div data-anim>
+      <span class="eyebrow">Novo serviço</span>
+      <h2 class="h2">Placas NFC com a tua marca.</h2>
+      <p class="lead">Uma placa no balcão, na mesa ou na montra. O cliente encosta o telemóvel e vai direto ao que interessa. Sem app, sem explicações.</p>
+      <div class="ticks">
+        <div class="tick"><b>&#43;</b> Desenhada com a tua identidade, nunca um autocolante genérico</div>
+        <div class="tick"><b>&#43;</b> Destino do link editável sempre que quiseres</div>
+        <div class="tick"><b>&#43;</b> Acrílico, madeira ou metal escovado</div>
+        <div class="tick"><b>&#43;</b> Avaliações no Google, menu, Instagram ou marcações</div>
+      </div>
+      <div class="btns" style="margin-top:2.8rem"><a href="#contacto" class="btn btn-p">Pedir orçamento <i>&#8594;</i></a></div>
+    </div>
+    <div class="shots" data-anim data-d="1">
+      <div class="shot">Foto das placas no balcão</div>
+      <div class="shot">Detalhe do material</div>
+      <div class="shot">Telemóvel a encostar</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stats" data-anim>
+    <div class="stat"><b>30+</b><small>Sites entregues</small></div>
+    <div class="stat"><b>48h</b><small>Primeira versão no ar</small></div>
+    <div class="stat"><b>0</b><small>Templates usados</small></div>
+    <div class="stat"><b>2</b><small>Pessoas, sem intermediários</small></div>
+  </div>
+</section>
+
+<section class="cta" id="contacto">
+  <div class="wrap">
+    <h2 data-anim>Falamos <em>quinze minutos</em>?</h2>
+    <p class="lead" style="margin-inline:auto" data-anim data-d="1">Chega para perceber o que precisas e dizer quanto custa. Sem compromisso.</p>
+    <div class="btns" data-anim data-d="2">
+      <a href="#" class="btn btn-p">Marcar chamada <i>&#8594;</i></a>
+      <a href="#" class="btn btn-s">Escrever no WhatsApp <i>&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>MA Webs, estúdio MA Studios</span>
+  <span><a href="#">Instagram</a> &nbsp;&nbsp; <a href="#">WhatsApp</a> &nbsp;&nbsp; <a href="#">Email</a></span>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+
+const outer=document.querySelector('.rail-outer'),rail=document.querySelector('.rail'),prog=document.getElementById('prog'),nav=document.getElementById('nav');
+let t=false;
+function onScroll(){
+  const r=outer.getBoundingClientRect(),total=outer.offsetHeight-innerHeight;
+  const p=Math.min(1,Math.max(0,-r.top/total));
+  rail.style.transform='translate3d('+(-p*(rail.scrollWidth-innerWidth+40))+'px,0,0)';
+  prog.style.width=(p*100)+'%';
+  nav.classList.toggle('stuck',scrollY>80);
+  t=false;
+}
+addEventListener('scroll',()=>{if(!t){t=true;requestAnimationFrame(onScroll)}},{passive:true});
+addEventListener('resize',onScroll);onScroll();
+</script>
+</body>
+</html>
