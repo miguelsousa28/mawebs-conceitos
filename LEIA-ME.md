@@ -1,4 +1,55 @@
-# MA Webs, 5 conceitos de site (06/08/2026)
+# MA Webs, conceitos de site (06/08/2026)
+
+## 06, Híbrido (o que pediste)
+
+Tipografia e proporções do conceito 03 (Archivo + Space Mono, Suíço, preciso)
+dentro do layout do conceito 04 (hero centrada, moldura dupla, cartões suaves, processo fixo).
+Mais o que faltava de marca:
+
+- **Gradiente de marca** `#3E4FD4 → #39B3AE`, com sublinhado a desenhar-se por baixo de "negócios" mal a página abre
+- **Fundo WebGL que reage ao rato** (é isto que procuravas quando disseste "renders"): duas nuvens de cor a fluir devagar sobre branco quente, com uma luz que segue o cursor. Desliga-se sozinho fora do ecrã para não gastar bateria
+- **3D**: placa NFC na hero que se inclina conforme o rato, cartões com inclinação suave, moldura do vídeo que cresce e endireita com o scroll
+- Ficheiro: `06-hibrido.html`
+
+---
+
+## Conceito do vídeo da hero
+
+Faltava isto e é a decisão que destranca a gravação. Três hipóteses, por ordem de recomendação.
+
+### A. "O Toque" (recomendado)
+
+Um plano único, câmara fixa, câmara lenta suave, luz baixa e lateral.
+Uma mão pousa o telemóvel sobre a placa NFC no balcão. No instante do contacto,
+uma onda de luz com o gradiente da marca sai da placa e atravessa a superfície.
+O ecrã do telemóvel acende com o site do cliente. Corta.
+
+- **Porquê:** liga os dois serviços num só gesto, sem explicar nada. Website e placa NFC no mesmo plano
+- **Precisas de:** um balcão escuro, um candeeiro quente de lado, uma placa, um telemóvel com o site aberto
+- **Duração:** 8 a 10s em loop, sem som, sem cortes
+- **Truque:** grava o brilho separado com o telefone a filmar uma lanterna a passar, e sobrepõe. Ou deixa comigo em pós
+
+### B. "A Mesa"
+
+Plano de cima, mãos a arrumar folhas impressas com layouts, um telemóvel e uma placa NFC.
+Tudo desliza e encaixa numa grelha que é exatamente a grelha do site.
+
+- **Porquê:** casa com a tipografia suíça do 03, é o registo mais estúdio
+- **Mais fácil de gravar**, menos impacto que a A
+
+### C. Sem vídeo, só o render
+
+A hero fica só com o fundo WebGL e a placa 3D a reagir ao rato.
+O próprio site demonstra o toque NFC, sem gravar nada.
+
+- **Porquê:** zero produção, funciona já hoje, e é o que está no `06-hibrido.html`
+- **Contra:** não mostra um negócio real
+
+**Sugestão:** publica com a C hoje, grava a A este fim de semana e troca. A moldura já está lá à espera.
+
+---
+
+# Os cinco conceitos base
 
 Cinco direções para o site novo da agência. Todos calmos, muito branded e caros. Nada playful.
 Abre o `index.html` para os ver lado a lado, ou cada ficheiro diretamente.
