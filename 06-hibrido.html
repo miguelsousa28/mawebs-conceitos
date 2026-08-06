@@ -50,7 +50,7 @@ img{display:block;max-width:100%}
              radial-gradient(52% 48% at 80% 72%,rgba(10,11,12,.042),transparent 66%);
   animation:drift 34s ease-in-out infinite alternate}
 .veil{position:fixed;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(to bottom,transparent 50%,var(--bg) 93%)}
+  background:linear-gradient(to bottom,transparent 62%,var(--bg) 97%)}
 @keyframes drift{to{transform:translate3d(-2%,-1.5%,0) scale(1.06)}}
 .grain{position:fixed;inset:0;z-index:59;pointer-events:none;opacity:.035;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -61,6 +61,7 @@ img{display:block;max-width:100%}
 .island{pointer-events:auto;display:flex;align-items:center;gap:1.6rem;height:58px;width:100%;
   max-width:1120px;padding:0 .48rem 0 1.25rem;border-radius:1.15rem;background:#fff;
   border:1px solid var(--hair);overflow:hidden;white-space:nowrap;
+  position:relative;
   box-shadow:0 22px 50px -32px rgba(10,11,12,.4), 0 2px 8px -5px rgba(10,11,12,.07);
   /* uma curva so, sem ressalto, para o retangulo virar capsula sem saltos */
   transition:max-width 1.05s var(--e),border-radius .7s var(--e),height 1.05s var(--e),
@@ -70,24 +71,27 @@ img{display:block;max-width:100%}
 .brand{display:flex;align-items:center;flex:none;height:100%}
 .brand img{height:17px;width:auto;mix-blend-mode:multiply;transition:height 1.1s var(--spring)}
 .island.mini .brand img{height:15px}
-.isl-nav{display:flex;gap:1.7rem;font-size:.88rem;margin-left:auto;overflow:hidden;max-width:460px;opacity:1;
-  transition:max-width 1.15s var(--spring),opacity .6s var(--e),margin-right 1.15s var(--spring)}
-.island.mini .isl-nav{max-width:0;opacity:0;margin-right:-1.6rem}
+/* indice sempre centrado na cápsula, seja qual for a largura */
+.isl-nav{display:flex;gap:1.55rem;font-size:.88rem;position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);white-space:nowrap;opacity:1;
+  transition:opacity .55s var(--e),transform .8s var(--e)}
+.island.mini .isl-nav{opacity:0;transform:translate(-50%,-50%) translateY(-8px);pointer-events:none}
 .isl-nav a{color:var(--ink-2);position:relative;padding:.2rem 0;transition:color .8s var(--e)}
 .isl-nav a::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:9px;
   background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .85s var(--spring)}
 .isl-nav a:hover,.isl-nav a.on{color:var(--ink)}
 .isl-nav a:hover::after,.isl-nav a.on::after{transform:scaleX(1)}
-.isl-live{display:flex;align-items:center;gap:.55rem;font-size:.87rem;color:var(--ink-2);overflow:hidden;
-  max-width:0;opacity:0;margin-left:auto;margin-right:-1.6rem;
-  transition:max-width 1.15s var(--spring),opacity .6s var(--e),margin-right 1.15s var(--spring)}
-.island.mini .isl-live{max-width:210px;opacity:1;margin-right:0}
+.isl-live{display:flex;align-items:center;gap:.55rem;font-size:.87rem;color:var(--ink-2);
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) translateY(8px);white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity .55s var(--e),transform .8s var(--e)}
+.island.mini .isl-live{opacity:1;transform:translate(-50%,-50%)}
 .isl-live b{width:7px;height:7px;border-radius:99px;background:var(--ink);flex:none;animation:blip 3.2s ease-in-out infinite}
 @keyframes blip{50%{opacity:.25}}
 .isl-live em{font-style:normal;display:inline-block;transition:opacity .45s var(--e),transform .45s var(--e)}
 .isl-live em.swap{opacity:0;transform:translateY(-9px)}
 .cta-mini{display:flex;align-items:center;gap:.45rem;background:var(--ink);color:#fff;border-radius:999px;
   padding:.52rem .52rem .52rem 1.1rem;font-size:.85rem;font-weight:500;flex:none;white-space:nowrap;
+  margin-left:auto;
   transition:transform .7s var(--spring),background .8s var(--e),padding 1.05s var(--e)}
 .cta-mini em{font-style:normal;display:inline-block}
 .cta-mini span{width:25px;height:25px;border-radius:999px;background:rgba(255,255,255,.2);display:grid;
@@ -108,7 +112,18 @@ img{display:block;max-width:100%}
 /* ===== HERO ===== */
 .hero{position:relative;z-index:2;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;padding:clamp(8rem,18vh,11rem) var(--pad) clamp(3rem,7vh,5rem)}
-.hero h1{font-size:clamp(2.8rem,7.4vw,7rem);max-width:14ch}
+.hero h1{font-size:clamp(2.4rem,6.4vw,6rem);max-width:17ch}
+/* palavras destacadas em capsula preta com icone desenhado, sem emoji */
+.hl{display:inline-flex;align-items:center;gap:.26em;background:var(--ink);color:#fff;
+  border-radius:.34em;padding:.06em .32em .1em .24em;line-height:1;white-space:nowrap;
+  transform:translateY(.06em) scale(.94);opacity:0;
+  transition:transform 1s var(--spring),opacity .8s var(--e)}
+h1.in .hl{transform:translateY(.06em) scale(1);opacity:1}
+h1.in .hl:nth-of-type(1){transition-delay:.42s}
+h1.in .hl:nth-of-type(2){transition-delay:.58s}
+h1.in .hl:nth-of-type(3){transition-delay:.74s}
+.hl svg{width:.66em;height:.66em;flex:none;stroke:#fff;stroke-width:1.7;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
 .hero>p{max-width:54ch;color:var(--ink-2);margin:1.9rem auto 0;font-size:1.08rem;letter-spacing:-.014em}
 .btns{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:2.3rem}
 .btn{display:inline-flex;align-items:center;gap:.65rem;border-radius:999px;padding:.88rem .88rem .88rem 1.55rem;
@@ -348,8 +363,11 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 .fnd:hover{transform:translateY(-8px);box-shadow:var(--lift)}
 .fnd .ph{aspect-ratio:1;overflow:hidden;background:#EDEBE7;border-radius:50%;width:min(270px,74%);
   margin:2.4rem auto 0;border:1px solid var(--hair)}
-.fnd .ph img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform 1.4s var(--e)}
-.fnd:hover .ph img{transform:scale(1.05)}
+/* as duas fotos foram tiradas a distancias diferentes, o --s iguala o tamanho das caras */
+.fnd .ph img{--s:1;width:100%;height:100%;object-fit:cover;object-position:center 14%;
+  transform:scale(var(--s));transition:transform 1.4s var(--e)}
+.fnd:hover .ph img{transform:scale(calc(var(--s) * 1.05))}
+.fnd.zoom .ph img{--s:1.26;object-position:center 9%}
 .fnd .info{padding:1.4rem 1.6rem 2rem}
 .fnd h4{font-size:1.12rem}
 .fnd span{display:block;color:var(--ink-dim);font-size:.83rem;margin-top:.25rem}
@@ -444,7 +462,8 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
   <div class="island" id="island">
     <a href="#" class="brand"><img src="img/logo-lockup-2x.png" alt="MA Webs"></a>
     <nav class="isl-nav">
-      <a href="#servicos">Serviços</a><a href="#processo">Processo</a><a href="#trabalho">Trabalho</a><a href="#nfc">Placas NFC</a>
+      <a href="#servicos">Serviços</a><a href="#processo">Processo</a><a href="#trabalho">Trabalho</a>
+      <a href="portfolio.html">Portfólio</a><a href="#nfc">Placas NFC</a>
     </nav>
     <span class="isl-live"><b></b> <em id="islSec">Início</em></span>
     <a href="#contacto" class="cta-mini"><em>Marcar chamada</em> <span>&#8599;</span></a>
@@ -452,7 +471,11 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 </header>
 
 <section class="hero">
-  <h1 data-anim>Um site que traz telefonemas, reservas e avaliações.</h1>
+  <h1 data-anim>Um site que traz
+    <span class="hl"><svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg>telefonemas</span>,
+    <span class="hl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4M8 15h4"/></svg>reservas</span> e
+    <span class="hl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg>dinheiro</span>.
+  </h1>
   <p data-anim data-d="1">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar. Feito à mão por duas pessoas, mantido por nós.</p>
   <div class="btns" data-anim data-d="2">
     <a href="#contacto" class="btn btn-p">Quero mais clientes a ligar <i>&#8599;</i></a>
@@ -664,7 +687,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       <p class="lead">Somos irmãos e trabalhamos juntos. Não há comerciais, não há gestores de conta, não há ninguém a quem tenhas de explicar tudo outra vez.</p>
     </div>
     <div class="founders">
-      <article class="fnd" data-anim data-d="1">
+      <article class="fnd zoom" data-anim data-d="1">
         <div class="ph"><img src="img/miguel.png" alt="Miguel Sousa"></div>
         <div class="info"><h4>Miguel Sousa</h4><span>Desenho e desenvolvimento</span>
           <p>Desenha e constrói os sites. É quem responde quando escreves.</p></div>
@@ -731,9 +754,9 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       </div>
       <div class="foot-col" data-anim data-d="3">
         <h5>Contacto</h5>
-        <a href="tel:+351962303550">962 303 550</a>
-        <a href="https://wa.me/351962303550" target="_blank" rel="noopener">WhatsApp</a>
         <a href="#contacto">Marcar chamada</a>
+        <a href="https://wa.me/351962303550" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="mailto:mawebsitespt@gmail.com">Email</a>
         <a href="#">Instagram</a>
       </div>
     </div>
@@ -902,8 +925,8 @@ function mountRender(host,dark){
       col=mix(col,vec3(.039,.043,.047),smoothstep(.32,1.0,length(st*vec2(.8,1.0))));
     }else{
       vec3 bg=vec3(.965,.961,.953);
-      col=mix(bg,vec3(.58,.60,.62),v*.40)+warp*.06;
-      col=mix(col,bg,smoothstep(.28,1.0,length(st*vec2(.8,1.0))));
+      col=mix(bg,vec3(.47,.49,.51),v*.58)+warp*.08;
+      col=mix(col,bg,smoothstep(.36,1.05,length(st*vec2(.78,1.0))));
     }
     gl_FragColor=vec4(col,1.);}`;
   function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o}
