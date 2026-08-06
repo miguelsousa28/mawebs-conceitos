@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MA Webs / 5 variações da secção Placas NFC</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230A0B0C'/><text x='50' y='54' font-family='Helvetica,Arial,sans-serif' font-size='40' font-weight='700' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle' letter-spacing='-2'>MA</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F3;--card:#fff;--ink:#0A0B0C;--ink-2:rgba(10,11,12,.64);--ink-dim:rgba(10,11,12,.46);
+  --hair:rgba(10,11,12,.09);--soft:0 36px 90px -46px rgba(10,11,12,.30);--lift:0 60px 120px -50px rgba(10,11,12,.4);
+  --e:cubic-bezier(.22,.61,.20,1);--spring:cubic-bezier(.34,1.28,.36,1);--pad:clamp(1.25rem,5vw,4.5rem)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Geist','Plus Jakarta Sans',-apple-system,sans-serif;
+  font-weight:400;line-height:1.6;letter-spacing:-.011em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-weight:500;letter-spacing:-.045em;line-height:1.04}
+a{color:inherit;text-decoration:none}
+header{padding:clamp(3.5rem,10vh,6rem) var(--pad) 2.5rem;border-bottom:1px solid var(--hair)}
+header h1{font-size:clamp(1.9rem,4.5vw,3.2rem);max-width:20ch}
+header p{color:var(--ink-2);max-width:60ch;margin-top:1.1rem}
+.wrap{max-width:1320px;margin:0 auto}
+.lab{padding:clamp(2.5rem,7vh,4rem) var(--pad) 1.4rem;max-width:1320px;margin:0 auto}
+.lab .n{font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.lab h2{font-size:clamp(1.3rem,2.6vw,1.9rem);margin:.5rem 0 .5rem}
+.lab p{color:var(--ink-2);max-width:62ch;font-size:.95rem}
+section.v{padding:0 var(--pad) clamp(3rem,8vh,5rem)}
+.eyebrow{display:inline-block;font-size:.76rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;
+  margin-bottom:1.1rem;color:var(--ink-dim)}
+.h2{font-size:clamp(1.85rem,4.2vw,3.3rem);max-width:17ch}
+.btns{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.8rem}
+.btn{display:inline-flex;align-items:center;gap:.65rem;border-radius:999px;padding:.85rem .85rem .85rem 1.5rem;
+  font-size:.92rem;font-weight:500;letter-spacing:-.016em;
+  transition:transform .6s var(--spring),background .6s var(--e),border-color .6s var(--e),box-shadow .6s var(--e)}
+.btn i{width:30px;height:30px;border-radius:999px;display:grid;place-items:center;font-style:normal;font-size:.85rem;
+  transition:transform .6s var(--spring)}
+.btn:hover i{transform:translate(3px,-2px)}.btn:active{transform:scale(.98)}
+.btn-p{background:var(--ink);color:#fff}.btn-p i{background:rgba(255,255,255,.18)}
+.btn-p:hover{background:#22262A;box-shadow:0 26px 48px -26px rgba(10,11,12,.6)}
+.btn-s{background:#fff;border:1px solid var(--hair);box-shadow:var(--soft)}
+.btn-s i{background:rgba(10,11,12,.05)}
+.btn-s:hover{border-color:rgba(10,11,12,.32)}
+.dark .btn-p{background:#fff;color:var(--ink)}.dark .btn-p i{background:rgba(10,11,12,.08)}
+.dark .btn-p:hover{background:#E6E4E0}
+.dark .btn-s{background:transparent;border-color:rgba(255,255,255,.24);color:#fff;box-shadow:none}
+.dark .btn-s i{background:rgba(255,255,255,.14)}
+.dark .btn-s:hover{border-color:#fff}
+
+/* demo partilhada, sem aneis a pulsar */
+.demo{display:flex;align-items:center;justify-content:center;gap:clamp(1.2rem,3vw,2.6rem)}
+.plate{width:clamp(104px,13vw,146px);aspect-ratio:1.58/1;border-radius:.85rem;position:relative;flex:none;
+  background:linear-gradient(150deg,#2E3236,#131619);display:grid;place-items:center;
+  box-shadow:0 26px 46px -22px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.16);
+  transition:transform .7s var(--e),box-shadow .7s var(--e)}
+.plate:hover{transform:translateY(-5px) rotate(-1.5deg)}
+.plate span{font-size:.95rem;font-weight:600;letter-spacing:-.02em;color:#fff}
+.phone{width:clamp(150px,17vw,200px);aspect-ratio:9/18.5;border-radius:1.8rem;padding:.36rem;flex:none;
+  background:linear-gradient(160deg,#34383D,#131619);box-shadow:0 40px 66px -30px rgba(0,0,0,.85)}
+.phone .scr{border-radius:1.5rem;height:100%;background:#fff;overflow:hidden;position:relative}
+.scene{position:absolute;inset:0;opacity:0;transform:translateY(8px);padding:1.1rem .8rem;color:var(--ink);
+  text-align:center;transition:opacity .6s var(--e),transform .6s var(--e)}
+.scene.on{opacity:1;transform:none}
+.scene .t{font-size:.64rem;font-weight:500;line-height:1.35}
+.scene .s{font-size:.53rem;color:var(--ink-dim);margin-top:.35rem;line-height:1.4}
+.s1{display:grid;place-content:center;background:#111315;color:#fff}
+.s1 .t{color:rgba(255,255,255,.92)}.s1 .s{color:rgba(255,255,255,.42)}
+.stars{display:flex;gap:2px;justify-content:center;margin-top:.7rem;font-size:.85rem}
+.gbox{margin-top:.85rem;border:1px solid var(--hair);border-radius:.55rem;padding:.5rem;background:#FAFAF9}
+.gbox .ln{height:4px;border-radius:99px;background:rgba(10,11,12,.1);margin-bottom:4px}
+.gbox .ln:nth-child(2){width:78%}.gbox .ln:nth-child(3){width:56%}
+.done{width:32px;height:32px;border-radius:999px;background:var(--ink);color:#fff;display:grid;place-items:center;
+  margin:0 auto .7rem;font-size:.9rem}
+.cap{text-align:center;font-size:.78rem;margin-top:1.2rem;color:var(--ink-dim)}
+.dark .cap{color:rgba(255,255,255,.42)}
+
+/* precos partilhados */
+.packs{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.pack{border-radius:1.2rem;padding:1.8rem;border:1px solid var(--hair);background:#fff;
+  transition:transform .7s var(--e),border-color .7s var(--e),box-shadow .7s var(--e)}
+.pack:hover{transform:translateY(-6px);box-shadow:var(--lift);border-color:rgba(10,11,12,.24)}
+.pack h4{font-size:1.1rem}
+.pack .pr{font-size:2.1rem;font-weight:500;letter-spacing:-.05em;margin:.6rem 0 .1rem}
+.pack .pr small{font-size:.8rem;font-weight:400;color:var(--ink-dim);letter-spacing:-.01em}
+.pack ul{list-style:none;margin-top:1rem;display:grid;gap:.45rem}
+.pack li{color:var(--ink-2);font-size:.88rem;display:flex;gap:.55rem}
+.pack li b{font-weight:500;color:var(--ink)}
+.pack.hi{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pack.hi li{color:rgba(255,255,255,.68)}.pack.hi li b{color:#fff}
+.pack.hi .pr small{color:rgba(255,255,255,.5)}
+.dark .pack{background:transparent;border-color:rgba(255,255,255,.13);color:#fff}
+.dark .pack li{color:rgba(255,255,255,.66)}.dark .pack li b{color:#fff}
+.dark .pack .pr small{color:rgba(255,255,255,.5)}
+.dark .pack:hover{border-color:rgba(255,255,255,.4);box-shadow:none;background:rgba(255,255,255,.05)}
+.dark .pack.hi{background:#fff;color:var(--ink);border-color:#fff}
+.dark .pack.hi li{color:var(--ink-2)}.dark .pack.hi li b{color:var(--ink)}
+.dark .pack.hi .pr small{color:var(--ink-dim)}
+.tag{display:inline-block;font-size:.6rem;font-weight:600;letter-spacing:.09em;background:var(--ink);color:#fff;
+  padding:.19rem .46rem;border-radius:5px;margin-left:.45rem;vertical-align:middle}
+.pack.hi .tag{background:#fff;color:var(--ink)}
+.dark .pack.hi .tag{background:var(--ink);color:#fff}
+@media(max-width:900px){.packs{grid-template-columns:1fr}}
+
+.card{border-radius:2.2rem;overflow:hidden;position:relative}
+.card.dark{background:#0A0B0C;color:#fff;box-shadow:var(--lift)}
+.card .inner{position:relative;z-index:2;padding:clamp(2.2rem,5.5vw,4.2rem)}
+.rnd{position:absolute;inset:0;z-index:0;overflow:hidden}
+.rnd canvas{width:100%;height:100%;display:block}
+
+/* A */
+.a-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.a-grid p{color:rgba(255,255,255,.68);max-width:38ch;margin-top:1.1rem}
+/* B */
+.b-mid{text-align:center}
+.b-mid .h2{margin-inline:auto}
+.b-mid p{color:rgba(255,255,255,.68);max-width:46ch;margin:1.1rem auto 2.4rem}
+.b-mid .demo{margin-bottom:2.6rem;transform:scale(1.12);transform-origin:center}
+/* C */
+.c-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.c-box{background:#0A0B0C;border-radius:2rem;padding:clamp(2rem,4vw,3rem);position:relative;overflow:hidden}
+.c-line{margin-top:2rem;border-top:1px solid var(--hair);display:grid;grid-template-columns:repeat(3,1fr)}
+.c-line div{padding:1.2rem 1rem 0 0}
+.c-line b{display:block;font-size:1.6rem;font-weight:500;letter-spacing:-.05em}
+.c-line span{font-size:.82rem;color:var(--ink-dim)}
+/* D */
+.d-cmp{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.2rem}
+.d-col{border-radius:1.5rem;padding:clamp(1.6rem,3vw,2.2rem);border:1px solid var(--hair);background:#fff}
+.d-col.win{background:var(--ink);color:#fff;border-color:var(--ink)}
+.d-col h4{font-size:1.05rem;margin-bottom:1.1rem}
+.d-col ul{list-style:none;display:grid;gap:.75rem}
+.d-col li{display:flex;gap:.7rem;font-size:.93rem;color:var(--ink-2)}
+.d-col.win li{color:rgba(255,255,255,.72)}
+.d-col li i{font-style:normal;flex:none;width:18px;height:18px;border-radius:999px;display:grid;place-items:center;
+  font-size:.6rem;background:rgba(10,11,12,.08);margin-top:.2rem}
+.d-col.win li i{background:#fff;color:var(--ink)}
+/* E */
+.e-top{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end}
+.e-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.4rem}
+.e-step{border:1px solid rgba(255,255,255,.13);border-radius:1.3rem;padding:1.6rem;
+  transition:background .7s var(--e),border-color .7s var(--e)}
+.e-step:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.34)}
+.e-step b{display:block;font-size:2rem;font-weight:500;letter-spacing:-.05em;color:rgba(255,255,255,.28)}
+.e-step h4{font-size:1.1rem;margin-top:.5rem}
+.e-step p{color:rgba(255,255,255,.6);font-size:.9rem;margin-top:.4rem}
+.e-bar{margin-top:1rem;border:1px solid rgba(255,255,255,.13);border-radius:1.3rem;
+  display:grid;grid-template-columns:repeat(3,1fr) auto;gap:1.5rem;align-items:center;
+  padding:1.5rem clamp(1.5rem,3vw,2.2rem)}
+.e-bar .p b{display:block;font-size:1.7rem;font-weight:500;letter-spacing:-.05em}
+.e-bar .p span{font-size:.82rem;color:rgba(255,255,255,.5)}
+@media(max-width:900px){
+  .a-grid,.c-grid,.d-cmp,.e-top{grid-template-columns:1fr}
+  .e-steps{grid-template-columns:1fr}
+  .e-bar{grid-template-columns:1fr;gap:1.1rem}
+  .b-mid .demo{transform:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Cinco variações da secção das placas NFC.</h1>
+  <p>Todas com os preços novos: 30 euros à unidade com mais 5 pela personalização, 120 o pack de cinco, 200 o pack de dez. Todas sem a animação dos anéis a pulsar e com muito menos texto a competir por atenção.</p>
+</header>
+
+<!-- A -->
+<div class="lab"><div class="n">Variação A</div><h2>Split escuro, uma frase só</h2>
+  <p>A frase forte à esquerda, a demonstração à direita, os preços por baixo. É a mais próxima do que já tens, mas com um terço do texto.</p></div>
+<section class="v"><div class="wrap card dark">
+  <div class="rnd" data-render></div>
+  <div class="inner">
+    <div class="a-grid">
+      <div>
+        <span class="eyebrow" style="color:rgba(255,255,255,.45)">Placas NFC</span>
+        <h2 class="h2">Uma placa no balcão. Avaliações no Google todos os dias.</h2>
+        <p>O cliente encosta o telemóvel e a tua página abre sozinha. Sem app e sem pedir nada em voz alta.</p>
+        <div class="btns"><a href="#" class="btn btn-p">Quero as minhas placas <i>&#8599;</i></a></div>
+      </div>
+      <div>
+        <div class="demo"><div class="plate" data-plate><span>MA</span></div>
+          <div class="phone"><div class="scr" data-scr></div></div></div>
+        <p class="cap">Passa o rato pela placa</p>
+      </div>
+    </div>
+    <div class="packs" style="margin-top:clamp(2.5rem,6vw,4rem)">
+      <div class="pack"><h4>Uma placa</h4><div class="pr">30&euro; <small>por placa</small></div>
+        <ul><li><b>1</b> placa pronta a usar</li><li>Com a tua marca por mais <b>5&euro;</b></li><li>Link editável para sempre</li></ul></div>
+      <div class="pack hi"><h4>Pack de 5 <span class="tag">MAIS ESCOLHIDO</span></h4><div class="pr">120&euro; <small>24&euro; cada</small></div>
+        <ul><li><b>5</b> placas, uma por mesa</li><li>Personalização incluída</li><li>Página de avaliações configurada</li></ul></div>
+      <div class="pack"><h4>Pack de 10</h4><div class="pr">200&euro; <small>20&euro; cada</small></div>
+        <ul><li><b>10</b> placas para o espaço todo</li><li>Personalização incluída</li><li>Troca de destino quando pedires</li></ul></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- B -->
+<div class="lab"><div class="n">Variação B</div><h2>Centrada, com a demonstração em grande</h2>
+  <p>Tudo ao centro e a demonstração aumentada. O olho cai primeiro no telemóvel a mudar de ecrã, e só depois lê. É a mais impactante e a que melhor explica sem palavras.</p></div>
+<section class="v"><div class="wrap card dark">
+  <div class="rnd" data-render></div>
+  <div class="inner b-mid">
+    <span class="eyebrow" style="color:rgba(255,255,255,.45)">Placas NFC</span>
+    <h2 class="h2">Nove segundos entre pagar e avaliar.</h2>
+    <p>O cliente encosta o telemóvel na placa e a tua página abre sozinha.</p>
+    <div class="demo"><div class="plate" data-plate><span>MA</span></div>
+      <div class="phone"><div class="scr" data-scr></div></div></div>
+    <div class="packs">
+      <div class="pack"><h4>Uma placa</h4><div class="pr">30&euro; <small>por placa</small></div>
+        <ul><li><b>1</b> placa pronta a usar</li><li>Com a tua marca por mais <b>5&euro;</b></li></ul></div>
+      <div class="pack hi"><h4>Pack de 5 <span class="tag">MAIS ESCOLHIDO</span></h4><div class="pr">120&euro; <small>24&euro; cada</small></div>
+        <ul><li><b>5</b> placas, uma por mesa</li><li>Personalização incluída</li></ul></div>
+      <div class="pack"><h4>Pack de 10</h4><div class="pr">200&euro; <small>20&euro; cada</small></div>
+        <ul><li><b>10</b> placas para o espaço todo</li><li>Personalização incluída</li></ul></div>
+    </div>
+    <div class="btns" style="justify-content:center"><a href="#" class="btn btn-p">Quero as minhas placas <i>&#8599;</i></a></div>
+  </div>
+</div></section>
+
+<!-- C -->
+<div class="lab"><div class="n">Variação C</div><h2>Clara, com a demonstração dentro de um bloco preto</h2>
+  <p>A secção fica no fundo claro do site e só a demonstração é preta. Não corta a página ao meio e os preços ficam numa linha, sem cartões. É a mais sóbria.</p></div>
+<section class="v"><div class="wrap">
+  <div class="c-grid">
+    <div>
+      <span class="eyebrow">Placas NFC</span>
+      <h2 class="h2">Uma placa no balcão. Avaliações todos os dias.</h2>
+      <p style="color:var(--ink-2);max-width:40ch;margin-top:1.1rem">O cliente encosta o telemóvel e a tua página abre sozinha. Sem app, sem QR code desbotado.</p>
+      <div class="c-line">
+        <div><b>30&euro;</b><span>uma placa, mais 5 com marca</span></div>
+        <div><b>120&euro;</b><span>pack de cinco</span></div>
+        <div><b>200&euro;</b><span>pack de dez</span></div>
+      </div>
+      <div class="btns"><a href="#" class="btn btn-p">Quero as minhas placas <i>&#8599;</i></a></div>
+    </div>
+    <div class="c-box dark">
+      <div class="rnd" data-render></div>
+      <div style="position:relative;z-index:2">
+        <div class="demo"><div class="plate" data-plate><span>MA</span></div>
+          <div class="phone"><div class="scr" data-scr></div></div></div>
+        <p class="cap">Passa o rato pela placa</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- D -->
+<div class="lab"><div class="n">Variação D</div><h2>Sem placa contra com placa</h2>
+  <p>Mostra o antes e o depois lado a lado. É a que vende melhor a quem ainda não percebeu o problema, porque nomeia a situação atual dele.</p></div>
+<section class="v"><div class="wrap">
+  <span class="eyebrow">Placas NFC</span>
+  <h2 class="h2">A diferença entre pedir avaliações e recebê-las.</h2>
+  <div class="d-cmp">
+    <div class="d-col">
+      <h4>Como está hoje</h4>
+      <ul>
+        <li><i>&#10005;</i> Pedes em voz alta e ficas desconfortável</li>
+        <li><i>&#10005;</i> O QR impresso está desbotado e ninguém o usa</li>
+        <li><i>&#10005;</i> O cliente diz que faz depois e esquece-se</li>
+        <li><i>&#10005;</i> O concorrente ao lado tem 120 avaliações</li>
+      </ul>
+    </div>
+    <div class="d-col win">
+      <h4>Com a placa no balcão</h4>
+      <ul>
+        <li><i>&#10003;</i> O cliente encosta o telemóvel enquanto paga</li>
+        <li><i>&#10003;</i> A tua página abre sozinha, sem app</li>
+        <li><i>&#10003;</i> Nove segundos entre pagar e avaliar</li>
+        <li><i>&#10003;</i> Mudas o destino do link sem trocar a placa</li>
+      </ul>
+    </div>
+  </div>
+  <div class="packs" style="margin-top:1rem">
+    <div class="pack"><h4>Uma placa</h4><div class="pr">30&euro; <small>mais 5 com a tua marca</small></div>
+      <ul><li><b>1</b> placa pronta a usar</li></ul></div>
+    <div class="pack hi"><h4>Pack de 5 <span class="tag">MAIS ESCOLHIDO</span></h4><div class="pr">120&euro; <small>24&euro; cada</small></div>
+      <ul><li><b>5</b> placas com personalização incluída</li></ul></div>
+    <div class="pack"><h4>Pack de 10</h4><div class="pr">200&euro; <small>20&euro; cada</small></div>
+      <ul><li><b>10</b> placas com personalização incluída</li></ul></div>
+  </div>
+  <div class="btns"><a href="#" class="btn btn-p">Quero as minhas placas <i>&#8599;</i></a></div>
+</div></section>
+
+<!-- E -->
+<div class="lab"><div class="n">Variação E</div><h2>Três tempos e uma faixa de preços</h2>
+  <p>Sem demonstração. Três cartões explicam o gesto e uma faixa única mostra os três preços seguidos. É a mais curta de todas, boa se a secção estiver a ficar pesada.</p></div>
+<section class="v"><div class="wrap card dark">
+  <div class="rnd" data-render></div>
+  <div class="inner">
+    <div class="e-top">
+      <div>
+        <span class="eyebrow" style="color:rgba(255,255,255,.45)">Placas NFC</span>
+        <h2 class="h2">Encosta, abre, fica feito.</h2>
+      </div>
+      <a href="#" class="btn btn-p">Quero as minhas placas <i>&#8599;</i></a>
+    </div>
+    <div class="e-steps">
+      <div class="e-step"><b>01</b><h4>Encosta</h4><p>O cliente pousa o telemóvel na placa enquanto paga.</p></div>
+      <div class="e-step"><b>02</b><h4>Abre</h4><p>A tua página abre sozinha. Google, menu ou Instagram.</p></div>
+      <div class="e-step"><b>03</b><h4>Fica feito</h4><p>Segundos depois está publicado, e mudas o destino quando quiseres.</p></div>
+    </div>
+    <div class="e-bar">
+      <div class="p"><b>30&euro;</b><span>uma placa, mais 5 com a tua marca</span></div>
+      <div class="p"><b>120&euro;</b><span>pack de 5, personalização incluída</span></div>
+      <div class="p"><b>200&euro;</b><span>pack de 10, personalização incluída</span></div>
+      <a href="#" class="btn btn-s">Pedir <i>&#8594;</i></a>
+    </div>
+  </div>
+</div></section>
+
+<script>
+/* conteudo da demo, injetado em cada telemovel */
+const SCR=`
+<div class="scene s1 on"><div><div class="t">Encosta aqui</div><div class="s">Sem app, sem código</div></div></div>
+<div class="scene"><div class="t">Gama Barbearia</div><div class="s">Como correu a tua visita?</div>
+  <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+  <div class="gbox"><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+  <div class="s" style="margin-top:.6rem">Publicar avaliação</div></div>
+<div class="scene" style="display:grid;place-content:center"><div><div class="done">&#10003;</div>
+  <div class="t">Avaliação publicada</div><div class="s">Demorou nove segundos</div></div></div>`;
+document.querySelectorAll('[data-scr]').forEach(s=>s.innerHTML=SCR);
+
+document.querySelectorAll('.demo').forEach(d=>{
+  const scenes=[...d.querySelectorAll('.scene')];let i=0,t;
+  const show=k=>{i=k;scenes.forEach((s,n)=>s.classList.toggle('on',n===k))};
+  const play=()=>{clearInterval(t);t=setInterval(()=>show((i+1)%scenes.length),2800)};
+  play();
+  const pl=d.querySelector('[data-plate]');
+  pl.addEventListener('mouseenter',()=>{clearInterval(t);show(1)});
+  pl.addEventListener('mouseleave',()=>{show(2);setTimeout(play,1500)});
+});
+
+/* render monocromatico escuro, reativo ao rato, em cada bloco preto */
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function mountRender(host){
+  if(reduce)return;
+  const cv=document.createElement('canvas');
+  const gl=cv.getContext('webgl',{antialias:false});
+  if(!gl)return;
+  host.appendChild(cv);
+  const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
+  const fs=`precision highp float;uniform vec2 u_res;uniform float u_t;uniform vec2 u_m;
+  vec2 hash(vec2 p){p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)));return -1.+2.*fract(sin(p)*43758.5453123);}
+  float noise(vec2 p){const float K1=0.366025404,K2=0.211324865;
+    vec2 i=floor(p+(p.x+p.y)*K1);vec2 a=p-i+(i.x+i.y)*K2;float m=step(a.y,a.x);
+    vec2 o=vec2(m,1.0-m);vec2 b=a-o+K2,c=a-1.0+2.0*K2;
+    vec3 h=max(0.5-vec3(dot(a,a),dot(b,b),dot(c,c)),0.0);
+    vec3 n=h*h*h*h*vec3(dot(a,hash(i)),dot(b,hash(i+o)),dot(c,hash(i+1.0)));return dot(n,vec3(70.0));}
+  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p*=2.03;a*=.5;}return v;}
+  void main(){vec2 st=(gl_FragCoord.xy-.5*u_res)/u_res.y;vec2 m=(u_m-.5*u_res)/u_res.y;
+    float warp=exp(-length(st-m)*1.8)*.6;
+    vec2 q=st*1.15+(st-m)*warp;
+    float f=fbm(q+vec2(u_t*.038,u_t*.026));
+    float g=fbm(q*1.55+vec2(-u_t*.028,u_t*.042)+f);
+    float v=smoothstep(-.25,.9,f)*.55+smoothstep(-.1,.95,g)*.45;
+    vec3 col=mix(vec3(.043,.047,.051),vec3(.33,.35,.37),v*.55)+warp*.10;
+    col=mix(col,vec3(.039,.043,.047),smoothstep(.32,1.0,length(st*vec2(.8,1.0))));
+    gl_FragColor=vec4(col,1.);}`;
+  function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o}
+  const pr=gl.createProgram();
+  gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){cv.remove();return}
+  gl.useProgram(pr);
+  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  const uRes=gl.getUniformLocation(pr,'u_res'),uT=gl.getUniformLocation(pr,'u_t'),uM=gl.getUniformLocation(pr,'u_m');
+  let W,H;
+  function size(){const dpr=Math.min(devicePixelRatio||1,1.5),r=host.getBoundingClientRect();
+    W=cv.width=Math.max(1,Math.floor(r.width*dpr));H=cv.height=Math.max(1,Math.floor(r.height*dpr));gl.viewport(0,0,W,H)}
+  size();addEventListener('resize',size);
+  let mx=0,my=0,tx=0,ty=0;
+  addEventListener('mousemove',e=>{const dpr=Math.min(devicePixelRatio||1,1.5),r=host.getBoundingClientRect();
+    tx=(e.clientX-r.left)*dpr;ty=(r.height-(e.clientY-r.top))*dpr},{passive:true});
+  const t0=performance.now();
+  (function loop(now){requestAnimationFrame(loop);
+    if(document.hidden)return;
+    const r=host.getBoundingClientRect();
+    if(r.bottom<-200||r.top>innerHeight+200)return;
+    mx+=(tx-mx)*.06;my+=(ty-my)*.06;
+    gl.uniform2f(uRes,W,H);gl.uniform2f(uM,mx,my);gl.uniform1f(uT,(now-t0)/1000);
+    gl.drawArrays(gl.TRIANGLES,0,3)})(t0);
+}
+document.querySelectorAll('[data-render]').forEach(mountRender);
+</script>
+</body>
+</html>

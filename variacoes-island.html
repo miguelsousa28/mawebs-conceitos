@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MA Webs / 5 variações da Dynamic Island</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230A0B0C'/><text x='50' y='54' font-family='Helvetica,Arial,sans-serif' font-size='40' font-weight='700' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle' letter-spacing='-2'>MA</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F3;--ink:#0A0B0C;--ink-2:rgba(10,11,12,.64);--ink-dim:rgba(10,11,12,.46);
+  --hair:rgba(10,11,12,.09);--e:cubic-bezier(.22,.61,.20,1);--spring:cubic-bezier(.34,1.28,.36,1);
+  --pad:clamp(1.25rem,5vw,4rem)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Geist','Plus Jakarta Sans',-apple-system,sans-serif;
+  font-weight:400;line-height:1.6;letter-spacing:-.011em;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:500;letter-spacing:-.045em;line-height:1.05}
+a{color:inherit;text-decoration:none}
+header{padding:clamp(3.5rem,10vh,6rem) var(--pad) 2.5rem;border-bottom:1px solid var(--hair)}
+header h1{font-size:clamp(1.9rem,4.5vw,3.2rem);max-width:20ch}
+header p{color:var(--ink-2);max-width:56ch;margin-top:1.1rem}
+.ctrl{position:sticky;top:0;z-index:40;background:rgba(246,245,243,.9);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--hair);padding:.9rem var(--pad);display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
+.ctrl span{color:var(--ink-dim);font-size:.85rem;margin-right:auto}
+.tgl{border:1px solid var(--hair);background:#fff;border-radius:999px;padding:.55rem 1.2rem;font:inherit;font-size:.85rem;
+  cursor:pointer;transition:background .5s var(--e),color .5s var(--e),border-color .5s var(--e)}
+.tgl.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+main{padding:0 var(--pad) 6rem;max-width:1200px;margin:0 auto}
+.demo{padding:clamp(2.5rem,7vh,4.5rem) 0;border-bottom:1px solid var(--hair)}
+.demo:last-child{border-bottom:0}
+.demo .meta{margin-bottom:2rem}
+.demo .n{font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.demo h2{font-size:clamp(1.3rem,2.6vw,1.9rem);margin:.5rem 0 .6rem}
+.demo .meta p{color:var(--ink-2);max-width:60ch;font-size:.95rem}
+.stage{background:linear-gradient(180deg,#EFEEEB,#F6F5F3);border:1px solid var(--hair);border-radius:1.6rem;
+  min-height:200px;display:grid;place-items:center;padding:2.5rem 1.2rem;position:relative;overflow:hidden}
+.stage::before{content:'';position:absolute;inset:0;opacity:.5;
+  background:radial-gradient(60% 60% at 50% 0%,rgba(255,255,255,.9),transparent 70%)}
+.mark{display:flex;align-items:center;gap:.62rem;font-weight:500;font-size:.95rem;letter-spacing:-.038em;flex:none}
+.mark i{width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;display:grid;place-items:center;
+  font-style:normal;font-size:.56rem;font-weight:600;flex:none}
+.cta{display:flex;align-items:center;gap:.45rem;background:var(--ink);color:#fff;border-radius:999px;
+  padding:.5rem .5rem .5rem 1.05rem;font-size:.85rem;flex:none;transition:background .6s var(--e),transform .6s var(--spring)}
+.cta s{text-decoration:none;display:inline-block;overflow:hidden;max-width:170px;opacity:1;
+  transition:max-width .9s var(--spring),opacity .35s var(--e),margin-right .9s var(--spring)}
+.cta span{width:24px;height:24px;border-radius:999px;background:rgba(255,255,255,.18);display:grid;place-items:center;
+  transition:transform .6s var(--spring);flex:none}
+.cta:hover{background:#22262A}.cta:hover span{transform:translate(3px,-2px)}
+.lnk{color:var(--ink-2);font-size:.87rem;position:relative;transition:color .6s var(--e)}
+.lnk::after{content:'';position:absolute;left:0;right:0;bottom:-5px;height:1.5px;border-radius:9px;background:var(--ink);
+  transform:scaleX(0);transition:transform .55s var(--spring)}
+.lnk:hover{color:var(--ink)}.lnk:hover::after{transform:scaleX(1)}
+.live{display:flex;align-items:center;gap:.55rem;font-size:.86rem;color:var(--ink-2);white-space:nowrap}
+.live b{width:6px;height:6px;border-radius:99px;background:var(--ink);flex:none;animation:blip 2.8s infinite}
+@keyframes blip{50%{opacity:.28}}
+
+/* A, capsula solida */
+.a{display:flex;align-items:center;gap:1.3rem;height:54px;padding:0 .42rem 0 1.1rem;border-radius:999px;
+  background:#fff;border:1px solid var(--hair);overflow:hidden;white-space:nowrap;
+  box-shadow:0 22px 48px -30px rgba(10,11,12,.45),0 2px 8px -4px rgba(10,11,12,.08);
+  max-width:660px;transition:max-width .9s var(--spring),height .9s var(--spring)}
+.a nav{display:flex;gap:1.5rem;overflow:hidden;max-width:400px;opacity:1;
+  transition:max-width .9s var(--spring),opacity .35s var(--e),margin-right .9s var(--spring)}
+.a .live{overflow:hidden;max-width:0;opacity:0;margin-right:-1.3rem;
+  transition:max-width .9s var(--spring),opacity .35s var(--e),margin-right .9s var(--spring)}
+.mini .a{max-width:320px;height:48px}
+.mini .a nav{max-width:0;opacity:0;margin-right:-1.3rem}
+.mini .a .live{max-width:200px;opacity:1;margin-right:0}
+.mini .a .cta s{max-width:0;opacity:0;margin-right:-.45rem}
+.mini .a .cta{padding-left:.5rem}
+
+/* B, tres capsulas que se juntam */
+.b{display:flex;align-items:center;gap:.6rem;transition:gap .9s var(--spring)}
+.b .seg{background:#fff;border:1px solid var(--hair);border-radius:999px;height:52px;display:flex;align-items:center;
+  padding:0 1.1rem;box-shadow:0 18px 40px -28px rgba(10,11,12,.45);
+  transition:border-radius .9s var(--spring),padding .9s var(--spring),transform .9s var(--spring)}
+.b .seg.mid{gap:1.5rem}
+.b .seg.end{padding:0 .42rem 0 .42rem}
+.mini .b{gap:0}
+.mini .b .seg{border-radius:0}
+.mini .b .seg:first-child{border-radius:999px 0 0 999px;border-right:0}
+.mini .b .seg:last-child{border-radius:0 999px 999px 0;border-left:0}
+.mini .b .seg.mid{max-width:0;padding:0;opacity:0;overflow:hidden;border-inline:0}
+.b .seg.mid{overflow:hidden;transition:max-width .9s var(--spring),opacity .35s var(--e),padding .9s var(--spring)}
+
+/* C, barra que vira bolha */
+.c-wrap{width:100%;display:flex;justify-content:center}
+.c{width:100%;max-width:1000px;height:56px;background:#fff;border:1px solid var(--hair);border-radius:1rem;
+  display:flex;align-items:center;gap:2rem;padding:0 .5rem 0 1.2rem;overflow:hidden;white-space:nowrap;
+  box-shadow:0 20px 44px -30px rgba(10,11,12,.4);
+  transition:max-width .95s var(--spring),border-radius .95s var(--spring),height .95s var(--spring)}
+.c nav{display:flex;gap:1.5rem;margin-left:auto;overflow:hidden;max-width:400px;opacity:1;
+  transition:max-width .9s var(--spring),opacity .35s var(--e)}
+.c .live{overflow:hidden;max-width:0;opacity:0;margin-left:auto;
+  transition:max-width .9s var(--spring),opacity .35s var(--e)}
+.mini .c{max-width:300px;border-radius:999px;height:48px}
+.mini .c nav{max-width:0;opacity:0}
+.mini .c .live{max-width:190px;opacity:1}
+.mini .c .cta s{max-width:0;opacity:0;margin-right:-.45rem}
+
+/* D, com anel de progresso */
+.d{display:flex;align-items:center;gap:1.3rem;height:54px;padding:0 .42rem 0 .5rem;border-radius:999px;background:#fff;
+  border:1px solid var(--hair);overflow:hidden;white-space:nowrap;
+  box-shadow:0 22px 48px -30px rgba(10,11,12,.45);max-width:660px;
+  transition:max-width .9s var(--spring),height .9s var(--spring)}
+.ring{width:38px;height:38px;border-radius:999px;flex:none;display:grid;place-items:center;position:relative;
+  background:conic-gradient(var(--ink) calc(var(--p,18) * 1%), rgba(10,11,12,.12) 0)}
+.ring::after{content:'';position:absolute;inset:3px;border-radius:999px;background:#fff}
+.ring b{position:relative;z-index:2;font-size:.55rem;font-weight:600;letter-spacing:-.01em}
+.d nav{display:flex;gap:1.5rem;overflow:hidden;max-width:400px;opacity:1;
+  transition:max-width .9s var(--spring),opacity .35s var(--e),margin-right .9s var(--spring)}
+.d .live{overflow:hidden;max-width:0;opacity:0;margin-right:-1.3rem;
+  transition:max-width .9s var(--spring),opacity .35s var(--e),margin-right .9s var(--spring)}
+.mini .d{max-width:300px;height:48px}
+.mini .d nav{max-width:0;opacity:0;margin-right:-1.3rem}
+.mini .d .live{max-width:190px;opacity:1;margin-right:0}
+.mini .d .cta s{max-width:0;opacity:0;margin-right:-.45rem}
+
+/* E, abre para painel */
+.e{background:#fff;border:1px solid var(--hair);border-radius:1.6rem;overflow:hidden;width:340px;
+  box-shadow:0 24px 52px -30px rgba(10,11,12,.45);
+  transition:width .9s var(--spring),border-radius .9s var(--spring)}
+.e .top{height:52px;display:flex;align-items:center;gap:1rem;padding:0 .42rem 0 1.1rem;cursor:pointer}
+.e .top .live{margin-left:auto}
+.e .chev{width:26px;height:26px;border-radius:999px;background:rgba(10,11,12,.06);display:grid;place-items:center;
+  font-size:.7rem;transition:transform .7s var(--spring);flex:none}
+.e.open{width:400px}
+.e.open .chev{transform:rotate(180deg)}
+.e .panel{max-height:0;overflow:hidden;transition:max-height .9s var(--spring)}
+.e.open .panel{max-height:320px}
+.e .panel-in{padding:.4rem 1.1rem 1.1rem;border-top:1px solid var(--hair)}
+.e .panel a.row{display:flex;justify-content:space-between;align-items:center;padding:.72rem 0;
+  border-bottom:1px solid var(--hair);font-size:.92rem;color:var(--ink-2);
+  transition:color .5s var(--e),padding-left .5s var(--e)}
+.e .panel a.row:hover{color:var(--ink);padding-left:.35rem}
+.e .panel a.row:last-of-type{border-bottom:0}
+.e .panel .cta{margin-top:.8rem;width:100%;justify-content:space-between}
+.hint{margin-top:1.1rem;font-size:.8rem;color:var(--ink-dim);text-align:center}
+@media(max-width:720px){.b{flex-direction:column;gap:.6rem}.mini .b{gap:.6rem}
+  .b .seg.mid{display:none}.c{max-width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Cinco variações da Dynamic Island.</h1>
+  <p>Todas com fundo branco sólido, marca a preto e a mesma curva com ligeiro ressalto. Carrega em "Simular scroll" para ver o estado compacto, e passa o rato por cima de cada uma para ver as animações.</p>
+</header>
+
+<div class="ctrl">
+  <span>Estado</span>
+  <button class="tgl on" id="tExp">Topo da página</button>
+  <button class="tgl" id="tMini">Simular scroll</button>
+</div>
+
+<main id="root">
+  <section class="demo">
+    <div class="meta"><div class="n">Variação A</div><h2>Cápsula sólida</h2>
+      <p>Uma peça só. Encolhe no scroll, os links desaparecem e no lugar aparece a secção onde estás. O botão reduz-se ao ícone. É a mais discreta e a mais segura.</p></div>
+    <div class="stage">
+      <div class="a">
+        <a href="#" class="mark"><i>MA</i> MA Webs</a>
+        <nav><a class="lnk">Serviços</a><a class="lnk">Processo</a><a class="lnk">Trabalho</a><a class="lnk">Placas NFC</a></nav>
+        <span class="live"><b></b> Placas NFC</span>
+        <a href="#" class="cta"><s>Falamos 15 min</s> <span>&#8599;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo">
+    <div class="meta"><div class="n">Variação B</div><h2>Três cápsulas que se juntam</h2>
+      <p>No topo são três peças separadas: marca, navegação e botão. Ao fazer scroll a do meio desaparece e as outras duas encaixam uma na outra, como se fossem ímanes. É a mais viva das cinco.</p></div>
+    <div class="stage">
+      <div class="b">
+        <div class="seg"><a href="#" class="mark"><i>MA</i> MA Webs</a></div>
+        <div class="seg mid"><a class="lnk">Serviços</a><a class="lnk">Processo</a><a class="lnk">Trabalho</a><a class="lnk">Placas NFC</a></div>
+        <div class="seg end"><a href="#" class="cta"><s>Falamos 15 min</s> <span>&#8599;</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo">
+    <div class="meta"><div class="n">Variação C</div><h2>Barra que vira bolha</h2>
+      <p>Começa como uma barra larga de cantos suaves, quase uma barra de aplicação. Ao fazer scroll contrai para uma bolha redonda ao centro. É a que faz a transformação mais visível.</p></div>
+    <div class="stage">
+      <div class="c-wrap">
+        <div class="c">
+          <a href="#" class="mark"><i>MA</i> MA Webs</a>
+          <nav><a class="lnk">Serviços</a><a class="lnk">Processo</a><a class="lnk">Trabalho</a><a class="lnk">Placas NFC</a></nav>
+          <span class="live"><b></b> Placas NFC</span>
+          <a href="#" class="cta"><s>Falamos 15 min</s> <span>&#8599;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo">
+    <div class="meta"><div class="n">Variação D</div><h2>Com anel de progresso</h2>
+      <p>A marca vive dentro de um anel que se vai enchendo conforme desces a página. Dá noção de quanto falta, sem barras horizontais no topo. É a mais informativa.</p></div>
+    <div class="stage">
+      <div class="d">
+        <span class="ring" id="ring" style="--p:64"><b>MA</b></span>
+        <nav><a class="lnk">Serviços</a><a class="lnk">Processo</a><a class="lnk">Trabalho</a><a class="lnk">Placas NFC</a></nav>
+        <span class="live"><b></b> Placas NFC</span>
+        <a href="#" class="cta"><s>Falamos 15 min</s> <span>&#8599;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo">
+    <div class="meta"><div class="n">Variação E</div><h2>Abre para painel</h2>
+      <p>Fica sempre compacta e, ao carregar, cresce para baixo num painel com tudo: secções, telefone e WhatsApp. É a que funciona melhor em telemóvel, porque substitui o menu hamburguer.</p></div>
+    <div class="stage">
+      <div class="e" id="eIsl">
+        <div class="top" id="eTop">
+          <a href="#" class="mark"><i>MA</i> MA Webs</a>
+          <span class="live"><b></b> Placas NFC</span>
+          <span class="chev">&#8964;</span>
+        </div>
+        <div class="panel"><div class="panel-in">
+          <a class="row">Serviços <span>&#8594;</span></a>
+          <a class="row">Processo <span>&#8594;</span></a>
+          <a class="row">Trabalho <span>&#8594;</span></a>
+          <a class="row">Placas NFC <span>&#8594;</span></a>
+          <a class="row">962 303 550 <span>&#9990;</span></a>
+          <a href="#" class="cta"><s>Falamos 15 minutos</s> <span>&#8599;</span></a>
+        </div></div>
+      </div>
+    </div>
+    <p class="hint">Carrega na cápsula para abrir</p>
+  </section>
+</main>
+
+<script>
+const root=document.getElementById('root'),tExp=document.getElementById('tExp'),tMini=document.getElementById('tMini');
+function setMini(on){
+  root.classList.toggle('mini',on);
+  tMini.classList.toggle('on',on);tExp.classList.toggle('on',!on);
+}
+tExp.onclick=()=>setMini(false);
+tMini.onclick=()=>setMini(true);
+
+const eIsl=document.getElementById('eIsl');
+document.getElementById('eTop').onclick=()=>eIsl.classList.toggle('open');
+
+/* anel de progresso da variacao D acompanha o scroll da propria pagina */
+const ring=document.getElementById('ring');
+addEventListener('scroll',()=>{
+  const p=Math.round(scrollY/(document.body.scrollHeight-innerHeight)*100);
+  ring.style.setProperty('--p',Math.max(4,Math.min(100,p)));
+},{passive:true});
+</script>
+</body>
+</html>

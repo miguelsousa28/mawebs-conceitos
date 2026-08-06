@@ -1,0 +1,26 @@
+/* MA Webs, marca preto e branco. Partilhado pelos ficheiros de conceito. */
+:root{
+  --bg:#F6F5F3;
+  --bg-2:#EFEEEB;
+  --card:#FFFFFF;
+  --ink:#0A0B0C;
+  --ink-2:rgba(10,11,12,.64);
+  --ink-dim:rgba(10,11,12,.46);
+  --hair:rgba(10,11,12,.09);
+  /* gradiente monocromatico, substitui o azul/verde */
+  --grad:linear-gradient(100deg,#0A0B0C 10%,#7C8186 92%);
+  --grad-soft:linear-gradient(100deg,#2A2D30,#9AA0A5);
+  --soft:0 36px 90px -46px rgba(10,11,12,.30), 0 8px 26px -18px rgba(10,11,12,.10);
+  --lift:0 60px 120px -50px rgba(10,11,12,.40);
+  --e:cubic-bezier(.22,.61,.20,1);
+  --spring:cubic-bezier(.34,1.28,.36,1);
+  --pad:clamp(1.25rem,5vw,5rem);
+}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:190% 100%;animation:gshift 16s ease-in-out infinite alternate}
+@keyframes gshift{to{background-position:100% 0}}
+
+/* logo: quadrado preto, MA a branco */
+.mark{display:flex;align-items:center;gap:.62rem;font-weight:500;font-size:.95rem;letter-spacing:-.038em;flex:none}
+.mark i{width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;display:grid;place-items:center;
+  font-style:normal;font-size:.56rem;font-weight:600;letter-spacing:-.01em;flex:none}

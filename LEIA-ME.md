@@ -1,6 +1,43 @@
 # MA Webs, conceitos de site (06/08/2026)
 
-## 06, Híbrido v2 (o conceito principal)
+## v3, marca a preto e branco (06/08, fim do dia)
+
+O gradiente azul e verde saiu de todo o lado. A marca é agora **preto e branco**,
+com um gradiente monocromático (`#0A0B0C → #83888D`) dentro das palavras onde antes havia cor.
+
+- **Logo:** quadrado preto de cantos suaves com "MA" a branco. **Favicon** igual, em SVG embutido
+- **Renders monocromáticos** em duas secções: hero em cinza claro, placas NFC em cinza escuro sobre preto. Ambos reagem ao rato
+- **Fotografias** passaram todas a preto e branco com mais contraste, para parecerem intencionais até chegarem as reais
+- **Serviços reescritos:** cada linha diz o que é, para quem é, o que levas e a partir de quanto custa. Percebe-se tudo sem sair da secção
+- **Processo:** o scroll passou de 520vh para 300vh, muda de passo muito mais depressa
+- **Hover corrigido:** a inclinação 3D dos cartões saltava. Saiu. Ficou elevação limpa mais escala da imagem
+- **Animação dos anéis do NFC:** removida
+- **Hero das placas NFC:** uma frase, uma linha de apoio, dois botões. Cortei dois terços do texto
+- **Preços novos:** 30€ à unidade com mais 5€ pela personalização, 120€ o pack de 5, 200€ o pack de 10
+- **Falamos 15 minutos:** copy nova, três razões concretas, e o CTA passou a ser o teu número **962 303 550** em destaque mais WhatsApp com mensagem escrita
+- **Fundadores:** secção nova com Miguel e Afonso. Faltam as fotos
+- **Dynamic Island:** fundo branco sólido, sublinhado a saltar nos links
+- **Removidos:** "duas vagas para Agosto" e a faixa de números (30+, 48h, 0, 2)
+- **Legal:** `legal.html` com identificação, privacidade RGPD, cookies, termos, livro de reclamações e resolução de litígios. Links no rodapé
+
+### Ficheiros novos
+
+| Ficheiro | O que é |
+|---|---|
+| `variacoes-island.html` | 5 desenhos da Dynamic Island, com botão para simular o scroll |
+| `variacoes-nfc.html` | 5 disposições para a secção das placas NFC |
+| `legal.html` | Todas as políticas legais |
+
+### Ainda por resolver
+
+- **Fotografias e vídeos reais.** As imagens continuam de exemplo, agora a preto e branco. Fotos cinemáticas por IA e vídeo da hero ficam para quando decidires a direção
+- **Fotos dos fundadores.** Diz-me onde estão as do Lovable e eu meto
+- **NIF, morada e entidade RAL** na página legal, estão marcados a tracejado
+- Para onde aponta "Ver portfólio completo"
+
+---
+
+## 06, Híbrido v2 (histórico)
 
 Ficheiro: `06-hibrido.html`. A v1 está no histórico do git se quiseres comparar.
 
