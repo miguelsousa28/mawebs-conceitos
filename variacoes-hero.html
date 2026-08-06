@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MA Webs / 5 variações da hero</title>
+<link rel="icon" href="img/favicon-128.png">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F3;--card:#fff;--ink:#0A0B0C;--ink-2:rgba(10,11,12,.64);--ink-dim:rgba(10,11,12,.46);
+  --hair:rgba(10,11,12,.09);--soft:0 36px 90px -46px rgba(10,11,12,.28);--lift:0 60px 120px -50px rgba(10,11,12,.38);
+  --e:cubic-bezier(.22,.61,.20,1);--spring:cubic-bezier(.34,1.24,.38,1);--pad:clamp(1.25rem,5vw,4.5rem)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Geist','Plus Jakarta Sans',-apple-system,sans-serif;
+  font-weight:400;line-height:1.62;letter-spacing:-.011em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-weight:500;letter-spacing:-.05em;line-height:1.06}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+svg{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+.top{position:sticky;top:0;z-index:30;background:rgba(246,245,243,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--hair);padding:.9rem var(--pad);display:flex;align-items:center;gap:1.2rem}
+.top img{height:16px;mix-blend-mode:multiply}
+.top span{font-size:.85rem;color:var(--ink-2)}
+.top a{margin-left:auto;background:var(--ink);color:#fff;border-radius:999px;padding:.45rem 1.05rem;font-size:.84rem}
+header{padding:clamp(3rem,8vh,5rem) var(--pad) 1rem;max-width:1200px;margin:0 auto}
+header h2{font-size:clamp(1.7rem,4vw,2.8rem);max-width:20ch}
+header p{color:var(--ink-2);max-width:60ch;margin-top:1rem}
+
+.lab{max-width:1200px;margin:0 auto;padding:clamp(2.5rem,6vh,4rem) var(--pad) 0}
+.lab .n{font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.lab h3{font-size:clamp(1.2rem,2.4vw,1.7rem);margin:.45rem 0}
+.lab p{color:var(--ink-2);max-width:62ch;font-size:.94rem}
+
+.hero{position:relative;overflow:hidden;border-radius:1.8rem;border:1px solid var(--hair);background:#fff;
+  box-shadow:var(--soft);margin:1.6rem auto clamp(2rem,5vh,3rem);max-width:1200px;
+  padding:clamp(3rem,8vw,5.5rem) clamp(1.5rem,5vw,4rem);text-align:center}
+.hero .clouds{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(58% 52% at 26% 20%,rgba(10,11,12,.10),transparent 62%),
+             radial-gradient(52% 48% at 78% 74%,rgba(10,11,12,.075),transparent 66%);
+  animation:drift 30s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(-2%,-1.5%,0) scale(1.07)}}
+.hero>*{position:relative;z-index:2}
+.hero h1{font-size:clamp(2.1rem,5.2vw,4.4rem);max-width:18ch;margin-inline:auto}
+.hero .sub{max-width:52ch;color:var(--ink-2);margin:1.5rem auto 0;font-size:1.02rem;letter-spacing:-.014em}
+.btns{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:2rem}
+.btn{display:inline-flex;align-items:center;gap:.6rem;border-radius:999px;padding:.82rem .82rem .82rem 1.45rem;
+  font-size:.92rem;font-weight:500;transition:transform .7s var(--spring),background .8s var(--e),
+  border-color .8s var(--e),box-shadow .8s var(--e)}
+.btn i{width:29px;height:29px;border-radius:999px;display:grid;place-items:center;font-style:normal;font-size:.84rem;
+  transition:transform .7s var(--spring)}
+.btn:hover i{transform:translate(3px,-2px)}
+.btn-p{background:var(--ink);color:#fff}.btn-p i{background:rgba(255,255,255,.2)}
+.btn-p:hover{background:#22262A;box-shadow:0 28px 52px -26px rgba(10,11,12,.5)}
+.btn-s{background:#fff;border:1px solid var(--hair);box-shadow:var(--soft)}
+.btn-s i{background:rgba(10,11,12,.05)}
+.btn-s:hover{border-color:rgba(10,11,12,.3)}
+
+/* A, capsula preta cheia */
+.a .hl{display:inline-flex;align-items:center;gap:.24em;background:var(--ink);color:#fff;
+  border-radius:.32em;padding:.05em .3em .09em .22em;line-height:1;white-space:nowrap}
+.a .hl svg{width:.62em;height:.62em;flex:none}
+
+/* B, palavra normal com selo do icone antes */
+.b .hl{display:inline-flex;align-items:baseline;gap:.2em;white-space:nowrap}
+.b .hl i{display:inline-grid;place-items:center;width:.72em;height:.72em;border-radius:50%;
+  background:var(--ink);color:#fff;transform:translateY(-.06em);flex:none}
+.b .hl i svg{width:.42em;height:.42em}
+
+/* C, sublinhado grosso com icone a abrir */
+.c .hl{position:relative;display:inline-flex;align-items:center;gap:.22em;white-space:nowrap;
+  padding-bottom:.06em}
+.c .hl::after{content:'';position:absolute;left:0;right:0;bottom:-.02em;height:.11em;border-radius:.06em;
+  background:var(--ink);transform:scaleX(0);transform-origin:left;
+  animation:draw 1s var(--e) forwards}
+.c .hl:nth-of-type(2)::after{animation-delay:.18s}
+.c .hl:nth-of-type(3)::after{animation-delay:.36s}
+@keyframes draw{to{transform:scaleX(1)}}
+.c .hl svg{width:.6em;height:.6em;flex:none;opacity:.85}
+
+/* D, titulo limpo e tres fichas por baixo */
+.d h1{max-width:16ch}
+.chips{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+.chip{display:inline-flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--hair);
+  border-radius:999px;padding:.7rem 1.25rem;font-size:.98rem;font-weight:500;box-shadow:var(--soft);
+  transition:transform .8s var(--spring),box-shadow .8s var(--e),border-color .8s var(--e)}
+.chip:hover{transform:translateY(-5px);box-shadow:var(--lift);border-color:rgba(10,11,12,.28)}
+.chip span{display:grid;place-items:center;width:26px;height:26px;border-radius:999px;background:var(--ink);color:#fff;flex:none}
+.chip span svg{width:14px;height:14px}
+
+/* E, capsula de contorno */
+.e .hl{display:inline-flex;align-items:center;gap:.24em;border:.055em solid var(--ink);
+  border-radius:999px;padding:.04em .38em .08em .3em;line-height:1;white-space:nowrap;
+  transition:background .7s var(--e),color .7s var(--e)}
+.e .hl:hover{background:var(--ink);color:#fff}
+.e .hl svg{width:.6em;height:.6em;flex:none}
+
+footer{padding:3rem var(--pad);border-top:1px solid var(--hair);color:var(--ink-dim);font-size:.85rem;
+  max-width:1200px;margin:2rem auto 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
+  .c .hl::after{transform:scaleX(1)}}
+</style>
+</head>
+<body>
+<div class="top">
+  <img src="img/logo-lockup-2x.png" alt="MA Webs"><span>Cinco tratamentos para a hero</span>
+  <a href="06-hibrido.html">Voltar ao site</a>
+</div>
+
+<header>
+  <h2>Cinco formas de destacar as três palavras.</h2>
+  <p>O texto é o mesmo em todas. O que muda é o peso visual do destaque, do mais forte para o mais discreto. A A é a que está no site agora.</p>
+</header>
+
+<!-- A -->
+<div class="lab"><div class="n">Variação A</div><h3>Cápsula preta cheia</h3>
+  <p>É a que está no site. Máximo contraste, lê-se de longe. O risco é o bloco preto pesar tanto que engole o resto da frase.</p></div>
+<section class="hero a">
+  <div class="clouds"></div>
+  <h1>Um site que traz
+    <span class="hl"><svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg>telefonemas</span>,
+    <span class="hl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>reservas</span> e
+    <span class="hl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg>dinheiro</span>.
+  </h1>
+  <p class="sub">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar <i>&#8599;</i></a>
+    <a class="btn btn-s">Ver trabalho <i>&#8595;</i></a></div>
+</section>
+
+<!-- B -->
+<div class="lab"><div class="n">Variação B</div><h3>Selo redondo antes da palavra</h3>
+  <p>A frase mantém-se toda em texto, e cada palavra ganha só um pequeno círculo preto com o ícone. Muito mais leve, e o título continua a ler-se como uma frase e não como três blocos.</p></div>
+<section class="hero b">
+  <div class="clouds"></div>
+  <h1>Um site que traz
+    <span class="hl"><i><svg viewBox="0 0 24 24" stroke-width="2.4"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg></i>telefonemas</span>,
+    <span class="hl"><i><svg viewBox="0 0 24 24" stroke-width="2.4"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></i>reservas</span> e
+    <span class="hl"><i><svg viewBox="0 0 24 24" stroke-width="2.4"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg></i>dinheiro</span>.
+  </h1>
+  <p class="sub">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar <i>&#8599;</i></a>
+    <a class="btn btn-s">Ver trabalho <i>&#8595;</i></a></div>
+</section>
+
+<!-- C -->
+<div class="lab"><div class="n">Variação C</div><h3>Sublinhado grosso a desenhar-se</h3>
+  <p>Sem caixas. Cada palavra tem o ícone à frente e um traço grosso que se desenha da esquerda para a direita ao abrir a página. É a mais editorial e a que envelhece melhor.</p></div>
+<section class="hero c">
+  <div class="clouds"></div>
+  <h1>Um site que traz
+    <span class="hl"><svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg>telefonemas</span>,
+    <span class="hl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>reservas</span> e
+    <span class="hl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg>dinheiro</span>.
+  </h1>
+  <p class="sub">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar <i>&#8599;</i></a>
+    <a class="btn btn-s">Ver trabalho <i>&#8595;</i></a></div>
+</section>
+
+<!-- D -->
+<div class="lab"><div class="n">Variação D</div><h3>Título limpo e três fichas por baixo</h3>
+  <p>O título fica curto e sem interrupções, e as três palavras passam a fichas independentes por baixo. É a mais legível em telemóvel e a que dá mais espaço aos ícones.</p></div>
+<section class="hero d">
+  <div class="clouds"></div>
+  <h1>Um site que traz o que interessa ao teu negócio.</h1>
+  <div class="chips">
+    <span class="chip"><span><svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg></span>Telefonemas</span>
+    <span class="chip"><span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>Reservas</span>
+    <span class="chip"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg></span>Dinheiro</span>
+  </div>
+  <p class="sub">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar <i>&#8599;</i></a>
+    <a class="btn btn-s">Ver trabalho <i>&#8595;</i></a></div>
+</section>
+
+<!-- E -->
+<div class="lab"><div class="n">Variação E</div><h3>Cápsula de contorno</h3>
+  <p>A mesma ideia da A, mas só com o traço à volta, sem preencher. Fica bastante mais leve e enche a preto quando passas o rato. É o meio termo entre a A e a B.</p></div>
+<section class="hero e">
+  <div class="clouds"></div>
+  <h1>Um site que traz
+    <span class="hl"><svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg>telefonemas</span>,
+    <span class="hl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>reservas</span> e
+    <span class="hl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg>dinheiro</span>.
+  </h1>
+  <p class="sub">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar <i>&#8599;</i></a>
+    <a class="btn btn-s">Ver trabalho <i>&#8595;</i></a></div>
+</section>
+
+<footer>
+  <span>&copy; 2026 MA Webs</span>
+  <a href="06-hibrido.html">Voltar ao site</a>
+</footer>
+</body>
+</html>
