@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MA Webs / 06 / Híbrido v5</title>
+<title>MA Webs / 06 / Híbrido v6</title>
 <link rel="icon" href="img/favicon-128.png">
 <link rel="apple-touch-icon" href="img/favicon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,9 +62,10 @@ img{display:block;max-width:100%}
   max-width:1120px;padding:0 .48rem 0 1.25rem;border-radius:1.15rem;background:#fff;
   border:1px solid var(--hair);overflow:hidden;white-space:nowrap;
   box-shadow:0 22px 50px -32px rgba(10,11,12,.4), 0 2px 8px -5px rgba(10,11,12,.07);
-  transition:max-width 1.15s var(--spring),border-radius 1.15s var(--spring),height 1.15s var(--spring),
-             box-shadow 1s var(--e),padding 1.15s var(--spring)}
-.island.mini{max-width:344px;border-radius:999px;height:50px;padding-left:.95rem;
+  /* uma curva so, sem ressalto, para o retangulo virar capsula sem saltos */
+  transition:max-width 1.05s var(--e),border-radius .7s var(--e),height 1.05s var(--e),
+             padding 1.05s var(--e),box-shadow .9s var(--e)}
+.island.mini{max-width:428px;gap:1.05rem;border-radius:999px;height:50px;padding-left:1rem;padding-right:.42rem;
   box-shadow:0 18px 42px -26px rgba(10,11,12,.48)}
 .brand{display:flex;align-items:center;flex:none;height:100%}
 .brand img{height:17px;width:auto;mix-blend-mode:multiply;transition:height 1.1s var(--spring)}
@@ -86,16 +87,18 @@ img{display:block;max-width:100%}
 .isl-live em{font-style:normal;display:inline-block;transition:opacity .45s var(--e),transform .45s var(--e)}
 .isl-live em.swap{opacity:0;transform:translateY(-9px)}
 .cta-mini{display:flex;align-items:center;gap:.45rem;background:var(--ink);color:#fff;border-radius:999px;
-  padding:.52rem .52rem .52rem 1.1rem;font-size:.85rem;font-weight:500;flex:none;
-  transition:transform .7s var(--spring),background .8s var(--e),padding 1.15s var(--spring)}
-.cta-mini em{font-style:normal;display:inline-block;overflow:hidden;max-width:200px;
-  transition:max-width 1.15s var(--spring)}
-.island.mini .cta-mini em{max-width:88px}
+  padding:.52rem .52rem .52rem 1.1rem;font-size:.85rem;font-weight:500;flex:none;white-space:nowrap;
+  transition:transform .7s var(--spring),background .8s var(--e),padding 1.05s var(--e)}
+.cta-mini em{font-style:normal;display:inline-block}
 .cta-mini span{width:25px;height:25px;border-radius:999px;background:rgba(255,255,255,.2);display:grid;
-  place-items:center;transition:transform .7s var(--spring)}
+  place-items:center;flex:none;overflow:hidden;
+  transition:transform .7s var(--spring),width .8s var(--e),opacity .5s var(--e),margin-left .8s var(--e)}
 .cta-mini:hover{background:#22262A}
 .cta-mini:hover span{transform:translate(3px,-2px)}
 .cta-mini:active{transform:scale(.965)}
+/* recolhido: a seta sai, o texto fica inteiro */
+.island.mini .cta-mini{padding:.52rem 1.05rem}
+.island.mini .cta-mini span{width:0;opacity:0;margin-left:-.45rem}
 @media(max-width:1040px){
   .isl-nav{display:none}
   .island{max-width:400px;border-radius:999px}.island.mini{max-width:340px}
@@ -339,12 +342,12 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
   .stage{perspective:none}.phone{transform:none}.rig{display:flex;flex-direction:column;align-items:center}}
 
 /* ===== QUEM SOMOS, centrado ===== */
-.founders{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;margin:2.8rem auto 0;max-width:760px}
-.fnd{background:var(--card);border:1px solid var(--hair);border-radius:1.6rem;overflow:hidden;box-shadow:var(--soft);
+.founders{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem;margin:3rem auto 0;max-width:900px}
+.fnd{background:var(--card);border:1px solid var(--hair);border-radius:1.8rem;overflow:hidden;box-shadow:var(--soft);
   text-align:center;transition:transform 1s var(--e),box-shadow 1s var(--e)}
 .fnd:hover{transform:translateY(-8px);box-shadow:var(--lift)}
-.fnd .ph{aspect-ratio:1;overflow:hidden;background:#EDEBE7;border-radius:50%;width:min(190px,58%);
-  margin:2rem auto 0;border:1px solid var(--hair)}
+.fnd .ph{aspect-ratio:1;overflow:hidden;background:#EDEBE7;border-radius:50%;width:min(270px,74%);
+  margin:2.4rem auto 0;border:1px solid var(--hair)}
 .fnd .ph img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform 1.4s var(--e)}
 .fnd:hover .ph img{transform:scale(1.05)}
 .fnd .info{padding:1.4rem 1.6rem 2rem}
@@ -435,7 +438,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 <div class="render" id="heroRender"></div>
 <div class="veil"></div>
 <div class="grain"></div>
-<div class="badge">06 / Híbrido v5</div>
+<div class="badge">06 / Híbrido v6</div>
 
 <header class="nav">
   <div class="island" id="island">
@@ -449,10 +452,10 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 </header>
 
 <section class="hero">
-  <h1 data-anim>Websites que fazem o teu negócio <span class="grad">parecer maior do que é.</span></h1>
-  <p data-anim data-d="1">Somos dois. Desenhamos, construímos e mantemos o site, o menu digital e as placas NFC do teu balcão. Sem agências no meio, sem promessas que não cumprimos.</p>
+  <h1 data-anim>Um site que traz telefonemas, reservas e avaliações.</h1>
+  <p data-anim data-d="1">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar. Feito à mão por duas pessoas, mantido por nós.</p>
   <div class="btns" data-anim data-d="2">
-    <a href="#contacto" class="btn btn-p">Marcar chamada de 15 minutos <i>&#8599;</i></a>
+    <a href="#contacto" class="btn btn-p">Quero mais clientes a ligar <i>&#8599;</i></a>
     <a href="#trabalho" class="btn btn-s">Ver trabalho <i>&#8595;</i></a>
   </div>
 
@@ -480,8 +483,8 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
   <div class="wrap">
     <div data-anim>
       <span class="eyebrow">Serviços</span>
-      <h2 class="h2">Tudo o que o cliente vê, tratado no mesmo sítio.</h2>
-      <p class="lead">Não subcontratamos nada. Quem desenha é quem constrói e quem mantém. Por isso não há telefones a passar de mão em mão quando alguma coisa precisa de mudar.</p>
+      <h2 class="h2">Cada serviço existe para trazer alguma coisa.</h2>
+      <p class="lead">O site traz contactos. As placas trazem avaliações. O conteúdo faz com que se lembrem de ti. Nada aqui existe só para ficar bonito.</p>
     </div>
 
     <div class="svc">
@@ -586,8 +589,8 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 
 <section id="trabalho">
   <div class="wrap">
-    <div data-anim><span class="eyebrow">Trabalho</span><h2 class="h2">Sites reais, no ar, feitos por nós.</h2>
-      <p class="lead">Não são imagens de exemplo. São capturas dos sites verdadeiros. Passa o rato por cima de qualquer um para o percorreres de cima a baixo.</p></div>
+    <div data-anim><span class="eyebrow">Trabalho</span><h2 class="h2">Negócios que passaram a aparecer.</h2>
+      <p class="lead">Não são imagens de exemplo. São capturas dos sites verdadeiros, no ar neste momento. Passa o rato por cima de qualquer um para o percorreres de cima a baixo.</p></div>
     <div class="works" id="works">
       <article class="work" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/mr-burger-full.jpg')"></div></div><div class="cap"><h4>Mr. Burger</h4><span>Site e menu</span></div></article>
       <article class="work" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/raizes-do-sobreiro-full.jpg')"></div></div><div class="cap"><h4>Raízes do Sobreiro</h4><span>Restaurante</span></div></article>
@@ -595,21 +598,8 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       <article class="work" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/malveira-full.jpg')"></div></div><div class="cap"><h4>Escola de Música da Malveira</h4><span>Plataforma</span></div></article>
       <article class="work" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/zenith-full.jpg')"></div></div><div class="cap"><h4>Zenith Beauty Space</h4><span>Estética</span></div></article>
       <article class="work" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/casadarocha-full.jpg')"></div></div><div class="cap"><h4>Casa da Rocha</h4><span>Construção</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/agpremier-full.jpg')"></div></div><div class="cap"><h4>AG Premier</h4><span>Serviços</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/brah-full.jpg')"></div></div><div class="cap"><h4>Brah Ericeira</h4><span>Smash burgers</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/lobbybarber-full.jpg')"></div></div><div class="cap"><h4>The Lobby Barber Shop</h4><span>Barbearia</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/isarodriguez-full.jpg')"></div></div><div class="cap"><h4>Isa Rodriguez</h4><span>Marca pessoal</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/bialacerda-full.jpg')"></div></div><div class="cap"><h4>Bia Lacerda</h4><span>Marca pessoal</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/serlotus-full.jpg')"></div></div><div class="cap"><h4>Ser Lotus</h4><span>Bem estar</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/inafer-full.jpg')"></div></div><div class="cap"><h4>Inafer Materiais</h4><span>Comércio</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/ferrosil-full.jpg')"></div></div><div class="cap"><h4>Ferrosil</h4><span>Indústria</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/ctpainting-full.jpg')"></div></div><div class="cap"><h4>CT Painting</h4><span>Serviços</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/mavie-full.jpg')"></div></div><div class="cap"><h4>Mavie Aesthetic</h4><span>Estética</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/unicutz-full.jpg')"></div></div><div class="cap"><h4>Unicutz</h4><span>Barbearia</span></div></article>
-      <article class="work hid"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/mr-burger-fotos-full.jpg')"></div></div><div class="cap"><h4>Mr. Burger, fotos do menu</h4><span>Ferramenta</span></div></article>
     </div>
     <div class="more">
-      <button class="btn btn-s" id="showMore">Ver mais projetos <i>&#8595;</i></button>
       <a href="portfolio.html" class="btn btn-p">Ver portfólio completo <i>&#8599;</i></a>
     </div>
   </div>
@@ -621,15 +611,15 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
     <div class="nfc-grid">
       <div data-anim>
         <span class="kick">Placas NFC</span>
-        <h2>Uma placa no balcão. Avaliações todos os dias.</h2>
+        <h2>Nove segundos entre pagar e avaliar.</h2>
         <div class="bul">
-          <div><i></i> Sem app e sem QR code desbotado</div>
+          <div><i></i> Sem app, o cliente só encosta o telemóvel</div>
           <div><i></i> Mudas o destino do link sem trocar a placa</div>
-          <div><i></i> Acrílico, madeira ou metal escovado</div>
+          <div><i></i> Acrílico, com a tua marca gravada</div>
+          <div><i></i> Podemos incluir QR code, se nos deres o teu</div>
         </div>
         <div class="btns">
-          <a href="#packs" class="btn btn-p">Ver preços <i>&#8595;</i></a>
-          <a href="#contacto" class="btn btn-s">Falar connosco <i>&#8599;</i></a>
+          <a href="#contacto" class="btn btn-p">Quero as minhas placas <i>&#8599;</i></a>
         </div>
       </div>
 
@@ -660,7 +650,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
     </div>
 
     <div class="nfc-foot">
-      <p>Sete a dez dias úteis desde a aprovação do desenho. Se o telemóvel do cliente não tiver NFC, o verso da placa leva um QR code.</p>
+      <p>Dez dias úteis a contar da encomenda ao nosso fornecedor, cerca de duas semanas. Feitas em acrílico. Se quiseres QR code impresso no verso, é possível, mas o código tem de vir do teu lado.</p>
       <a href="#contacto" class="btn btn-p">Quero as minhas placas <i>&#8599;</i></a>
     </div>
   </div>
@@ -692,8 +682,8 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
   <div class="wrap call">
     <div data-anim>
       <span class="eyebrow">Chamada de 15 minutos</span>
-      <h2 class="h2">Quinze minutos para percebermos o teu negócio.</h2>
-      <p class="lead">Não é uma chamada de vendas nem um questionário. É uma conversa curta para sabermos o que fazes, mostrarmos trabalho parecido e dizermos como trabalhamos e quanto custa.</p>
+      <h2 class="h2">Dizemos o que muda no teu caso, com números.</h2>
+      <p class="lead">Quinze minutos por Zoom. Não é uma chamada de vendas nem um questionário. É uma conversa curta para sabermos o que fazes, mostrarmos trabalho parecido e dizermos quanto custa.</p>
       <div class="agenda">
         <div class="ag"><i>1</i><div><b>Contas nos o negócio</b><p>O que vendes, quem são os clientes e o que te está a faltar online.</p></div></div>
         <div class="ag"><i>2</i><div><b>Mostramos sites que já fizemos</b><p>De preferência de negócios parecidos com o teu, para veres o resultado antes de decidires.</p></div></div>
@@ -702,17 +692,18 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
     </div>
     <div class="callcard" data-anim data-d="1">
       <span class="free">&#9679; Sem custo e sem compromisso</span>
-      <h3>Marca a tua chamada esta semana.</h3>
-      <p>Escreve nos com o nome do negócio. Respondemos no próprio dia com duas horas à escolha.</p>
+      <h3>Escolhe a hora que te dá jeito.</h3>
+      <p>Escolhes o horário no calendário e recebes o link do Zoom por email. Sem trocas de mensagens para marcar.</p>
       <div class="deliver">
-        <div><i>&#10003;</i> Quinze minutos, por telefone ou WhatsApp</div>
+        <div><i>&#10003;</i> Quinze minutos por Zoom</div>
         <div><i>&#10003;</i> Falas connosco os dois, não com um comercial</div>
         <div><i>&#10003;</i> Sais a saber o preço, mesmo que não avances</div>
       </div>
       <div class="btns">
-        <a href="https://wa.me/351962303550?text=Ol%C3%A1%2C%20vim%20do%20site%20da%20MA%20Webs%20e%20queria%20marcar%20a%20chamada%20de%2015%20minutos." target="_blank" rel="noopener" class="btn btn-p">Marcar no WhatsApp <i>&#8599;</i></a>
+        <!-- TODO: trocar pelo link real do cal.com que o Miguel vai enviar -->
+        <a href="https://cal.com/mawebs/15min" target="_blank" rel="noopener" class="btn btn-p">Escolher horário <i>&#8599;</i></a>
       </div>
-      <a class="phonelink" href="tel:+351962303550">&#9990; ou liga já para <b>962 303 550</b></a>
+      <a class="phonelink" href="https://wa.me/351962303550?text=Ol%C3%A1%2C%20vim%20do%20site%20da%20MA%20Webs%20e%20queria%20marcar%20a%20chamada%20de%2015%20minutos." target="_blank" rel="noopener">&#9993; ou fala connosco no <b>WhatsApp</b></a>
       <div class="fine">
         <span><b></b> Resposta no próprio dia</span>
         <span><b></b> Duas vagas por semana</span>
@@ -755,7 +746,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
     </div>
     <div class="foot-mid">
       <span>&copy; 2026 MA Webs. Todos os direitos reservados.</span>
-      <span>Miguel Sousa, empresário em nome individual</span>
+      <span>Miguel Sousa e Afonso Sousa, empresários em nome individual</span>
     </div>
   </div>
   <div class="foot-mark"><img src="img/logo-lockup-2x.png" alt=""></div>
@@ -822,16 +813,6 @@ function islandScroll(){
 function onScroll(){pinScroll();islandScroll();tick=false}
 addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});
 addEventListener('resize',onScroll);onScroll();
-
-/* ver mais projetos */
-const btnMore=document.getElementById('showMore');
-btnMore.addEventListener('click',()=>{
-  [...document.querySelectorAll('.work.hid')].forEach((w,i)=>{
-    w.classList.remove('hid');w.setAttribute('data-anim','');w.setAttribute('data-d',String(i%3));
-    requestAnimationFrame(()=>io.observe(w));
-  });
-  btnMore.remove();
-});
 
 /* ===== demo NFC: o telemovel encosta, em ciclo permanente ===== */
 document.getElementById('scr').innerHTML=`
