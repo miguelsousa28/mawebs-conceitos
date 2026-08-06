@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MA Webs / 5 animações da secção NFC</title>
+<link rel="icon" href="img/favicon-128.png">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F3;--ink:#0A0B0C;--ink-2:rgba(10,11,12,.64);--ink-dim:rgba(10,11,12,.46);
+  --hair:rgba(10,11,12,.09);--soft:0 36px 90px -46px rgba(10,11,12,.3);--lift:0 60px 120px -50px rgba(10,11,12,.4);
+  --e:cubic-bezier(.22,.61,.20,1);--spring:cubic-bezier(.34,1.28,.36,1);--pad:clamp(1.25rem,5vw,4.5rem)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Geist','Plus Jakarta Sans',-apple-system,sans-serif;
+  font-weight:400;line-height:1.6;letter-spacing:-.011em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-weight:500;letter-spacing:-.045em;line-height:1.04}
+a{color:inherit;text-decoration:none}
+header{padding:clamp(3.5rem,10vh,6rem) var(--pad) 2.5rem;border-bottom:1px solid var(--hair)}
+header h1{font-size:clamp(1.9rem,4.5vw,3.2rem);max-width:22ch}
+header p{color:var(--ink-2);max-width:62ch;margin-top:1.1rem}
+.lab{padding:clamp(2.5rem,7vh,4rem) var(--pad) 1.3rem;max-width:1320px;margin:0 auto}
+.lab .n{font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.lab h2{font-size:clamp(1.3rem,2.6vw,1.9rem);margin:.5rem 0}
+.lab p{color:var(--ink-2);max-width:64ch;font-size:.95rem}
+section.v{padding:0 var(--pad) clamp(3rem,8vh,5rem)}
+.wrap{max-width:1320px;margin:0 auto}
+
+/* bloco NFC: B centrado, com a parte esquerda do C por cima */
+.nfc{background:#0A0B0C;color:#fff;border-radius:2.4rem;position:relative;overflow:hidden;box-shadow:var(--lift);
+  padding:clamp(2.5rem,6vw,4.5rem)}
+.nfc>*{position:relative;z-index:2}
+.nfc>.rnd{position:absolute;inset:0;z-index:0}
+.rnd canvas{width:100%;height:100%;display:block}
+.top{display:grid;grid-template-columns:1fr auto;gap:clamp(1.5rem,4vw,3rem);align-items:end;
+  padding-bottom:clamp(1.8rem,4vw,2.6rem);border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:clamp(2rem,5vw,3.4rem)}
+.kick{font-size:.76rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.45);
+  display:block;margin-bottom:1rem}
+.top h2{font-size:clamp(1.7rem,3.8vw,3rem);max-width:16ch}
+.bul{display:grid;gap:.6rem;min-width:min(300px,100%)}
+.bul div{display:flex;gap:.7rem;color:rgba(255,255,255,.66);font-size:.93rem}
+.bul i{font-style:normal;width:5px;height:5px;border-radius:99px;background:rgba(255,255,255,.5);margin-top:.62rem;flex:none}
+.stagew{display:grid;place-items:center}
+.demo{display:flex;align-items:center;justify-content:center;gap:clamp(2rem,6vw,5rem);position:relative;
+  transform:scale(1.05)}
+.cap{text-align:center;color:rgba(255,255,255,.42);font-size:.8rem;margin-top:1.6rem}
+.plate{width:clamp(112px,14vw,158px);aspect-ratio:1.58/1;border-radius:.9rem;position:relative;flex:none;
+  background:linear-gradient(150deg,#2E3236,#131619);display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 26px 46px -22px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.16);
+  transition:transform .8s var(--spring),box-shadow .8s var(--e)}
+.plate img{width:44%;filter:invert(1);opacity:.9}
+.phone{width:clamp(168px,19vw,214px);aspect-ratio:9/18.5;border-radius:1.9rem;padding:.38rem;flex:none;position:relative;
+  background:linear-gradient(160deg,#34383D,#131619);box-shadow:0 44px 70px -30px rgba(0,0,0,.9);
+  transition:transform .9s var(--spring)}
+.scr{border-radius:1.55rem;height:100%;background:#fff;overflow:hidden;position:relative}
+.scene{position:absolute;inset:0;padding:1.15rem .85rem;color:var(--ink);text-align:center}
+.t{font-size:.66rem;font-weight:500;line-height:1.35}
+.s{font-size:.54rem;color:var(--ink-dim);margin-top:.35rem;line-height:1.4}
+.lock{background:#111315;color:#fff;display:grid;place-content:center}
+.lock .t{color:rgba(255,255,255,.92)}.lock .s{color:rgba(255,255,255,.42)}
+.stars{display:flex;gap:3px;justify-content:center;margin-top:.75rem;font-size:.9rem}
+.stars b{opacity:.16;transform:scale(.7);display:inline-block;
+  transition:opacity .35s var(--spring),transform .45s var(--spring)}
+.stars b.on{opacity:1;transform:none}
+.gbox{margin-top:.85rem;border:1px solid var(--hair);border-radius:.55rem;padding:.5rem;background:#FAFAF9}
+.gbox .ln{height:4px;border-radius:99px;background:rgba(10,11,12,.12);margin-bottom:4px;width:0;
+  transition:width .6s var(--e)}
+.gbox .ln.on:nth-child(1){width:100%}.gbox .ln.on:nth-child(2){width:78%}.gbox .ln.on:nth-child(3){width:56%}
+.pub{margin-top:.7rem;font-size:.54rem;background:var(--ink);color:#fff;border-radius:99px;padding:.3rem .1rem;
+  opacity:.35;transition:opacity .4s var(--e)}
+.pub.on{opacity:1}
+.done{width:34px;height:34px;border-radius:999px;background:var(--ink);color:#fff;display:grid;place-items:center;
+  margin:0 auto .7rem;font-size:.95rem;transform:scale(.4);opacity:0;
+  transition:transform .6s var(--spring),opacity .4s var(--e)}
+.ok.show .done{transform:none;opacity:1}
+.ok{display:grid;place-content:center;background:#fff}
+
+/* estados comuns das cenas */
+.scene{opacity:0;pointer-events:none;transition:opacity .5s var(--e),transform .6s var(--e)}
+.scene.show{opacity:1;pointer-events:auto}
+
+.hint{position:absolute;inset:auto 0 -2.2rem 0;text-align:center;font-size:.74rem;color:rgba(255,255,255,.35)}
+
+/* A: onda de contacto que viaja ate ao telemovel */
+.wave{position:absolute;left:0;top:50%;width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.6);
+  transform:translate(-50%,-50%) scale(.3);opacity:0;pointer-events:none}
+.a-run .wave{animation:travel 1.15s var(--e) forwards}
+.a-run .wave:nth-of-type(2){animation-delay:.13s}
+.a-run .wave:nth-of-type(3){animation-delay:.26s}
+@keyframes travel{
+  0%{transform:translate(-50%,-50%) scale(.3);opacity:0}
+  12%{opacity:.9}
+  100%{transform:translate(calc(-50% + var(--dx,320px)),-50%) scale(2.4);opacity:0}}
+.a-run .scr{animation:flash .5s var(--e) .55s}
+@keyframes flash{50%{box-shadow:inset 0 0 0 100px rgba(255,255,255,.7)}}
+.slideup{transform:translateY(16px)}
+.slideup.show{transform:none}
+
+/* B: o telemovel inclina-se e encosta */
+.b-run .phone{transform:translateX(-26px) rotate(-7deg) scale(1.02)}
+.b-run .plate{transform:translateX(10px) scale(1.04)}
+.b-glow{position:absolute;left:50%;top:50%;width:120px;height:120px;border-radius:999px;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,255,255,.55),transparent 65%);
+  transform:translate(-50%,-50%) scale(.2);opacity:0;transition:transform .7s var(--e),opacity .7s var(--e)}
+.b-run .b-glow{transform:translate(-50%,-50%) scale(1.6);opacity:1}
+
+/* C: feixe de luz que se desenha */
+.beam{position:absolute;left:0;top:50%;height:2px;width:var(--w,300px);transform:translateY(-50%);
+  background:linear-gradient(90deg,rgba(255,255,255,.9),rgba(255,255,255,0));
+  transform-origin:left center;scale:0 1;opacity:0;pointer-events:none;
+  transition:scale .7s var(--e),opacity .5s var(--e)}
+.c-run .beam{scale:1 1;opacity:1}
+.c-run .plate{box-shadow:0 26px 46px -22px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.4),0 0 40px rgba(255,255,255,.28)}
+.typed{overflow:hidden;white-space:nowrap;display:inline-block;max-width:0;transition:max-width .9s var(--e)}
+.typed.on{max-width:180px}
+
+/* D: cartas empilhadas que rodam */
+.d .scene{transform-origin:center bottom;backface-visibility:hidden;
+  transition:transform .75s var(--spring),opacity .5s var(--e)}
+.d .scene:not(.show){transform:rotateX(28deg) translateY(22px) scale(.94)}
+.d .scene.show{transform:none}
+.d .scr{perspective:900px}
+
+/* E: barra de nove segundos */
+.timer{position:absolute;inset:auto 0 -3.4rem 0;height:3px;border-radius:99px;background:rgba(255,255,255,.14);
+  overflow:hidden}
+.timer b{position:absolute;inset:0;background:#fff;transform-origin:left;transform:scaleX(0)}
+.e-run .timer b{transition:transform 2.7s linear;transform:scaleX(1)}
+.secs{position:absolute;inset:auto 0 -5.6rem 0;text-align:center;font-size:.76rem;color:rgba(255,255,255,.45);
+  font-variant-numeric:tabular-nums}
+@media(max-width:900px){
+  .top{grid-template-columns:1fr}
+  .demo{gap:1.5rem;transform:none}
+  .b-run .phone{transform:none}.b-run .plate{transform:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Cinco animações para o momento do toque.</h1>
+  <p>Todas com o mesmo layout: a frase e os três pontos da variação C em cima, a demonstração grande e ao centro da variação B por baixo. O que muda é o que acontece quando passas o rato pela placa. Todas correm sozinhas em ciclo e reagem ao rato.</p>
+</header>
+
+<!-- A -->
+<div class="lab"><div class="n">Animação A</div><h2>Onda de contacto</h2>
+  <p>Saem três anéis da placa que atravessam o espaço até ao telemóvel. Quando chegam, o ecrã pisca e a página de avaliação sobe de baixo. As estrelas acendem uma a uma. É a mais explicativa, mostra que alguma coisa viaja da placa para o telefone.</p></div>
+<section class="v"><div class="wrap nfc" data-anim="a">
+  <div class="rnd" data-render></div>
+  <div class="top">
+    <div><span class="kick">Placas NFC</span><h2>Uma placa no balcão. Avaliações todos os dias.</h2></div>
+    <div class="bul">
+      <div><i></i> Sem app e sem QR code desbotado</div>
+      <div><i></i> Mudas o destino do link sem trocar a placa</div>
+      <div><i></i> Acrílico, madeira ou metal escovado</div>
+    </div>
+  </div>
+  <div class="stagew"><div>
+    <div class="demo">
+      <span class="wave"></span><span class="wave"></span><span class="wave"></span>
+      <div class="plate" data-plate><img src="img/logo-mono.png" alt="MA"></div>
+      <div class="phone"><div class="scr" data-scr></div></div>
+    </div>
+    <p class="cap">Passa o rato pela placa</p>
+  </div></div>
+</div></section>
+
+<!-- B -->
+<div class="lab"><div class="n">Animação B</div><h2>O telemóvel encosta</h2>
+  <p>O telemóvel inclina-se e aproxima-se fisicamente da placa, acende-se um brilho no ponto de contacto e só depois o ecrã muda. É a mais física e a que melhor imita o gesto real.</p></div>
+<section class="v"><div class="wrap nfc" data-anim="b">
+  <div class="rnd" data-render></div>
+  <div class="top">
+    <div><span class="kick">Placas NFC</span><h2>Uma placa no balcão. Avaliações todos os dias.</h2></div>
+    <div class="bul">
+      <div><i></i> Sem app e sem QR code desbotado</div>
+      <div><i></i> Mudas o destino do link sem trocar a placa</div>
+      <div><i></i> Acrílico, madeira ou metal escovado</div>
+    </div>
+  </div>
+  <div class="stagew"><div>
+    <div class="demo">
+      <span class="b-glow"></span>
+      <div class="plate" data-plate><img src="img/logo-mono.png" alt="MA"></div>
+      <div class="phone"><div class="scr" data-scr></div></div>
+    </div>
+    <p class="cap">Passa o rato pela placa</p>
+  </div></div>
+</div></section>
+
+<!-- C -->
+<div class="lab"><div class="n">Animação C</div><h2>Feixe de luz</h2>
+  <p>Um traço de luz desenha-se da placa até ao telemóvel enquanto a placa ganha halo. Do outro lado o texto da avaliação escreve-se sozinho. É a mais premium e a mais discreta.</p></div>
+<section class="v"><div class="wrap nfc" data-anim="c">
+  <div class="rnd" data-render></div>
+  <div class="top">
+    <div><span class="kick">Placas NFC</span><h2>Uma placa no balcão. Avaliações todos os dias.</h2></div>
+    <div class="bul">
+      <div><i></i> Sem app e sem QR code desbotado</div>
+      <div><i></i> Mudas o destino do link sem trocar a placa</div>
+      <div><i></i> Acrílico, madeira ou metal escovado</div>
+    </div>
+  </div>
+  <div class="stagew"><div>
+    <div class="demo">
+      <span class="beam"></span>
+      <div class="plate" data-plate><img src="img/logo-mono.png" alt="MA"></div>
+      <div class="phone"><div class="scr" data-scr></div></div>
+    </div>
+    <p class="cap">Passa o rato pela placa</p>
+  </div></div>
+</div></section>
+
+<!-- D -->
+<div class="lab"><div class="n">Animação D</div><h2>Cartas a virar</h2>
+  <p>Os três ecrãs comportam se como cartas empilhadas: cada um roda para cima e assenta, como as notificações do iPhone. É a mais suave e a que menos distrai quem está a ler o texto.</p></div>
+<section class="v"><div class="wrap nfc d" data-anim="d">
+  <div class="rnd" data-render></div>
+  <div class="top">
+    <div><span class="kick">Placas NFC</span><h2>Uma placa no balcão. Avaliações todos os dias.</h2></div>
+    <div class="bul">
+      <div><i></i> Sem app e sem QR code desbotado</div>
+      <div><i></i> Mudas o destino do link sem trocar a placa</div>
+      <div><i></i> Acrílico, madeira ou metal escovado</div>
+    </div>
+  </div>
+  <div class="stagew"><div>
+    <div class="demo">
+      <div class="plate" data-plate><img src="img/logo-mono.png" alt="MA"></div>
+      <div class="phone"><div class="scr" data-scr></div></div>
+    </div>
+    <p class="cap">Passa o rato pela placa</p>
+  </div></div>
+</div></section>
+
+<!-- E -->
+<div class="lab"><div class="n">Animação E</div><h2>Nove segundos cronometrados</h2>
+  <p>Uma barra fina corre por baixo e o contador sobe de zero a nove enquanto os ecrãs mudam. Transforma a promessa "nove segundos" em algo que se vê acontecer. É a mais persuasiva.</p></div>
+<section class="v" style="padding-bottom:clamp(5rem,12vh,8rem)"><div class="wrap nfc" data-anim="e">
+  <div class="rnd" data-render></div>
+  <div class="top">
+    <div><span class="kick">Placas NFC</span><h2>Uma placa no balcão. Avaliações todos os dias.</h2></div>
+    <div class="bul">
+      <div><i></i> Sem app e sem QR code desbotado</div>
+      <div><i></i> Mudas o destino do link sem trocar a placa</div>
+      <div><i></i> Acrílico, madeira ou metal escovado</div>
+    </div>
+  </div>
+  <div class="stagew"><div style="position:relative">
+    <div class="demo">
+      <div class="plate" data-plate><img src="img/logo-mono.png" alt="MA"></div>
+      <div class="phone"><div class="scr" data-scr></div></div>
+    </div>
+    <div class="timer"><b></b></div>
+    <div class="secs"><span data-secs>0</span> segundos</div>
+  </div></div>
+</div></section>
+
+<script>
+const SCR=`
+<div class="scene lock show" data-s="0"><div><div class="t">Encosta aqui</div><div class="s">Sem app, sem código</div></div></div>
+<div class="scene slideup" data-s="1">
+  <div class="t">Gama Barbearia</div><div class="s">Como correu a tua visita?</div>
+  <div class="stars"><b>&#9733;</b><b>&#9733;</b><b>&#9733;</b><b>&#9733;</b><b>&#9733;</b></div>
+  <div class="gbox"><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+  <div class="pub">Publicar avaliação</div>
+</div>
+<div class="scene ok" data-s="2"><div><div class="done">&#10003;</div>
+  <div class="t">Avaliação publicada</div><div class="s">Demorou nove segundos</div></div></div>`;
+document.querySelectorAll('[data-scr]').forEach(s=>s.innerHTML=SCR);
+
+document.querySelectorAll('.nfc[data-anim]').forEach(block=>{
+  const kind=block.dataset.anim;
+  const scenes=[...block.querySelectorAll('.scene')];
+  const stars=[...block.querySelectorAll('.stars b')];
+  const lines=[...block.querySelectorAll('.gbox .ln')];
+  const pub=block.querySelector('.pub');
+  const okScene=block.querySelector('.ok');
+  const plate=block.querySelector('[data-plate]');
+  const secsEl=block.querySelector('[data-secs]');
+  const demo=block.querySelector('.demo');
+  const runClass=kind+'-run';
+  let timers=[],loop;
+
+  const clear=()=>{timers.forEach(clearTimeout);timers=[];};
+  const at=(ms,fn)=>timers.push(setTimeout(fn,ms));
+  const reset=()=>{
+    block.classList.remove(runClass);
+    scenes.forEach((s,i)=>s.classList.toggle('show',i===0));
+    stars.forEach(s=>s.classList.remove('on'));
+    lines.forEach(l=>l.classList.remove('on'));
+    pub&&pub.classList.remove('on');
+    okScene&&okScene.classList.remove('show');
+    if(secsEl)secsEl.textContent='0';
+  };
+
+  /* distancia entre placa e telemovel, para a onda e o feixe */
+  const measure=()=>{
+    const a=plate.getBoundingClientRect(),d=demo.getBoundingClientRect();
+    const ph=block.querySelector('.phone').getBoundingClientRect();
+    demo.style.setProperty('--dx',(ph.left+ph.width/2-(a.left+a.width/2))+'px');
+    demo.style.setProperty('--w',(ph.left-a.right+16)+'px');
+    const beam=block.querySelector('.beam');
+    if(beam){beam.style.left=(a.right-d.left)+'px';beam.style.width=(ph.left-a.right)+'px'}
+    const waves=block.querySelectorAll('.wave');
+    waves.forEach(w=>{w.style.left=(a.left+a.width/2-d.left)+'px';
+      w.style.setProperty('--dx',(ph.left+ph.width/2-(a.left+a.width/2))+'px')});
+    const glow=block.querySelector('.b-glow');
+    if(glow){glow.style.left=((a.right+ph.left)/2-d.left)+'px'}
+  };
+  measure();addEventListener('resize',measure);
+
+  const run=()=>{
+    clear();reset();measure();
+    void block.offsetWidth;
+    block.classList.add(runClass);
+
+    const T = kind==='e' ? {open:900,stars:1300,text:1900,pub:2350,done:2800} :
+              kind==='a' ? {open:750,stars:1150,text:1650,pub:2050,done:2500} :
+                           {open:650,stars:1050,text:1550,pub:1950,done:2400};
+
+    at(T.open,()=>{scenes[0].classList.remove('show');scenes[1].classList.add('show')});
+    stars.forEach((s,i)=>at(T.stars+i*110,()=>s.classList.add('on')));
+    lines.forEach((l,i)=>at(T.text+i*130,()=>l.classList.add('on')));
+    at(T.pub,()=>pub&&pub.classList.add('on'));
+    at(T.done,()=>{scenes[1].classList.remove('show');scenes[2].classList.add('show');
+      okScene&&okScene.classList.add('show')});
+    at(T.done+1800,()=>{block.classList.remove(runClass);reset()});
+
+    if(secsEl){
+      let n=0;const step=setInterval(()=>{n++;secsEl.textContent=n;if(n>=9)clearInterval(step)},T.done/9);
+      timers.push(step);
+    }
+  };
+
+  const start=()=>{run();loop=setInterval(run,6200)};
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){if(!loop)start()}else{clearInterval(loop);loop=null;clear();reset()}
+  }),{threshold:.25});
+  io.observe(block);
+
+  plate.addEventListener('mouseenter',()=>{clearInterval(loop);loop=null;run();
+    loop=setInterval(run,6200)});
+});
+
+/* render monocromatico reativo ao rato */
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function mountRender(host){
+  if(reduce)return;
+  const cv=document.createElement('canvas');const gl=cv.getContext('webgl',{antialias:false});
+  if(!gl)return;host.appendChild(cv);
+  const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
+  const fs=`precision highp float;uniform vec2 u_res;uniform float u_t;uniform vec2 u_m;
+  vec2 hash(vec2 p){p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)));return -1.+2.*fract(sin(p)*43758.5453123);}
+  float noise(vec2 p){const float K1=0.366025404,K2=0.211324865;
+    vec2 i=floor(p+(p.x+p.y)*K1);vec2 a=p-i+(i.x+i.y)*K2;float m=step(a.y,a.x);
+    vec2 o=vec2(m,1.0-m);vec2 b=a-o+K2,c=a-1.0+2.0*K2;
+    vec3 h=max(0.5-vec3(dot(a,a),dot(b,b),dot(c,c)),0.0);
+    vec3 n=h*h*h*h*vec3(dot(a,hash(i)),dot(b,hash(i+o)),dot(c,hash(i+1.0)));return dot(n,vec3(70.0));}
+  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p*=2.03;a*=.5;}return v;}
+  void main(){vec2 st=(gl_FragCoord.xy-.5*u_res)/u_res.y;vec2 m=(u_m-.5*u_res)/u_res.y;
+    float warp=exp(-length(st-m)*1.8)*.6;
+    vec2 q=st*1.15+(st-m)*warp;
+    float f=fbm(q+vec2(u_t*.038,u_t*.026));
+    float g=fbm(q*1.55+vec2(-u_t*.028,u_t*.042)+f);
+    float v=smoothstep(-.25,.9,f)*.55+smoothstep(-.1,.95,g)*.45;
+    vec3 col=mix(vec3(.043,.047,.051),vec3(.33,.35,.37),v*.55)+warp*.10;
+    col=mix(col,vec3(.039,.043,.047),smoothstep(.32,1.0,length(st*vec2(.8,1.0))));
+    gl_FragColor=vec4(col,1.);}`;
+  function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o}
+  const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));
+  gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){cv.remove();return}
+  gl.useProgram(pr);
+  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  const uRes=gl.getUniformLocation(pr,'u_res'),uT=gl.getUniformLocation(pr,'u_t'),uM=gl.getUniformLocation(pr,'u_m');
+  let W,H;
+  function size(){const dpr=Math.min(devicePixelRatio||1,1.5),r=host.getBoundingClientRect();
+    W=cv.width=Math.max(1,Math.floor(r.width*dpr));H=cv.height=Math.max(1,Math.floor(r.height*dpr));gl.viewport(0,0,W,H)}
+  size();addEventListener('resize',size);
+  let mx=0,my=0,tx=0,ty=0;
+  addEventListener('mousemove',e=>{const dpr=Math.min(devicePixelRatio||1,1.5),r=host.getBoundingClientRect();
+    tx=(e.clientX-r.left)*dpr;ty=(r.height-(e.clientY-r.top))*dpr},{passive:true});
+  const t0=performance.now();
+  (function loop(now){requestAnimationFrame(loop);
+    if(document.hidden)return;
+    const r=host.getBoundingClientRect();
+    if(r.bottom<-200||r.top>innerHeight+200)return;
+    mx+=(tx-mx)*.06;my+=(ty-my)*.06;
+    gl.uniform2f(uRes,W,H);gl.uniform2f(uM,mx,my);gl.uniform1f(uT,(now-t0)/1000);
+    gl.drawArrays(gl.TRIANGLES,0,3)})(t0);
+}
+document.querySelectorAll('[data-render]').forEach(mountRender);
+</script>
+</body>
+</html>
