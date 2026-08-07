@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MA Webs / 5 variações da hero C</title>
+<title>MA Webs / 5 variações da hero C, sem desfoque</title>
 <link rel="icon" href="img/favicon-128.png">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -74,7 +74,7 @@ header p{color:var(--ink-2);max-width:66ch;margin-top:1rem}
   box-sizing:content-box;width:var(--w,auto);padding-inline:.16em;margin-inline:-.16em;
   transition:filter .34s var(--e)}
 .word i{font-style:normal;display:block;white-space:nowrap;text-align:center}
-.word.moving{filter:blur(.03em)}
+
 .hl.pop{transform:scale(1.045)}
 .hl .sheen{position:absolute;inset:0;border-radius:999px;pointer-events:none;opacity:0;overflow:hidden;
   background:linear-gradient(105deg,transparent 38%,rgba(10,11,12,.14) 50%,transparent 62%);
@@ -87,7 +87,7 @@ header p{color:var(--ink-2);max-width:66ch;margin-top:1rem}
 
 /* --- 1: painel de aeroporto --- */
 .v1 .word{overflow:hidden;padding-block:.16em;margin-block:-.16em}
-.v1 .word i{position:absolute;left:.16em;right:.16em;top:.16em;opacity:0;filter:blur(.045em);transform:translateY(.5em) rotateX(-70deg);
+.v1 .word i{position:absolute;left:.16em;right:.16em;top:.16em;opacity:0;transform:translateY(.5em) rotateX(-70deg);
   transform-origin:top center;transition:opacity .38s var(--e),transform .5s var(--spring)}
 .v1 .word i.on{position:relative;opacity:1;transform:none;filter:none}
 .v1 .word i.out{position:absolute;opacity:0;transform:translateY(-.5em) rotateX(70deg);transform-origin:bottom center}
@@ -95,12 +95,12 @@ header p{color:var(--ink-2);max-width:66ch;margin-top:1rem}
 /* --- 2: rolo contínuo --- */
 .v2 .word{height:1.34em;overflow:hidden;display:inline-flex;align-items:center}
 .v2 .roll{display:block;transition:transform .62s var(--spring),filter .3s var(--e)}
-.v2 .roll.moving{filter:blur(.05em)}
+
 .v2 .roll i{height:1.34em;line-height:1.34em}
 
 /* --- 3: máscara limpa --- */
 .v3 .word{height:1.34em;overflow:hidden;display:inline-flex;align-items:center}
-.v3 .word i{position:absolute;left:.16em;right:.16em;top:50%;margin-top:-.5em;opacity:0;filter:blur(.05em);transform:translateY(.85em);
+.v3 .word i{position:absolute;left:.16em;right:.16em;top:50%;margin-top:-.5em;opacity:0;transform:translateY(.85em);
   transition:opacity .3s var(--e),transform .55s var(--e)}
 .v3 .word i.on{position:relative;opacity:1;transform:none;filter:none}
 .v3 .word i.out{position:absolute;opacity:0;transform:translateY(-.85em)}
@@ -112,10 +112,10 @@ header p{color:var(--ink-2);max-width:66ch;margin-top:1rem}
 /* --- 5: cápsula que respira --- */
 .v5 .hl{transition:background .5s var(--e),color .5s var(--e)}
 .v5 .hl.pulse{background:var(--ink);color:#fff}
-.v5 .word i{position:absolute;left:.16em;right:.16em;top:0;opacity:0;filter:blur(.09em);transform:scale(.92);
-  transition:opacity .34s var(--e),filter .4s var(--e),transform .5s var(--spring)}
+.v5 .word i{position:absolute;left:.16em;right:.16em;top:0;opacity:0;transform:scale(.92);
+  transition:opacity .34s var(--e),transform .5s var(--spring)}
 .v5 .word i.on{position:relative;opacity:1;filter:none;transform:none}
-.v5 .word i.out{position:absolute;opacity:0;filter:blur(.09em);transform:scale(1.08)}
+.v5 .word i.out{position:absolute;opacity:0;transform:scale(1.08)}
 
 #tip{position:fixed;top:0;left:0;z-index:90;pointer-events:none;background:var(--ink);color:#fff;
   border-radius:.6rem;padding:.62rem .9rem;font-weight:500;will-change:transform;
@@ -130,12 +130,12 @@ footer{padding:3rem var(--pad);border-top:1px solid var(--hair);color:var(--ink-
 </style>
 </head>
 <body>
-<div class="top"><img src="img/logo-lockup-2x.png" alt="MA Webs"><span>Cinco formas de a palavra trocar</span>
+<div class="top"><img src="img/logo-lockup-2x.png" alt="MA Webs"><span>Cinco formas de a palavra trocar, sem desfoque</span>
   <a href="06-hibrido.html">Voltar ao site</a></div>
 
 <header>
-  <h2>A hero C, em cinco maneiras de trocar a palavra.</h2>
-  <p>A cápsula tem largura fixa, medida pela palavra mais comprida, por isso a frase nunca muda de linha nem salta. O que muda nas cinco é a forma como a palavra sai e como a seguinte entra. São sete palavras, trocam de segundo e meio em segundo e meio, e cada uma tem o seu texto quando passas o rato por cima.</p>
+  <h2>A mesma coisa, mas sem desfoque de movimento.</h2>
+  <p>Igual em tudo à outra página, tirando uma coisa: aqui não há desfoque nenhum, nem na caixa nem nas palavras que entram e saem. Abre as duas lado a lado e vê qual preferes.</p>
 </header>
 
 <div class="lab"><div class="n">Variação 1</div><h3>Painel de aeroporto</h3>
@@ -250,10 +250,7 @@ function beat(hl, word) {
   void hl.offsetWidth;
   hl.classList.add('pop', 'sweep');
   setTimeout(() => hl.classList.remove('pop'), 320);
-  if (word) {
-    word.classList.add('moving');
-    setTimeout(() => word.classList.remove('moving'), 420);
-  }
+
 }
 
 function setIcon(svg, i, bump) {
