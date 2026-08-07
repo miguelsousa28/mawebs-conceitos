@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MA Webs / 5 variações da hero C</title>
+<link rel="icon" href="img/favicon-128.png">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F3;--card:#fff;--ink:#0A0B0C;--ink-2:rgba(10,11,12,.64);--ink-dim:rgba(10,11,12,.46);
+  --hair:rgba(10,11,12,.09);--soft:0 30px 70px -40px rgba(10,11,12,.3);
+  --e:cubic-bezier(.22,.61,.20,1);--spring:cubic-bezier(.34,1.24,.38,1);--pad:clamp(1.25rem,5vw,4rem)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',-apple-system,sans-serif;font-weight:400;
+  line-height:1.62;letter-spacing:-.011em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-weight:500;letter-spacing:-.05em;line-height:1.34}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.top{position:sticky;top:0;z-index:40;background:rgba(246,245,243,.93);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--hair);padding:.9rem var(--pad);display:flex;align-items:center;gap:1.2rem}
+.top img{height:16px;mix-blend-mode:multiply}
+.top span{font-size:.85rem;color:var(--ink-2)}
+.top a{margin-left:auto;background:var(--ink);color:#fff;border-radius:999px;padding:.5rem 1.05rem;font-size:.84rem}
+header{padding:clamp(3rem,8vh,5rem) var(--pad) 1rem;max-width:1240px;margin:0 auto}
+header h2{font-size:clamp(1.7rem,4vw,2.8rem);max-width:22ch;line-height:1.06}
+header p{color:var(--ink-2);max-width:66ch;margin-top:1rem}
+.lab{max-width:1240px;margin:0 auto;padding:clamp(2.5rem,7vh,4rem) var(--pad) 0}
+.lab .n{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.lab h3{font-size:clamp(1.2rem,2.4vw,1.7rem);margin:.4rem 0 .5rem;line-height:1.1}
+.lab p{color:var(--ink-2);max-width:66ch;font-size:.94rem}
+
+.hero{position:relative;overflow:hidden;border-radius:1.8rem;border:1px solid var(--hair);background:#fff;
+  box-shadow:var(--soft);margin:1.5rem auto clamp(2rem,5vh,3rem);max-width:1240px;
+  padding:clamp(3rem,7vw,5rem) clamp(1.5rem,5vw,4rem);text-align:center}
+.clouds{position:absolute;inset:0;z-index:0;
+  background:radial-gradient(58% 46% at 24% 16%,rgba(10,11,12,.10),transparent 62%),
+             radial-gradient(52% 44% at 82% 72%,rgba(10,11,12,.07),transparent 66%);
+  animation:drift 30s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(-2%,-1.5%,0) scale(1.07)}}
+.hero>*{position:relative;z-index:2}
+.hero h1{font-size:clamp(1.9rem,4.4vw,3.6rem);max-width:19ch;margin-inline:auto}
+.sub{max-width:52ch;color:var(--ink-2);margin:1.5rem auto 0;font-size:1rem}
+.btns{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:2rem}
+.btn{display:inline-flex;align-items:center;gap:.85rem;border-radius:999px;
+  padding:.9rem 1.35rem .9rem 1.6rem;font-size:.92rem;font-weight:500;
+  transition:transform .5s var(--e),background .55s var(--e),box-shadow .55s var(--e)}
+.btn:active{transform:scale(.978)}
+.arw{position:relative;width:.95em;height:.95em;flex:none;overflow:hidden;display:inline-block}
+.arw svg{position:absolute;inset:0;width:100%;height:100%;stroke-width:2;transition:transform .55s var(--e)}
+.arw svg:nth-child(2){transform:translate(-120%,120%)}
+.btn:hover .arw svg:nth-child(1){transform:translate(120%,-120%)}
+.btn:hover .arw svg:nth-child(2){transform:none}
+.btn-p{background:var(--ink);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 10px 22px -14px rgba(10,11,12,.5)}
+.btn-p:hover{background:#191D21;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 20px 38px -18px rgba(10,11,12,.62)}
+
+/* cápsula base */
+.hl{display:inline-flex;align-items:center;justify-content:center;gap:.26em;
+  border:.055em solid var(--ink);color:var(--ink);
+  border-radius:999px;padding:.05em .42em .09em .32em;line-height:1;white-space:nowrap;margin:.09em .02em;
+  position:relative;vertical-align:baseline;cursor:pointer;overflow:hidden;
+  transition:transform .45s var(--spring),background .5s var(--e),color .5s var(--e)}
+.hl svg{width:.6em;height:.6em;flex:none}
+/* a caixa acompanha a palavra e o texto fica sempre centrado, nunca encostado a um lado */
+.word{display:inline-block;position:relative;overflow:hidden;text-align:center;
+  transition:width .68s var(--spring)}
+.word i{font-style:normal;display:block;white-space:nowrap;text-align:center}
+/* desfoque de movimento enquanto a caixa se ajusta */
+.word.moving{filter:blur(.028em)}
+.word{transition:width .68s var(--spring),filter .34s var(--e)}
+.hl.pop{transform:scale(1.045)}
+.hl .sheen{position:absolute;inset:0;border-radius:999px;pointer-events:none;opacity:0;
+  background:linear-gradient(105deg,transparent 38%,rgba(10,11,12,.14) 50%,transparent 62%);
+  background-size:260% 100%}
+.hl.sweep .sheen{animation:sweep .6s var(--e)}
+@keyframes sweep{0%{opacity:1;background-position:180% 0}100%{opacity:0;background-position:-80% 0}}
+.hl.dark .sheen{background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.3) 50%,transparent 62%);
+  background-size:260% 100%}
+.hl .bar{position:absolute;left:.5em;right:.5em;bottom:.09em;height:.042em;border-radius:99px;
+  background:currentColor;opacity:.22;transform-origin:left;transform:scaleX(0)}
+.hl.run .bar{animation:tick var(--dur,1.5s) linear}
+@keyframes tick{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* --- 1: painel de aeroporto --- */
+.v1 .word i{position:absolute;left:0;right:0;top:0;opacity:0;filter:blur(.045em);transform:translateY(.5em) rotateX(-70deg);
+  transform-origin:top center;transition:opacity .38s var(--e),transform .5s var(--spring)}
+.v1 .word i.on{position:relative;opacity:1;transform:none;filter:none}
+.v1 .word i.out{position:absolute;opacity:0;transform:translateY(-.5em) rotateX(70deg);transform-origin:bottom center}
+
+/* --- 2: rolo contínuo --- */
+.v2 .word{height:1.06em}
+.v2 .roll{display:block;transition:transform .62s var(--spring),filter .3s var(--e)}
+.v2 .roll.moving{filter:blur(.05em)}
+.v2 .roll i{height:1.06em;line-height:1.06em}
+
+/* --- 3: máscara limpa --- */
+.v3 .word{height:1.08em}
+.v3 .word i{position:absolute;left:0;right:0;top:0;opacity:0;filter:blur(.05em);transform:translateY(.85em);
+  transition:opacity .3s var(--e),transform .55s var(--e)}
+.v3 .word i.on{position:relative;opacity:1;transform:none;filter:none}
+.v3 .word i.out{position:absolute;opacity:0;transform:translateY(-.85em)}
+
+/* --- 4: letras a baralhar --- */
+.v4 .word{font-variant-numeric:tabular-nums}
+.v4 .hl{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* --- 5: cápsula que respira --- */
+.v5 .hl{transition:background .5s var(--e),color .5s var(--e)}
+.v5 .hl.pulse{background:var(--ink);color:#fff}
+.v5 .word i{position:absolute;left:0;right:0;top:0;opacity:0;filter:blur(.09em);transform:scale(.92);
+  transition:opacity .34s var(--e),filter .4s var(--e),transform .5s var(--spring)}
+.v5 .word i.on{position:relative;opacity:1;filter:none;transform:none}
+.v5 .word i.out{position:absolute;opacity:0;filter:blur(.09em);transform:scale(1.08)}
+
+#tip{position:fixed;top:0;left:0;z-index:90;pointer-events:none;background:var(--ink);color:#fff;
+  border-radius:.6rem;padding:.62rem .9rem;font-weight:500;will-change:transform;
+  opacity:0;transition:opacity .18s ease-out}
+#tip.on{opacity:1}
+#tip b{display:block;font-size:.88rem;white-space:nowrap}
+#tip span{display:block;max-width:28ch;font-size:.8rem;line-height:1.35;font-weight:400;opacity:.7;margin-top:.2rem}
+
+footer{padding:3rem var(--pad);border-top:1px solid var(--hair);color:var(--ink-dim);font-size:.85rem;
+  max-width:1240px;margin:2rem auto 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top"><img src="img/logo-lockup-2x.png" alt="MA Webs"><span>Cinco formas de a palavra trocar</span>
+  <a href="06-hibrido.html">Voltar ao site</a></div>
+
+<header>
+  <h2>A hero C, em cinco maneiras de trocar a palavra.</h2>
+  <p>O texto e a cápsula são iguais nas cinco. O que muda é como a palavra sai e como a seguinte entra, e como a cápsula se ajusta ao novo comprimento. Deixa a página aberta, os ciclos repetem sozinhos de dois em dois segundos.</p>
+</header>
+
+<div class="lab"><div class="n">Variação 1</div><h3>Painel de aeroporto</h3>
+  <p>A palavra tomba para cima e a seguinte roda para o lugar, como os painéis mecânicos dos aeroportos antigos. O ícone dá um salto quando muda. É a que tem mais personalidade e a que mais se nota.</p></div>
+<section class="hero v1" data-v="1">
+  <div class="clouds"></div>
+  <h1>Um site que traz <span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</h1>
+  <p class="sub">Tudo o que um site devia fazer e o teu provavelmente não faz.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
+    <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
+</section>
+
+<div class="lab"><div class="n">Variação 2</div><h3>Rolo contínuo</h3>
+  <p>As palavras estão empilhadas numa tira que desliza para cima, como o contador de quilómetros de um carro. Nunca há um corte, é sempre movimento. É a mais suave das cinco e a que cansa menos ao fim de muito tempo aberta.</p></div>
+<section class="hero v2" data-v="2">
+  <div class="clouds"></div>
+  <h1>Um site que traz <span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"><span class="roll"></span></span></span> ao teu negócio.</h1>
+  <p class="sub">Tudo o que um site devia fazer e o teu provavelmente não faz.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
+    <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
+</section>
+
+<div class="lab"><div class="n">Variação 3</div><h3>Máscara limpa</h3>
+  <p>Sem rotações nem 3D. A palavra sobe e desaparece atrás de um corte invisível, a seguinte sobe de baixo. É a mais sóbria e a que combina melhor com o resto do site, que é todo contido.</p></div>
+<section class="hero v3" data-v="3">
+  <div class="clouds"></div>
+  <h1>Um site que traz <span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</h1>
+  <p class="sub">Tudo o que um site devia fazer e o teu provavelmente não faz.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
+    <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
+</section>
+
+<div class="lab"><div class="n">Variação 4</div><h3>Letras a baralhar</h3>
+  <p>As letras passam por caracteres aleatórios e assentam uma a uma na palavra nova, da esquerda para a direita. A cápsula fica preta para o efeito se ler bem. É a mais técnica e a que dá mais ar de produto digital.</p></div>
+<section class="hero v4" data-v="4">
+  <div class="clouds"></div>
+  <h1>Um site que traz <span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</h1>
+  <p class="sub">Tudo o que um site devia fazer e o teu provavelmente não faz.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
+    <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
+</section>
+
+<div class="lab"><div class="n">Variação 5</div><h3>A cápsula respira</h3>
+  <p>A palavra sai desfocada e a nova entra a focar, enquanto a cápsula enche de preto por um instante e volta ao contorno. Parece a Dynamic Island do iPhone a mudar de conteúdo. É a mais premium.</p></div>
+<section class="hero v5" data-v="5">
+  <div class="clouds"></div>
+  <h1>Um site que traz <span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</h1>
+  <p class="sub">Tudo o que um site devia fazer e o teu provavelmente não faz.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
+    <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
+</section>
+
+<div id="tip"><b></b><span></span></div>
+
+<footer><span>&copy; 2026 MA Webs</span><a href="06-hibrido.html">Voltar ao site</a></footer>
+
+<script>
+const ITEMS = [
+  { w:'telefonemas', t:'O telefone a tocar',
+    d:'E não é a tua mãe. É gente que te encontrou no Google e carregou no botão de ligar.',
+    i:'M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z' },
+  { w:'reservas', t:'Agenda cheia sozinha',
+    d:'Marcações a entrar enquanto dormes. Tu só apareces e fazes o teu trabalho.',
+    i:'M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v11A2.5 2.5 0 0 1 18.5 21h-13A2.5 2.5 0 0 1 3 18.5zM3 10h18M8 3v4M16 3v4' },
+  { w:'dinheiro', t:'Dinheiro no teu bolso',
+    d:'No fim é isto que interessa. O resto é conversa bonita para encher chouriços.',
+    i:'M12 2.8a9.2 9.2 0 1 0 0 18.4 9.2 9.2 0 0 0 0-18.4M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4' },
+  { w:'avaliações', t:'Cinco estrelas no Google',
+    d:'Sem teres de pedir a ninguém. Uma placa no balcão e o cliente faz sozinho.',
+    i:'m12 3.2 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.7l6.1-.9z' },
+  { w:'clientes novos', t:'Gente que nunca te viu',
+    d:'Quem passava à porta sem entrar. Agora encontra te antes de sair de casa.',
+    i:'M16 20v-1.6a3.4 3.4 0 0 0-3.4-3.4H6.4A3.4 3.4 0 0 0 3 18.4V20M9.5 11.4a3.7 3.7 0 1 0 0-7.4 3.7 3.7 0 0 0 0 7.4M21 20v-1.6a3.4 3.4 0 0 0-2.6-3.3M15.4 4.1a3.4 3.4 0 0 1 0 6.6' },
+  { w:'orçamentos', t:'Pedidos já explicados',
+    d:'Chegam com o trabalho descrito, para não perderes meia hora ao telefone.',
+    i:'M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5zM14 2.5v5h5M9 13h6M9 17h4' },
+  { w:'mensagens', t:'WhatsApp a apitar',
+    d:'Com quem quer marcar, não com quem te quer vender seguros.',
+    i:'M20.5 11.6a8 8 0 0 1-11.9 7L3.5 20l1.4-5a8 8 0 1 1 15.6-3.4' }
+];
+const WORDS = ITEMS.map(o => o.w);
+const ICONS = ITEMS.map(o => o.i);
+const INTERVAL = 1500;
+
+/* mede cada palavra com a fonte real, para a cápsula crescer sem saltar */
+function measure(word, sample) {
+  const g = document.createElement('span');
+  const cs = getComputedStyle(sample);
+  g.style.cssText = `position:absolute;visibility:hidden;white-space:nowrap;font:${cs.font};letter-spacing:${cs.letterSpacing}`;
+  g.textContent = word;
+  document.body.appendChild(g);
+  const w = g.getBoundingClientRect().width;
+  g.remove();
+  return w;
+}
+
+const tip = document.getElementById('tip');
+const tipB = tip.querySelector('b'), tipS = tip.querySelector('span');
+/* as cinco seccoes partilham o mesmo tooltip, por isso so o dono e que escreve nele */
+let tipOwner = null;
+let mx = innerWidth / 2, my = innerHeight / 2, px = mx, py = my;
+addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+(function follow() {
+  px += (mx - px) * .18; py += (my - py) * .18;
+  tip.style.transform = 'translate3d(' + (px + 16) + 'px,' + (py + 18) + 'px,0)';
+  requestAnimationFrame(follow);
+})();
+
+/* pop, brilho, barra de tempo e desfoque de movimento */
+function beat(hl, word) {
+  hl.classList.remove('pop', 'sweep', 'run');
+  void hl.offsetWidth;
+  hl.style.setProperty('--dur', INTERVAL + 'ms');
+  hl.classList.add('pop', 'sweep', 'run');
+  setTimeout(() => hl.classList.remove('pop'), 320);
+  if (word) {
+    word.classList.add('moving');
+    setTimeout(() => word.classList.remove('moving'), 420);
+  }
+}
+
+function setIcon(svg, i, bump) {
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.innerHTML = '<path d="' + ICONS[i] + '"/>';
+  if (bump) svg.animate(
+    [{ transform: 'scale(.55) rotate(-20deg)', opacity: .15 }, { transform: 'none', opacity: 1 }],
+    { duration: 520, easing: 'cubic-bezier(.34,1.24,.38,1)' });
+}
+
+document.querySelectorAll('.hero[data-v]').forEach(hero => {
+  const v = hero.dataset.v;
+  const word = hero.querySelector('.word');
+  const svg = hero.querySelector('[data-icon]');
+  const hl = hero.querySelector('.hl');
+  let i = 0;
+
+  if (v === '4') hl.classList.add('dark');
+
+  /* tooltip com o texto da palavra que esta a vista */
+  let cur = 0;
+  hl.addEventListener('mouseenter', () => {
+    tipOwner = hl;
+    tipB.textContent = ITEMS[cur].t; tipS.textContent = ITEMS[cur].d; tip.classList.add('on');
+  });
+  hl.addEventListener('mouseleave', () => {
+    if (tipOwner === hl) { tipOwner = null; tip.classList.remove('on'); }
+  });
+  const sync = k => {
+    cur = k;
+    /* a capsula muda de largura e pode fugir de debaixo do cursor,
+       por isso confirma-se a cada troca se o rato ainda esta la em cima */
+    const sobre = document.elementFromPoint(mx, my)?.closest('.hl') === hl;
+    if (sobre) { tipOwner = hl; tip.classList.add('on'); }
+    else if (tipOwner === hl) { tipOwner = null; tip.classList.remove('on'); }
+    if (tipOwner === hl) { tipB.textContent = ITEMS[k].t; tipS.textContent = ITEMS[k].d; }
+  };
+
+  const widths = () => WORDS.map(w => measure(w, word));
+  let W = widths();
+  addEventListener('resize', () => { W = widths(); word.style.width = W[i] + 'px'; });
+
+  /* ---- 2: rolo contínuo ---- */
+  if (v === '2') {
+    const roll = word.querySelector('.roll');
+    roll.innerHTML = WORDS.concat(WORDS[0]).map(w => '<i>' + w + '</i>').join('');
+    word.style.width = W[0] + 'px';
+    setIcon(svg, 0, false);
+    let k = 0;
+    setInterval(() => {
+      k++;
+      roll.style.transition = 'transform .62s var(--spring)';
+      roll.style.transform = `translateY(-${k * 1.06}em)`;
+      const next = k % WORDS.length;
+      word.style.width = W[next] + 'px';
+      setIcon(svg, next, true); beat(hl, roll); sync(next);
+      if (k === WORDS.length) {
+        setTimeout(() => { roll.style.transition = 'none'; roll.style.transform = 'none'; k = 0; }, 640);
+      }
+    }, INTERVAL);
+    return;
+  }
+
+  /* ---- 4: letras a baralhar ---- */
+  if (v === '4') {
+    const CH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#%&';
+    word.innerHTML = '<i class="on">' + WORDS[0] + '</i>';
+    const cell = word.querySelector('i');
+    word.style.width = W[0] + 'px';
+    setIcon(svg, 0, false);
+    setInterval(() => {
+      const from = WORDS[i], to = WORDS[(i = (i + 1) % WORDS.length)];
+      word.style.width = W[i] + 'px';
+      setIcon(svg, i, true); beat(hl, word); sync(i);
+      const len = Math.max(from.length, to.length);
+      let frame = 0;
+      const total = len * 3 + 10;
+      const timer = setInterval(() => {
+        frame++;
+        let out = '';
+        for (let c = 0; c < len; c++) {
+          const settled = frame > c * 3 + 6;
+          if (settled) out += to[c] ?? '';
+          else if (c < to.length || c < from.length)
+            out += CH[Math.floor(Math.random() * CH.length)];
+        }
+        cell.textContent = out;
+        if (frame >= total) { clearInterval(timer); cell.textContent = to; }
+      }, 26);
+    }, INTERVAL);
+    return;
+  }
+
+  /* ---- 1, 3, 5: sai um, entra outro ---- */
+  word.innerHTML = WORDS.map((w, k) => '<i class="' + (k === 0 ? 'on' : '') + '">' + w + '</i>').join('');
+  const cells = [...word.querySelectorAll('i')];
+  word.style.width = W[0] + 'px';
+  setIcon(svg, 0, false);
+  setInterval(() => {
+    const prev = cells[i];
+    i = (i + 1) % WORDS.length;
+    prev.classList.remove('on');
+    prev.classList.add('out');
+    cells[i].classList.remove('out');
+    cells[i].classList.add('on');
+    word.style.width = W[i] + 'px';
+    setIcon(svg, i, true); beat(hl, word); sync(i);
+    if (v === '5') { hl.classList.add('pulse'); setTimeout(() => hl.classList.remove('pulse'), 520); }
+    setTimeout(() => prev.classList.remove('out'), 620);
+  }, INTERVAL);
+});
+</script>
+</body>
+</html>
