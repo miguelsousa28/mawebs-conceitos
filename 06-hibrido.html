@@ -90,20 +90,15 @@ img{display:block;max-width:100%}
 @keyframes blip{50%{opacity:.25}}
 .isl-live em{font-style:normal;display:inline-block;transition:opacity .45s var(--e),transform .45s var(--e)}
 .isl-live em.swap{opacity:0;transform:translateY(-9px)}
-.cta-mini{display:flex;align-items:center;gap:.45rem;background:var(--ink);color:#fff;border-radius:999px;
-  padding:.52rem .52rem .52rem 1.1rem;font-size:.85rem;font-weight:500;flex:none;white-space:nowrap;
-  margin-left:auto;
-  transition:transform .7s var(--spring),background .8s var(--e),padding 1.05s var(--e)}
-.cta-mini em{font-style:normal;display:inline-block}
-.cta-mini span{width:25px;height:25px;border-radius:999px;background:rgba(255,255,255,.2);display:grid;
-  place-items:center;flex:none;overflow:hidden;
-  transition:transform .7s var(--spring),width .8s var(--e),opacity .5s var(--e),margin-left .8s var(--e)}
-.cta-mini:hover{background:#22262A}
-.cta-mini:hover span{transform:translate(3px,-2px)}
+.cta-mini{display:flex;align-items:center;gap:.55rem;background:var(--ink);color:#fff;border-radius:999px;padding:.55rem 1.15rem;font-size:.85rem;font-weight:500;flex:none;margin-left:auto;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,.16);transition:background .55s var(--e),transform .5s var(--e),box-shadow .55s var(--e)}
+.cta-mini em{font-style:normal}
+.cta-mini .arw{position:relative;width:.85em;height:.85em;flex:none;overflow:hidden;display:inline-block}
+.cta-mini:hover{background:#191D21;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 12px 26px -14px rgba(10,11,12,.55)}
+
 .cta-mini:active{transform:scale(.965)}
 /* recolhido: a seta sai, o texto fica inteiro */
-.island.mini .cta-mini{padding:.52rem 1.05rem}
-.island.mini .cta-mini span{width:0;opacity:0;margin-left:-.45rem}
+
+.island.mini .cta-mini .arw{position:relative;width:.85em;height:.85em;flex:none;overflow:hidden;display:inline-block}
 @media(max-width:1040px){
   .isl-nav{display:none}
   .island{max-width:400px;border-radius:999px}.island.mini{max-width:340px}
@@ -158,36 +153,32 @@ h1.in .hl:nth-of-type(3){transition-delay:.74s,.74s,0s,0s,0s}
 #maTip .d{display:block;max-width:28ch;font-size:.8rem;line-height:1.35;font-weight:400;opacity:.7;margin-top:.2rem}
 
 /* ===== halo dos botoes, portado do @unlumen-ui/glow ===== */
-/* halo parado, sem rotacao. So um brilho suave por tras que respira ao passar o rato */
-.glow{position:relative;display:inline-flex;isolation:isolate}
-.glow>.halo{position:absolute;inset:-3px;z-index:-1;border-radius:999px;pointer-events:none;
-  filter:blur(15px);opacity:.42;transform:scale(1);
-  transition:opacity .8s var(--e),transform .8s var(--e)}
-.glow>.halo i{position:absolute;inset:0;border-radius:999px;background:#0A0B0C}
-.glow:hover>.halo{opacity:.7;transform:scale(1.04)}
-/* sobre fundo escuro o halo tem de ser claro para se ver */
-.glow.light>.halo i{background:#FFFFFF}
-.glow.light>.halo{opacity:.3}
-.glow.light:hover>.halo{opacity:.55}
-/* o da cápsula do topo é mais contido, para não borrar a barra branca */
-.cta-glow{margin-left:auto}
-.cta-glow>.halo{inset:-2px;filter:blur(10px);opacity:.3}
-.cta-glow:hover>.halo{opacity:.5;transform:scale(1.03)}
+
 .hero>p{max-width:54ch;color:var(--ink-2);margin:1.9rem auto 0;font-size:1.08rem;letter-spacing:-.014em}
 .btns{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:2.3rem}
-.btn{display:inline-flex;align-items:center;gap:.65rem;border-radius:999px;padding:.88rem .88rem .88rem 1.55rem;
-  font-size:.93rem;font-weight:500;letter-spacing:-.016em;
-  transition:transform .7s var(--spring),background .8s var(--e),border-color .8s var(--e),box-shadow .8s var(--e)}
-.btn i{width:31px;height:31px;border-radius:999px;display:grid;place-items:center;font-style:normal;
-  transition:transform .7s var(--spring);font-size:.85rem}
-.btn:hover i{transform:translate(3px,-2px)}
-.btn:active{transform:scale(.98)}
-.btn-p{background:var(--ink);color:#fff}
-.btn-p i{background:rgba(255,255,255,.2)}
-.btn-p:hover{background:#22262A;box-shadow:0 28px 52px -26px rgba(10,11,12,.55)}
-.btn-s{background:#fff;color:var(--ink);border:1px solid var(--hair);box-shadow:var(--soft)}
-.btn-s i{background:rgba(10,11,12,.05)}
-.btn-s:hover{border-color:rgba(10,11,12,.3)}
+.btn{display:inline-flex;align-items:center;gap:.85rem;border-radius:999px;
+  padding:.92rem 1.35rem .92rem 1.65rem;font-size:.94rem;font-weight:500;letter-spacing:-.016em;
+  position:relative;isolation:isolate;
+  transition:transform .5s var(--e),background .55s var(--e),color .55s var(--e),
+             border-color .55s var(--e),box-shadow .55s var(--e)}
+.btn:active{transform:scale(.978)}
+.arw{position:relative;width:.95em;height:.95em;flex:none;overflow:hidden;display:inline-block}
+.arw svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:currentColor;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .55s var(--e)}
+.arw svg:nth-child(2){transform:translate(-120%,120%)}
+.btn:hover .arw svg:nth-child(1),.cta-mini:hover .arw svg:nth-child(1){transform:translate(120%,-120%)}
+.btn:hover .arw svg:nth-child(2),.cta-mini:hover .arw svg:nth-child(2){transform:none}
+.btn.down .arw svg:nth-child(2){transform:translate(0,-130%)}
+.btn.down:hover .arw svg:nth-child(1){transform:translate(0,130%)}
+.btn.down:hover .arw svg:nth-child(2){transform:none}
+.btn-p{background:var(--ink);color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 10px 22px -14px rgba(10,11,12,.5)}
+.btn-p:hover{background:#191D21;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 20px 38px -18px rgba(10,11,12,.62)}
+.btn-s{background:#fff;color:var(--ink);border:1px solid var(--hair);
+  box-shadow:inset 0 1px 0 #fff, 0 6px 16px -12px rgba(10,11,12,.35)}
+.btn-s:hover{border-color:rgba(10,11,12,.26);
+  box-shadow:inset 0 1px 0 #fff, 0 14px 30px -16px rgba(10,11,12,.42)}
 
 /* placeholder do video da hero */
 .slot{position:relative;z-index:2;margin-top:clamp(2.5rem,7vh,4rem);width:min(1120px,100%);
@@ -615,28 +606,26 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       <a href="portfolio.html">Portfólio</a><a href="#nfc">Placas NFC</a>
     </nav>
     <span class="isl-live"><b></b> <em id="islSec">Início</em></span>
-    <span class="glow cta-glow"><span class="halo"><i></i></span>
-      <a href="#contacto" class="cta-mini" data-cursor="Marcar"><em>Marcar chamada</em> <span>&#8599;</span></a></span>
+    <a href="#contacto" class="cta-mini" data-cursor="Marcar">Marcar chamada <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
   </div>
 </header>
 
 <section class="hero">
   <h1 data-anim>Um site que traz
-    <span class="hl" data-tip="Telefonemas"
-      data-tip-d="Número visível em todas as páginas e botão de chamada a um toque no telemóvel.">
+    <span class="hl" data-tip="O telefone a tocar"
+      data-tip-d="E não é a tua mãe. É gente que te encontrou no Google e carregou no botão de ligar.">
       <svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg>telefonemas</span>,
-    <span class="hl" data-tip="Reservas"
-      data-tip-d="Marcações e pedidos de orçamento que entram sozinhos, sem tu atenderes o telefone.">
+    <span class="hl" data-tip="Agenda cheia sozinha"
+      data-tip-d="Marcações a entrar enquanto dormes. Tu só apareces e fazes o teu trabalho.">
       <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4M8 15h4"/></svg>reservas</span> e
-    <span class="hl" data-tip="Dinheiro"
-      data-tip-d="É para isto que serve tudo o resto. Mais clientes a decidir entrar em vez de continuar a andar.">
+    <span class="hl" data-tip="Dinheiro no teu bolso"
+      data-tip-d="No fim é isto que interessa. O resto é conversa bonita para encher chouriços.">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg>dinheiro</span>.
   </h1>
   <p data-anim data-d="1">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar. Feito à mão por duas pessoas, mantido por nós.</p>
   <div class="btns" data-anim data-d="2">
-    <span class="glow"><span class="halo"><i></i></span>
-      <a href="#contacto" class="btn btn-p" data-cursor="Marcar">Quero mais clientes a ligar <i>&#8599;</i></a></span>
-    <a href="#trabalho" class="btn btn-s" data-cursor="Ver">Ver trabalho <i>&#8595;</i></a>
+    <a href="#contacto" class="btn btn-p" data-cursor="Marcar">Quero mais clientes a ligar <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
+    <a href="#trabalho" class="btn btn-s down" data-cursor="Ver">Ver trabalho <i class="arw"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></i></a>
   </div>
 
   <div class="slot" data-anim data-d="3">
@@ -780,8 +769,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       <article class="work" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/casadarocha-full.jpg')"></div></div><div class="cap"><h4>Casa da Rocha</h4><span>Construção</span></div></article>
     </div>
     <div class="more">
-      <span class="glow"><span class="halo"><i></i></span>
-        <a href="portfolio.html" class="btn btn-p" data-cursor="Abrir">Ver portfólio completo <i>&#8599;</i></a></span>
+      <a href="portfolio.html" class="btn btn-p" data-cursor="Abrir">Ver portfólio completo <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
     </div>
   </div>
 </section>
@@ -800,7 +788,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
           <div><i></i> Podemos incluir QR code, se nos deres o teu</div>
         </div>
         <div class="btns">
-          <a href="#contacto" class="btn btn-p">Quero as minhas placas <i>&#8599;</i></a>
+          <a href="#contacto" class="btn btn-p">Quero as minhas placas <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
         </div>
       </div>
 
@@ -832,7 +820,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 
     <div class="nfc-foot">
       <p>Dez dias úteis a contar da encomenda ao nosso fornecedor, cerca de duas semanas. Feitas em acrílico. Se quiseres QR code impresso no verso, é possível, mas o código tem de vir do teu lado.</p>
-      <a href="#contacto" class="btn btn-p">Quero as minhas placas <i>&#8599;</i></a>
+      <a href="#contacto" class="btn btn-p">Quero as minhas placas <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
     </div>
   </div>
 </section>
@@ -881,8 +869,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
         <div><i>&#10003;</i> Sais a saber o preço, mesmo que não avances</div>
       </div>
       <div class="btns">
-        <span class="glow light"><span class="halo"><i></i></span>
-          <a href="https://cal.com/ma-webs/15min" target="_blank" rel="noopener" class="btn btn-p" data-cursor="Marcar">Escolher horário <i>&#8599;</i></a></span>
+        <a href="https://cal.com/ma-webs/15min" target="_blank" rel="noopener" class="btn btn-p" data-cursor="Marcar">Escolher horário <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
       </div>
       <a class="phonelink" href="https://wa.me/351928412799?text=Ol%C3%A1%2C%20vim%20do%20site%20da%20MA%20Webs%20e%20queria%20marcar%20a%20chamada%20de%2015%20minutos." target="_blank" rel="noopener">&#9993; ou fala connosco no <b>WhatsApp</b></a>
       <div class="phones">
