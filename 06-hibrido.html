@@ -71,6 +71,7 @@ img{display:block;max-width:100%}
 .brand{display:flex;align-items:center;flex:none;height:100%}
 .brand img{height:17px;width:auto;mix-blend-mode:multiply;transition:height 1.1s var(--spring)}
 .island.mini .brand img{height:15px}
+.brand .mono{display:none;height:20px}
 /* indice sempre centrado na cápsula, seja qual for a largura */
 .isl-nav{display:flex;gap:1.55rem;font-size:.88rem;position:absolute;left:50%;top:50%;
   transform:translate(-50%,-50%);white-space:nowrap;opacity:1;
@@ -113,17 +114,61 @@ img{display:block;max-width:100%}
 .hero{position:relative;z-index:2;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;padding:clamp(8rem,18vh,11rem) var(--pad) clamp(3rem,7vh,5rem)}
 .hero h1{font-size:clamp(2.4rem,6.4vw,6rem);max-width:17ch}
-/* palavras destacadas em capsula preta com icone desenhado, sem emoji */
-.hl{display:inline-flex;align-items:center;gap:.26em;background:var(--ink);color:#fff;
-  border-radius:.34em;padding:.06em .32em .1em .24em;line-height:1;white-space:nowrap;
-  transform:translateY(.06em) scale(.94);opacity:0;
-  transition:transform 1s var(--spring),opacity .8s var(--e)}
-h1.in .hl{transform:translateY(.06em) scale(1);opacity:1}
-h1.in .hl:nth-of-type(1){transition-delay:.42s}
-h1.in .hl:nth-of-type(2){transition-delay:.58s}
-h1.in .hl:nth-of-type(3){transition-delay:.74s}
-.hl svg{width:.66em;height:.66em;flex:none;stroke:#fff;stroke-width:1.7;fill:none;
+/* variacao E: capsula de contorno, enche a preto ao passar o rato */
+.hl{display:inline-flex;align-items:center;gap:.24em;border:.055em solid var(--ink);color:var(--ink);
+  border-radius:999px;padding:.04em .4em .08em .3em;line-height:1;white-space:nowrap;cursor:pointer;
+  opacity:0;transform:translateY(.08em) scale(.94);
+  transition:opacity .8s var(--e),transform 1s var(--spring),
+             background .55s var(--e),color .55s var(--e),border-color .55s var(--e)}
+h1.in .hl{opacity:1;transform:translateY(.02em) scale(1)}
+h1.in .hl:nth-of-type(1){transition-delay:.42s,.42s,0s,0s,0s}
+h1.in .hl:nth-of-type(2){transition-delay:.58s,.58s,0s,0s,0s}
+h1.in .hl:nth-of-type(3){transition-delay:.74s,.74s,0s,0s,0s}
+.hl:hover{background:var(--ink);color:#fff}
+.hl svg{width:.6em;height:.6em;flex:none;stroke:currentColor;stroke-width:1.8;fill:none;
   stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== cursor da marca, portado do @unlumen-ui/cursor ===== */
+@media(pointer:fine){
+  html.ma-cursor,html.ma-cursor *{cursor:none!important}
+  html.ma-cursor input,html.ma-cursor textarea,html.ma-cursor select{cursor:text!important}
+}
+#maCursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;width:34px;height:34px;
+  will-change:transform;opacity:0;transition:opacity .4s var(--e)}
+#maCursor.on{opacity:1}
+#maCursor .tile{width:100%;height:100%;border-radius:10px;background:var(--ink);display:grid;place-items:center;
+  box-shadow:0 10px 22px -10px rgba(10,11,12,.65)}
+#maCursor .tile img{width:60%;filter:invert(1)}
+#maCursor .tip{position:absolute;top:-1px;left:-1px;width:11px;height:11px;background:var(--ink);
+  clip-path:polygon(0 0,100% 0,0 100%);border-radius:2px 0 0 0}
+#maFollow{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;
+  background:var(--ink);color:#fff;border-radius:8px;padding:.3rem .6rem;font-size:.78rem;font-weight:500;
+  white-space:nowrap;will-change:transform;opacity:0;transition:opacity .35s var(--e)}
+#maFollow.on{opacity:1}
+
+/* ===== tooltip flutuante, portado do @unlumen-ui/floating-tooltip ===== */
+#maTip{position:fixed;top:0;left:0;z-index:9997;pointer-events:none;
+  background:var(--ink);color:#fff;border-radius:.6rem;padding:.62rem .9rem;
+  margin-left:1rem;margin-top:1rem;font-weight:500;will-change:transform;
+  opacity:0;transition:opacity .18s ease-out}
+#maTip.on{opacity:1}
+#maTip .h{display:block;font-size:.88rem;white-space:nowrap}
+#maTip .d{display:block;max-width:28ch;font-size:.8rem;line-height:1.35;font-weight:400;opacity:.7;margin-top:.2rem}
+
+/* ===== halo dos botoes, portado do @unlumen-ui/glow ===== */
+.glow{position:relative;display:inline-flex;isolation:isolate}
+.glow>.halo{position:absolute;inset:-2px;z-index:-1;border-radius:999px;pointer-events:none;
+  filter:blur(14px);opacity:.55;transform:scale(1);
+  transition:opacity .7s var(--e),transform .7s var(--spring)}
+.glow>.halo i{position:absolute;inset:0;border-radius:999px;
+  background:conic-gradient(from 0deg at 50% 50%,#0A0B0C,#8B9096,#FFFFFF,#5B6167,#0A0B0C);
+  animation:halo 5s linear infinite}
+@keyframes halo{to{transform:rotate(360deg)}}
+.glow:hover>.halo{opacity:.9;transform:scale(1.06)}
+/* sobre fundo escuro o halo tem de ser claro para se ver */
+.glow.light>.halo i{background:conic-gradient(from 0deg at 50% 50%,#FFFFFF,#9AA0A5,#FFFFFF,#6B7075,#FFFFFF)}
+.glow.light>.halo{opacity:.4}
+.glow.light:hover>.halo{opacity:.75}
 .hero>p{max-width:54ch;color:var(--ink-2);margin:1.9rem auto 0;font-size:1.08rem;letter-spacing:-.014em}
 .btns{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:2.3rem}
 .btn{display:inline-flex;align-items:center;gap:.65rem;border-radius:999px;padding:.88rem .88rem .88rem 1.55rem;
@@ -430,25 +475,116 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 .foot-mark img{width:min(1200px,96%);opacity:.07;mix-blend-mode:multiply}
 @media(max-width:900px){.foot-top{grid-template-columns:1fr 1fr;gap:2.2rem}.foot-brand{grid-column:span 2}}
 
-.cookies{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:80;max-width:520px;margin-inline:auto;
-  background:#fff;border:1px solid var(--hair);border-radius:1.3rem;box-shadow:var(--lift);
-  padding:1.3rem 1.5rem;transform:translateY(150%);transition:transform 1.2s var(--spring)}
-.cookies.show{transform:none}
-.cookies h4{font-size:1rem}
-.cookies p{color:var(--ink-2);font-size:.87rem;margin-top:.5rem}
-.cookies p a{text-decoration:underline;text-underline-offset:3px}
-.cookies .row{display:flex;gap:.6rem;margin-top:1.1rem;flex-wrap:wrap}
-.cookies button{font:inherit;font-size:.85rem;font-weight:500;border-radius:999px;padding:.6rem 1.2rem;
-  cursor:pointer;border:1px solid var(--hair);background:#fff;color:var(--ink);
-  transition:background .6s var(--e),color .6s var(--e),border-color .6s var(--e)}
+/* aviso de cookies discreto: uma barra pequena em baixo à esquerda, nao tapa o conteudo */
+.cookies{position:fixed;left:1rem;bottom:1rem;z-index:80;max-width:min(420px,calc(100vw - 2rem));
+  background:rgba(255,255,255,.9);backdrop-filter:blur(20px) saturate(1.4);
+  border:1px solid var(--hair);border-radius:1rem;box-shadow:0 24px 54px -34px rgba(10,11,12,.4);
+  padding:.85rem .95rem;display:flex;align-items:center;gap:.85rem;
+  transform:translateY(calc(100% + 1.5rem));opacity:0;
+  transition:transform 1s var(--spring),opacity .7s var(--e)}
+.cookies.show{transform:none;opacity:1}
+.cookies .txt{font-size:.82rem;color:var(--ink-2);line-height:1.4}
+.cookies .txt b{display:block;color:var(--ink);font-weight:500;font-size:.85rem}
+.cookies .txt a{text-decoration:underline;text-underline-offset:2px}
+.cookies .row{display:flex;gap:.4rem;flex:none}
+.cookies button{font:inherit;font-size:.8rem;font-weight:500;border-radius:999px;padding:.45rem .9rem;
+  cursor:pointer;border:1px solid var(--hair);background:#fff;color:var(--ink);white-space:nowrap;
+  transition:background .5s var(--e),color .5s var(--e),border-color .5s var(--e)}
 .cookies button.ok{background:var(--ink);color:#fff;border-color:var(--ink)}
 .cookies button.ok:hover{background:#22262A}
-.cookies button:hover{border-color:rgba(10,11,12,.3)}
+.cookies button:hover{border-color:rgba(10,11,12,.32)}
+/* em mobile fica uma barra fina, nunca tapa o botao principal */
+@media(max-width:620px){
+  .cookies{left:.6rem;right:.6rem;bottom:.6rem;max-width:none;padding:.6rem .7rem;gap:.6rem;border-radius:.9rem}
+  .cookies .txt{font-size:.76rem;line-height:1.3}
+  .cookies .txt b{font-size:.79rem}
+  .cookies .txt .long{display:none}
+  .cookies button{font-size:.76rem;padding:.42rem .7rem;min-height:36px}
+}
 
 .badge{position:fixed;left:1rem;top:1rem;z-index:70;background:#fff;border:1px solid var(--hair);
   border-radius:999px;font-size:.68rem;font-weight:500;padding:.4rem .8rem;box-shadow:var(--soft)}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
   [data-anim]{opacity:1;transform:none;filter:none}}
+
+/* =====================================================================
+   MOBILE. Tudo o que custa bateria ou atrapalha o dedo sai daqui.
+   ===================================================================== */
+@media(hover:none){
+  /* sem rato nao ha hover, por isso os estados de hover ficam sempre no estado calmo */
+  .card:hover,.work:hover,.fnd:hover,.pack:hover,.srow:hover{transform:none;box-shadow:var(--soft)}
+  .work:hover .shot .im{background-position:top center}
+  .hl:hover{background:none;color:var(--ink)}
+  .glow>.halo{opacity:.45}
+  .glow:hover>.halo{opacity:.45;transform:scale(1)}
+  /* alvos de toque com pelo menos 44px, como manda a norma */
+  .btn,.cta-mini,.foot-col a,.foot-legal a,.cookies button{min-height:44px}
+  .btn{padding-block:.9rem}
+  .foot-col a{padding-block:.55rem}
+}
+@media(max-width:820px){
+  /* o desfoque na entrada é o que mais custa a GPU do telemóvel */
+  [data-anim]{transform:translate3d(0,26px,0);filter:none;
+    transition:opacity .8s var(--e),transform .8s var(--e)}
+  [data-d="1"]{transition-delay:.07s}[data-d="2"]{transition-delay:.14s}
+  [data-d="3"]{transition-delay:.21s}[data-d="4"]{transition-delay:.28s}[data-d="5"]{transition-delay:.35s}
+  section{padding:clamp(3.5rem,9vh,5rem) var(--pad)}
+  .hero{padding-top:clamp(6.5rem,15vh,8rem);min-height:auto}
+  .hero h1{font-size:clamp(2rem,8.4vw,3rem);max-width:100%}
+  .hl{border-width:.05em;padding:.06em .34em .1em .26em}
+  .hero>p{font-size:1rem;margin-top:1.3rem}
+  .btns{gap:.6rem;width:100%}
+  .btns .glow,.btns .btn{width:100%}
+  .btn{justify-content:space-between;width:100%}
+  .slot .inner{aspect-ratio:auto;min-height:340px;padding:1.6rem 1.2rem}
+  .slot ul{gap:.55rem}
+  .slot li{font-size:.85rem}
+  .h2{font-size:clamp(1.6rem,6.4vw,2.2rem)}
+  .lead{font-size:.97rem}
+  .card{padding:1.4rem;gap:1.1rem;border-radius:1.25rem}
+  .svc{gap:.7rem}
+  .svc-all{flex-direction:column;align-items:flex-start;padding:1.5rem}
+  .svc-all .btn{width:100%}
+  .works{gap:.8rem}
+  .work .shot{aspect-ratio:16/12}
+  .nfc{border-radius:1.5rem;padding:1.7rem 1.3rem}
+  .nfc h2{font-size:clamp(1.5rem,6.4vw,2rem)}
+  .stage{min-height:0}
+  .rig{height:auto;gap:1.2rem}
+  .plate{width:min(150px,44vw)}
+  .phone{height:auto;width:min(190px,56vw)}
+  .pack{padding:1.4rem;border-radius:1rem}
+  .pack .pr{font-size:1.85rem}
+  .nfc-foot{flex-direction:column;align-items:flex-start}
+  .nfc-foot .btn{width:100%}
+  .callcard{padding:1.5rem;border-radius:1.4rem}
+  .callcard .btns .glow,.callcard .btns .btn{width:100%}
+  .founders{gap:1rem;margin-top:2rem}
+  .fnd .ph{width:min(200px,62%);margin-top:1.8rem}
+  .fnd .info{padding:1.1rem 1.2rem 1.5rem}
+  .foot{padding-top:3rem}
+  .foot-mark img{opacity:.055}
+  .badge{display:none}
+}
+/* a cápsula em mobile: o lockup é largo demais, entra o monograma sozinho */
+@media(max-width:820px){
+  .island,.island.mini{max-width:calc(100vw - 2 * var(--pad));height:54px;gap:.7rem;
+    padding:0 .42rem 0 .85rem;border-radius:999px}
+  .brand .lock{display:none}
+  .brand .mono{display:block}
+  .island .isl-live{position:static;transform:none;opacity:1;pointer-events:auto;margin:0 auto;
+    font-size:.83rem;min-width:0;overflow:hidden}
+  .island .isl-live em{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+  .island.mini .isl-live{transform:none}
+  .cta-mini{font-size:.82rem;padding:.5rem .5rem .5rem .95rem}
+  .island.mini .cta-mini{padding:.5rem .95rem}
+}
+@media(max-width:400px){
+  .island .isl-live{display:none}
+  .hero h1{font-size:clamp(1.8rem,8.6vw,2.3rem)}
+  .plate{width:min(126px,42vw)}
+  .phone{width:min(160px,52vw)}
+}
 </style>
 </head>
 <body>
@@ -460,7 +596,10 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 
 <header class="nav">
   <div class="island" id="island">
-    <a href="#" class="brand"><img src="img/logo-lockup-2x.png" alt="MA Webs"></a>
+    <a href="#" class="brand">
+      <img class="lock" src="img/logo-lockup-2x.png" alt="MA Webs">
+      <img class="mono" src="img/logo-mono-2x.png" alt="MA Webs">
+    </a>
     <nav class="isl-nav">
       <a href="#servicos">Serviços</a><a href="#processo">Processo</a><a href="#trabalho">Trabalho</a>
       <a href="portfolio.html">Portfólio</a><a href="#nfc">Placas NFC</a>
@@ -472,14 +611,21 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 
 <section class="hero">
   <h1 data-anim>Um site que traz
-    <span class="hl"><svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg>telefonemas</span>,
-    <span class="hl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4M8 15h4"/></svg>reservas</span> e
-    <span class="hl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg>dinheiro</span>.
+    <span class="hl" data-tip="Telefonemas"
+      data-tip-d="Número visível em todas as páginas e botão de chamada a um toque no telemóvel.">
+      <svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg>telefonemas</span>,
+    <span class="hl" data-tip="Reservas"
+      data-tip-d="Marcações e pedidos de orçamento que entram sozinhos, sem tu atenderes o telefone.">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4M8 15h4"/></svg>reservas</span> e
+    <span class="hl" data-tip="Dinheiro"
+      data-tip-d="É para isto que serve tudo o resto. Mais clientes a decidir entrar em vez de continuar a andar.">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg>dinheiro</span>.
   </h1>
   <p data-anim data-d="1">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar. Feito à mão por duas pessoas, mantido por nós.</p>
   <div class="btns" data-anim data-d="2">
-    <a href="#contacto" class="btn btn-p">Quero mais clientes a ligar <i>&#8599;</i></a>
-    <a href="#trabalho" class="btn btn-s">Ver trabalho <i>&#8595;</i></a>
+    <span class="glow"><span class="halo"><i></i></span>
+      <a href="#contacto" class="btn btn-p" data-follow="Marcar">Quero mais clientes a ligar <i>&#8599;</i></a></span>
+    <a href="#trabalho" class="btn btn-s" data-follow="Ver">Ver trabalho <i>&#8595;</i></a>
   </div>
 
   <div class="slot" data-anim data-d="3">
@@ -623,7 +769,8 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       <article class="work" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/casadarocha-full.jpg')"></div></div><div class="cap"><h4>Casa da Rocha</h4><span>Construção</span></div></article>
     </div>
     <div class="more">
-      <a href="portfolio.html" class="btn btn-p">Ver portfólio completo <i>&#8599;</i></a>
+      <span class="glow"><span class="halo"><i></i></span>
+        <a href="portfolio.html" class="btn btn-p" data-follow="Abrir">Ver portfólio completo <i>&#8599;</i></a></span>
     </div>
   </div>
 </section>
@@ -723,7 +870,8 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
         <div><i>&#10003;</i> Sais a saber o preço, mesmo que não avances</div>
       </div>
       <div class="btns">
-        <a href="https://cal.com/ma-webs/15min" target="_blank" rel="noopener" class="btn btn-p">Escolher horário <i>&#8599;</i></a>
+        <span class="glow light"><span class="halo"><i></i></span>
+          <a href="https://cal.com/ma-webs/15min" target="_blank" rel="noopener" class="btn btn-p" data-follow="Marcar">Escolher horário <i>&#8599;</i></a></span>
       </div>
       <a class="phonelink" href="https://wa.me/351962303550?text=Ol%C3%A1%2C%20vim%20do%20site%20da%20MA%20Webs%20e%20queria%20marcar%20a%20chamada%20de%2015%20minutos." target="_blank" rel="noopener">&#9993; ou fala connosco no <b>WhatsApp</b></a>
       <div class="fine">
@@ -774,13 +922,11 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
   <div class="foot-mark"><img src="img/logo-lockup-2x.png" alt=""></div>
 </footer>
 
-<div class="cookies" id="cookies">
-  <h4>Cookies</h4>
-  <p>Usamos apenas os essenciais para o site funcionar. Os de estatísticas só entram se aceitares.
-    Detalhes na <a href="legal.html#cookies">Política de Cookies</a>.</p>
+<div class="cookies" id="cookies" role="dialog" aria-label="Aviso de cookies">
+  <div class="txt"><b>Cookies</b><span class="long">Só os essenciais. Os de estatísticas entram se aceitares. </span><a href="legal.html#cookies">Detalhes</a>.</div>
   <div class="row">
-    <button class="ok" data-cookie="all">Aceitar todos</button>
-    <button data-cookie="essential">Só os essenciais</button>
+    <button data-cookie="essential">Só essenciais</button>
+    <button class="ok" data-cookie="all">Aceitar</button>
   </div>
 </div>
 
@@ -940,13 +1086,16 @@ function mountRender(host,dark){
   gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
   const uRes=gl.getUniformLocation(pr,'u_res'),uT=gl.getUniformLocation(pr,'u_t'),
         uM=gl.getUniformLocation(pr,'u_m'),uD=gl.getUniformLocation(pr,'u_dark');
+  /* no telemóvel o custo por pixel é muito maior, por isso desce se a densidade */
+  const DPR=()=>Math.min(devicePixelRatio||1,innerWidth<=820?1:1.5);
   let W=1,H=1;
-  function size(){const dpr=Math.min(devicePixelRatio||1,1.5),r=host.getBoundingClientRect();
+  function size(){const dpr=DPR(),r=host.getBoundingClientRect();
     W=cv.width=Math.max(1,Math.floor(r.width*dpr));H=cv.height=Math.max(1,Math.floor(r.height*dpr));
     gl.viewport(0,0,W,H)}
   size();addEventListener('resize',size);
   let mx=W*.5,my=H*.5,tx=mx,ty=my;
-  addEventListener('mousemove',e=>{const dpr=Math.min(devicePixelRatio||1,1.5),r=host.getBoundingClientRect();
+  /* so escuta o rato onde existe rato */
+  if(fine)addEventListener('mousemove',e=>{const dpr=DPR(),r=host.getBoundingClientRect();
     tx=(e.clientX-r.left)*dpr;ty=(r.height-(e.clientY-r.top))*dpr},{passive:true});
   const t0=performance.now();
   (function frame(now){
@@ -961,7 +1110,110 @@ function mountRender(host,dark){
   })(t0);
 }
 mountRender(document.getElementById('heroRender'),false);
-mountRender(document.getElementById('nfcRender'),true);
+/* no telemóvel só corre um render, o da hero. O da secção NFC fica pelo fundo em CSS */
+if(innerWidth>820)mountRender(document.getElementById('nfcRender'),true);
+else document.getElementById('nfcRender').style.background=
+  'radial-gradient(48% 44% at 74% 38%,rgba(255,255,255,.09),transparent 66%),'+
+  'radial-gradient(46% 42% at 22% 76%,rgba(255,255,255,.05),transparent 68%)';
+
+/* ===================================================================
+   Portes de tres componentes do unlumen-ui para HTML puro.
+   O CLI do shadcn instala React, por isso reescrevi o comportamento
+   mantendo as mesmas molas e os mesmos numeros do original.
+   =================================================================== */
+
+/* mola equivalente a useSpring do motion, massa 1 */
+function Spring(stiffness,damping){
+  return {x:0,v:0,t:0,mass:1,
+    set(v){this.t=v},
+    jump(v){this.x=this.t=v;this.v=0},
+    step(dt){
+      const f=-stiffness*(this.x-this.t)-damping*this.v;
+      this.v+=(f/this.mass)*dt;
+      this.x+=this.v*dt;
+      return this.x;
+    }};
+}
+const mapRange=(v,a,b,c,d)=>{
+  const t=Math.min(1,Math.max(0,(v-a)/(b-a)));
+  return c+(d-c)*t;
+};
+
+if(fine&&!reduce){
+  /* ---------- @unlumen-ui/cursor ---------- */
+  document.documentElement.classList.add('ma-cursor');
+  const cur=document.createElement('div');
+  cur.id='maCursor';
+  cur.innerHTML='<span class="tip"></span><span class="tile"><img src="img/logo-mono-2x.png" alt=""></span>';
+  const fol=document.createElement('div');
+  fol.id='maFollow';
+  document.body.append(cur,fol);
+
+  /* ---------- @unlumen-ui/floating-tooltip ---------- */
+  const tip=document.createElement('div');
+  tip.id='maTip';
+  tip.innerHTML='<span class="h"></span><span class="d"></span>';
+  document.body.appendChild(tip);
+  const tipH=tip.querySelector('.h'),tipD=tip.querySelector('.d');
+
+  /* molas com os valores do original */
+  const cx=Spring(300,25),cy=Spring(300,25);      /* cursor */
+  const rot=Spring(200,15);                       /* inclinacao do cursor */
+  const fx=Spring(300,25),fy=Spring(300,25);      /* etiqueta que segue */
+  const tx=Spring(750,45),ty=Spring(750,45);      /* tooltip */
+
+  let mx=innerWidth/2,my=innerHeight/2,started=false;
+  addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    if(!started){started=true;cx.jump(mx);cy.jump(my);fx.jump(mx);fy.jump(my);tx.jump(mx);ty.jump(my);
+      cur.classList.add('on')}
+  },{passive:true});
+  addEventListener('mouseleave',()=>cur.classList.remove('on'));
+  addEventListener('mouseenter',()=>{if(started)cur.classList.add('on')});
+
+  /* gatilhos */
+  document.querySelectorAll('[data-tip]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{
+      tipH.textContent=el.dataset.tip;
+      tipD.textContent=el.dataset.tipD||'';
+      tipD.style.display=el.dataset.tipD?'block':'none';
+      tip.classList.add('on');
+    });
+    el.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+  });
+  document.querySelectorAll('[data-follow]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{fol.textContent=el.dataset.follow;fol.classList.add('on')});
+    el.addEventListener('mouseleave',()=>fol.classList.remove('on'));
+  });
+
+  let last=performance.now();
+  (function loop(now){
+    requestAnimationFrame(loop);
+    const dt=Math.min((now-last)/1000,1/30);last=now;
+
+    cx.set(mx);cy.set(my);
+    const px=cx.step(dt),py=cy.step(dt);
+    /* inclinacao pela velocidade, limitada a 45 graus como no original */
+    const raw=Math.max(-45,Math.min(45,(cx.v/1000)*30+(cy.v/1000)*30));
+    rot.set(raw);
+    const r=rot.step(dt);
+    const speed=Math.hypot(cx.v,cy.v);
+    const sc=1-Math.min(speed/2000,.1);
+    cur.style.transform=`translate3d(${px}px,${py}px,0) rotate(${r}deg) scale(${sc})`;
+
+    fx.set(mx);fy.set(my);
+    const lx=fx.step(dt),ly=fy.step(dt);
+    fol.style.transform=`translate3d(${lx+16}px,${ly+22}px,0)`
+      +` scale(${mapRange(fx.v,-1000,1000,.9,1.15).toFixed(3)},${mapRange(fy.v,-1000,1000,1.15,.9).toFixed(3)})`
+      +` skew(${mapRange(fx.v,-1000,1000,-3,3).toFixed(2)}deg,${mapRange(fy.v,-1000,1000,-3,3).toFixed(2)}deg)`;
+
+    tx.set(mx);ty.set(my);
+    const ttx=tx.step(dt),tty=ty.step(dt);
+    tip.style.transform=`translate3d(${ttx}px,${tty}px,0)`
+      +` scale(${mapRange(tx.v,-1000,1000,.9,1.15).toFixed(3)},${mapRange(ty.v,-1000,1000,1.15,.9).toFixed(3)})`
+      +` skew(${mapRange(tx.v,-1000,1000,-3,3).toFixed(2)}deg,${mapRange(ty.v,-1000,1000,-3,3).toFixed(2)}deg)`;
+  })(last);
+}
 
 /* cookies */
 (function(){
