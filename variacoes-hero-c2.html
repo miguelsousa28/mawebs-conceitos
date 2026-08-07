@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MA Webs / 5 conceitos com a palavra a trocar</title>
+<link rel="icon" href="img/favicon-128.png">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F3;--card:#fff;--ink:#0A0B0C;--ink-2:rgba(10,11,12,.64);--ink-dim:rgba(10,11,12,.46);
+  --hair:rgba(10,11,12,.09);--soft:0 30px 70px -40px rgba(10,11,12,.3);
+  --e:cubic-bezier(.22,.61,.20,1);--spring:cubic-bezier(.34,1.24,.38,1);--pad:clamp(1.25rem,5vw,4rem)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',-apple-system,sans-serif;font-weight:400;
+  line-height:1.62;letter-spacing:-.011em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-weight:500;letter-spacing:-.05em}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.top{position:sticky;top:0;z-index:40;background:rgba(246,245,243,.93);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--hair);padding:.9rem var(--pad);display:flex;align-items:center;gap:1.2rem}
+.top img{height:16px;mix-blend-mode:multiply}
+.top span{font-size:.85rem;color:var(--ink-2)}
+.top a{margin-left:auto;background:var(--ink);color:#fff;border-radius:999px;padding:.5rem 1.05rem;font-size:.84rem}
+header{padding:clamp(3rem,8vh,5rem) var(--pad) 1rem;max-width:1240px;margin:0 auto}
+header h2{font-size:clamp(1.7rem,4vw,2.8rem);max-width:22ch;line-height:1.06}
+header p{color:var(--ink-2);max-width:66ch;margin-top:1rem}
+.lab{max-width:1240px;margin:0 auto;padding:clamp(2.5rem,7vh,4rem) var(--pad) 0}
+.lab .n{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.lab h3{font-size:clamp(1.2rem,2.4vw,1.7rem);margin:.4rem 0 .5rem;line-height:1.1}
+.lab p{color:var(--ink-2);max-width:66ch;font-size:.94rem}
+
+.hero{position:relative;overflow:hidden;border-radius:1.8rem;border:1px solid var(--hair);background:#fff;
+  box-shadow:var(--soft);margin:1.5rem auto clamp(2rem,5vh,3rem);max-width:1240px;
+  padding:clamp(3rem,6vw,4.5rem) clamp(1.5rem,5vw,4rem)}
+.clouds{position:absolute;inset:0;z-index:0;
+  background:radial-gradient(58% 46% at 24% 16%,rgba(10,11,12,.10),transparent 62%),
+             radial-gradient(52% 44% at 82% 72%,rgba(10,11,12,.07),transparent 66%);
+  animation:drift 30s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(-2%,-1.5%,0) scale(1.07)}}
+.hero>*{position:relative;z-index:2}
+.sub{color:var(--ink-2);font-size:1rem;margin-top:1.4rem;max-width:48ch}
+.btns{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:2rem}
+.btn{display:inline-flex;align-items:center;gap:.85rem;border-radius:999px;
+  padding:.9rem 1.35rem .9rem 1.6rem;font-size:.92rem;font-weight:500;
+  transition:transform .5s var(--e),background .55s var(--e),box-shadow .55s var(--e)}
+.btn:active{transform:scale(.978)}
+.arw{position:relative;width:.95em;height:.95em;flex:none;overflow:hidden;display:inline-block}
+.arw svg{position:absolute;inset:0;width:100%;height:100%;stroke-width:2;transition:transform .55s var(--e)}
+.arw svg:nth-child(2){transform:translate(-120%,120%)}
+.btn:hover .arw svg:nth-child(1){transform:translate(120%,-120%)}
+.btn:hover .arw svg:nth-child(2){transform:none}
+.btn-p{background:var(--ink);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 10px 22px -14px rgba(10,11,12,.5)}
+.btn-p:hover{background:#191D21;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 20px 38px -18px rgba(10,11,12,.62)}
+
+/* cápsula justa à palavra, com a largura animada. Como nada vem a seguir, nada se mexe. */
+.cap{display:inline-flex;align-items:center;gap:.26em;border:.055em solid var(--ink);color:var(--ink);
+  border-radius:999px;padding:.05em .42em .09em .32em;line-height:1;white-space:nowrap;
+  position:relative;cursor:pointer;vertical-align:baseline;
+  transition:transform .45s var(--spring),background .5s var(--e),color .5s var(--e)}
+.cap.pop{transform:scale(1.04)}
+.cap svg{width:.6em;height:.6em;flex:none}
+.slot{display:inline-block;position:relative;overflow:hidden;text-align:left;
+  transition:width .6s var(--spring),filter .3s var(--e)}
+.slot.moving{filter:blur(.03em)}
+.slot i{font-style:normal;display:block;white-space:nowrap;position:absolute;left:0;top:0;
+  opacity:0;transform:translateY(.85em);
+  transition:opacity .3s var(--e),transform .5s var(--e)}
+.slot i.on{position:relative;opacity:1;transform:none}
+.slot i.out{position:absolute;opacity:0;transform:translateY(-.85em)}
+.sheen{position:absolute;inset:0;border-radius:999px;pointer-events:none;opacity:0;overflow:hidden;
+  background:linear-gradient(105deg,transparent 38%,rgba(10,11,12,.14) 50%,transparent 62%);background-size:260% 100%}
+.cap.sweep .sheen{animation:sweep .6s var(--e)}
+@keyframes sweep{0%{opacity:1;background-position:180% 0}100%{opacity:0;background-position:-80% 0}}
+
+/* ---------- 1: alinhado à esquerda, cápsula fecha a frase ---------- */
+.h1a{font-size:clamp(1.9rem,4.6vw,3.7rem);line-height:1.3;max-width:none}
+/* a capsula tem linha propria e comeca sempre no mesmo x, por isso cresce para a direita sem empurrar nada */
+.h1a .l1,.h1a .l2{display:block}
+.h1a .l2{margin-top:.06em}
+
+/* ---------- 2: a palavra sozinha, em enorme ---------- */
+.k2{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
+.big{display:flex;align-items:center;gap:.24em;font-size:clamp(2.4rem,8vw,6.2rem);font-weight:500;
+  letter-spacing:-.055em;line-height:1.22;margin-top:.6rem}
+.big .ico{width:.72em;height:.72em;flex:none;border:.055em solid var(--ink);border-radius:999px;
+  display:grid;place-items:center}
+.big .ico svg{width:.42em;height:.42em}
+/* a letras grandes o recorte tem de ter altura propria, senao corta acentos e descidas */
+.big .slot{height:1.22em;overflow:hidden;transition:filter .3s var(--e)}
+.big .slot i{height:1.22em;line-height:1.22em;transform:translateY(.7em) scale(.96)}
+.big .slot i.on{transform:none}
+.big .slot i.out{transform:translateY(-.7em) scale(1.03)}
+.big .ico{align-self:center}
+.tail{font-size:clamp(1rem,1.9vw,1.35rem);color:var(--ink-2);margin-top:1.1rem}
+
+/* ---------- 3: as sete à vista, uma acesa de cada vez ---------- */
+.g3{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.stack{display:grid;gap:.1rem;justify-items:start}
+.stack .row{display:flex;align-items:center;gap:.5rem;font-size:clamp(1.15rem,2.4vw,1.85rem);
+  font-weight:500;letter-spacing:-.04em;color:var(--ink-dim);opacity:.32;
+  transition:opacity .55s var(--e),color .55s var(--e),transform .6s var(--spring)}
+.stack .row svg{width:.68em;height:.68em;flex:none;opacity:0;transform:translateX(-.3em);
+  transition:opacity .5s var(--e),transform .55s var(--spring)}
+.stack .row.on{opacity:1;color:var(--ink);transform:translateX(.22em)}
+.stack .row.on svg{opacity:1;transform:none}
+.h3t{font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.15;max-width:14ch}
+
+/* ---------- 4: painel à direita, como um widget ---------- */
+.g4{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.panel{background:var(--ink);color:#fff;border-radius:1.6rem;padding:clamp(1.8rem,3.4vw,2.6rem);
+  position:relative;overflow:hidden;box-shadow:0 40px 80px -44px rgba(10,11,12,.6)}
+.panel::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(52% 44% at 74% 22%,rgba(255,255,255,.14),transparent 68%)}
+.panel>*{position:relative;z-index:2}
+.panel .lab4{font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.panel .cap{border-color:#fff;color:#fff;font-size:clamp(1.4rem,3vw,2.3rem);margin-top:1rem}
+.panel .meta{color:rgba(255,255,255,.62);font-size:.9rem;margin-top:1.2rem;min-height:2.6em}
+.dots{display:flex;gap:.3rem;margin-top:1.4rem}
+.dots i{width:5px;height:5px;border-radius:99px;background:rgba(255,255,255,.25);
+  transition:width .5s var(--e),background .5s var(--e)}
+.dots i.on{width:18px;background:#fff}
+
+/* ---------- 5: faixa que desliza sem parar ---------- */
+.tick{position:relative;overflow:hidden;margin-top:1.6rem;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.tick .lane{display:flex;gap:.9rem;width:max-content;animation:slide 26s linear infinite}
+.tick .it{display:inline-flex;align-items:center;gap:.4rem;border:.055em solid var(--ink);border-radius:999px;
+  padding:.3rem .85rem .34rem .7rem;font-size:clamp(1.1rem,2.3vw,1.8rem);font-weight:500;letter-spacing:-.04em;
+  white-space:nowrap;opacity:.35;transition:opacity .5s var(--e),background .5s var(--e),color .5s var(--e)}
+.tick .it svg{width:.62em;height:.62em;flex:none}
+.tick .it.hot{opacity:1;background:var(--ink);color:#fff;border-color:var(--ink)}
+@keyframes slide{to{transform:translateX(-50%)}}
+.tick:hover .lane{animation-play-state:paused}
+.h5t{font-size:clamp(1.8rem,4vw,3.2rem);line-height:1.18;max-width:16ch}
+
+#tip{position:fixed;top:0;left:0;z-index:90;pointer-events:none;background:var(--ink);color:#fff;
+  border-radius:.6rem;padding:.62rem .9rem;font-weight:500;will-change:transform;
+  opacity:0;transition:opacity .18s ease-out}
+#tip.on{opacity:1}
+#tip b{display:block;font-size:.88rem;white-space:nowrap}
+#tip span{display:block;max-width:28ch;font-size:.8rem;line-height:1.35;font-weight:400;opacity:.7;margin-top:.2rem}
+
+footer{padding:3rem var(--pad);border-top:1px solid var(--hair);color:var(--ink-dim);font-size:.85rem;
+  max-width:1240px;margin:2rem auto 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(max-width:860px){.g3,.g4{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top"><img src="img/logo-lockup-2x.png" alt="MA Webs"><span>Cinco conceitos com a palavra a trocar</span>
+  <a href="06-hibrido.html">Voltar ao site</a></div>
+
+<header>
+  <h2>Cinco conceitos, não cinco animações.</h2>
+  <p>A caixa volta a ser justa à palavra. O que muda em cada um é a posição dela na página, escolhida para que a caixa possa crescer sem empurrar nada. Sete palavras, troca a cada segundo e meio, e cada uma tem o seu texto ao passar o rato.</p>
+</header>
+
+<!-- 1 -->
+<div class="lab"><div class="n">Conceito 1</div><h3>A cápsula fecha a frase</h3>
+  <p>O texto passa a estar alinhado à esquerda e a cápsula é a última coisa da frase. Como não há nada à direita dela, pode encolher e crescer à vontade que não empurra uma única letra. É a mudança mais pequena em relação ao que tens e a mais segura.</p></div>
+<section class="hero" data-v="1">
+  <div class="clouds"></div>
+  <h1 class="h1a"><span class="l1">Um site que te traz</span><span class="l2"><span class="cap" data-cap><span class="sheen"></span><svg data-icon></svg><span class="slot"></span></span></span></h1>
+  <p class="sub">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
+    <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
+</section>
+
+<!-- 2 -->
+<div class="lab"><div class="n">Conceito 2</div><h3>A palavra sozinha, em enorme</h3>
+  <p>Sai a cápsula e a frase. Fica uma linha pequena em cima, e por baixo a palavra em tamanho gigante com o ícone num círculo ao lado. É a mais impactante e a que se lê de mais longe, mas obriga a copy mais curta.</p></div>
+<section class="hero" data-v="2">
+  <div class="clouds"></div>
+  <span class="k2">O que um site devia trazer</span>
+  <div class="big"><span class="ico"><svg data-icon></svg></span><span class="slot"></span></div>
+  <p class="tail">E o teu, neste momento, não traz nada disto.</p>
+  <div class="btns"><a class="btn btn-p">Quero mudar isso
+    <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
+</section>
+
+<!-- 3 -->
+<div class="lab"><div class="n">Conceito 3</div><h3>As sete à vista, uma acesa de cada vez</h3>
+  <p>Em vez de trocar, mostra as sete ao mesmo tempo numa coluna e acende uma de cada vez, empurrando a acesa ligeiramente para a direita. Nada aparece nem desaparece, por isso nada se mexe. É a que comunica mais valor de uma vez só.</p></div>
+<section class="hero" data-v="3">
+  <div class="clouds"></div>
+  <div class="g3">
+    <div>
+      <h1 class="h3t">Tudo o que um site devia trazer ao teu negócio.</h1>
+      <p class="sub">O teu provavelmente não traz nenhuma delas. Vamos ver isso em quinze minutos.</p>
+      <div class="btns"><a class="btn btn-p">Marcar chamada
+        <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
+    </div>
+    <div class="stack" data-stack></div>
+  </div>
+</section>
+
+<!-- 4 -->
+<div class="lab"><div class="n">Conceito 4</div><h3>Painel à direita, como um contador ao vivo</h3>
+  <p>O texto fica à esquerda e a palavra passa para um painel preto à direita, com um texto explicativo por baixo e pontinhos de progresso. Parece um painel que está a contar coisas em tempo real. É a mais parecida com produto.</p></div>
+<section class="hero" data-v="4">
+  <div class="clouds"></div>
+  <div class="g4">
+    <div>
+      <h1 class="h3t">Um site só vale o que te traz de volta.</h1>
+      <p class="sub">Bonito não paga contas. O que paga é o telefone a tocar e a agenda a encher.</p>
+      <div class="btns"><a class="btn btn-p">Quero isso para mim
+        <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
+    </div>
+    <div class="panel">
+      <span class="lab4">O que te traz</span>
+      <div><span class="cap" data-cap><span class="sheen"></span><svg data-icon></svg><span class="slot"></span></span></div>
+      <p class="meta" data-meta></p>
+      <div class="dots" data-dots></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<div class="lab"><div class="n">Conceito 5</div><h3>Faixa que desliza sem parar</h3>
+  <p>As sete palavras passam numa faixa contínua da direita para a esquerda, e a que vai a meio acende a preto. Nunca para, e ao passar o rato a faixa congela para se poder ler. É a mais viva e a que enche melhor uma hero larga.</p></div>
+<section class="hero" data-v="5">
+  <div class="clouds"></div>
+  <h1 class="h5t">O teu site devia estar a trazer isto todos os dias.</h1>
+  <div class="tick"><div class="lane" data-lane></div></div>
+  <p class="sub">Passa o rato pela faixa para a parar.</p>
+  <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
+    <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
+</section>
+
+<div id="tip"><b></b><span></span></div>
+
+<footer><span>&copy; 2026 MA Webs</span><a href="06-hibrido.html">Voltar ao site</a></footer>
+
+<script>
+const ITEMS = [
+  { w:'telefonemas', t:'O telefone a tocar',
+    d:'E não é a tua mãe. É gente que te encontrou no Google e carregou no botão de ligar.',
+    i:'M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z' },
+  { w:'reservas', t:'Agenda cheia sozinha',
+    d:'Marcações a entrar enquanto dormes. Tu só apareces e fazes o teu trabalho.',
+    i:'M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v11A2.5 2.5 0 0 1 18.5 21h-13A2.5 2.5 0 0 1 3 18.5zM3 10h18M8 3v4M16 3v4' },
+  { w:'dinheiro', t:'Dinheiro no teu bolso',
+    d:'No fim é isto que interessa. O resto é conversa bonita para encher chouriços.',
+    i:'M12 2.8a9.2 9.2 0 1 0 0 18.4 9.2 9.2 0 0 0 0-18.4M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4' },
+  { w:'avaliações', t:'Cinco estrelas no Google',
+    d:'Sem teres de pedir a ninguém. Uma placa no balcão e o cliente faz sozinho.',
+    i:'m12 3.2 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.7l6.1-.9z' },
+  { w:'clientes novos', t:'Gente que nunca te viu',
+    d:'Quem passava à porta sem entrar. Agora encontra te antes de sair de casa.',
+    i:'M16 20v-1.6a3.4 3.4 0 0 0-3.4-3.4H6.4A3.4 3.4 0 0 0 3 18.4V20M9.5 11.4a3.7 3.7 0 1 0 0-7.4 3.7 3.7 0 0 0 0 7.4M21 20v-1.6a3.4 3.4 0 0 0-2.6-3.3M15.4 4.1a3.4 3.4 0 0 1 0 6.6' },
+  { w:'orçamentos', t:'Pedidos já explicados',
+    d:'Chegam com o trabalho descrito, para não perderes meia hora ao telefone.',
+    i:'M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5zM14 2.5v5h5M9 13h6M9 17h4' },
+  { w:'mensagens', t:'WhatsApp a apitar',
+    d:'Com quem quer marcar, não com quem te quer vender seguros.',
+    i:'M20.5 11.6a8 8 0 0 1-11.9 7L3.5 20l1.4-5a8 8 0 1 1 15.6-3.4' }
+];
+const INTERVAL = 1500;
+
+const tip = document.getElementById('tip');
+const tipB = tip.querySelector('b'), tipS = tip.querySelector('span');
+let owner = null, mx = innerWidth / 2, my = innerHeight / 2, px = mx, py = my;
+addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+(function follow(){ px += (mx - px) * .18; py += (my - py) * .18;
+  tip.style.transform = 'translate3d(' + (px + 16) + 'px,' + (py + 18) + 'px,0)';
+  requestAnimationFrame(follow); })();
+
+function bindTip(el, get) {
+  el.addEventListener('mouseenter', () => { owner = el; const o = get();
+    tipB.textContent = o.t; tipS.textContent = o.d; tip.classList.add('on'); });
+  el.addEventListener('mouseleave', () => { if (owner === el) { owner = null; tip.classList.remove('on'); } });
+  return () => { if (owner === el) { const o = get(); tipB.textContent = o.t; tipS.textContent = o.d; } };
+}
+
+function measure(word, sample) {
+  const g = document.createElement('span'), cs = getComputedStyle(sample);
+  g.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font:' + cs.font +
+    ';letter-spacing:' + cs.letterSpacing;
+  g.textContent = word;
+  document.body.appendChild(g);
+  const w = g.getBoundingClientRect().width;
+  g.remove();
+  return w;
+}
+function setIcon(svg, i, bump) {
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.innerHTML = '<path d="' + ITEMS[i].i + '"/>';
+  if (bump) svg.animate([{ transform: 'scale(.55) rotate(-20deg)', opacity: .15 }, { transform: 'none', opacity: 1 }],
+    { duration: 500, easing: 'cubic-bezier(.34,1.24,.38,1)' });
+}
+
+/* motor comum: a caixa acompanha a palavra, e nada vem a seguir para ser empurrado */
+function rotator(cap, slot, svg, onChange) {
+  slot.innerHTML = ITEMS.map((o, k) => '<i class="' + (k === 0 ? 'on' : '') + '">' + o.w + '</i>').join('');
+  const cells = [...slot.querySelectorAll('i')];
+  let W = ITEMS.map(o => measure(o.w, slot));
+  const fit = k => slot.style.width = (W[k] + 3) + 'px';
+  let i = 0;
+  fit(0); setIcon(svg, 0, false);
+  addEventListener('resize', () => { W = ITEMS.map(o => measure(o.w, slot)); fit(i); });
+  const sync = cap ? bindTip(cap, () => ITEMS[i]) : () => {};
+  setInterval(() => {
+    const prev = cells[i];
+    i = (i + 1) % ITEMS.length;
+    prev.classList.remove('on'); prev.classList.add('out');
+    cells[i].classList.remove('out'); cells[i].classList.add('on');
+    fit(i); setIcon(svg, i, true);
+    slot.classList.add('moving'); setTimeout(() => slot.classList.remove('moving'), 420);
+    if (cap) { cap.classList.remove('pop','sweep'); void cap.offsetWidth; cap.classList.add('pop','sweep');
+      setTimeout(() => cap.classList.remove('pop'), 320); }
+    sync(); onChange && onChange(i);
+    setTimeout(() => prev.classList.remove('out'), 600);
+  }, INTERVAL);
+}
+
+document.querySelectorAll('.hero[data-v]').forEach(hero => {
+  const v = hero.dataset.v;
+
+  if (v === '3') {
+    const stack = hero.querySelector('[data-stack]');
+    stack.innerHTML = ITEMS.map((o, k) =>
+      '<div class="row' + (k === 0 ? ' on' : '') + '"><svg viewBox="0 0 24 24"><path d="' + o.i + '"/></svg>' + o.w + '</div>').join('');
+    const rows = [...stack.children];
+    rows.forEach((r, k) => bindTip(r, () => ITEMS[k]));
+    let i = 0;
+    setInterval(() => {
+      rows[i].classList.remove('on');
+      i = (i + 1) % rows.length;
+      rows[i].classList.add('on');
+    }, INTERVAL);
+    return;
+  }
+
+  if (v === '5') {
+    const lane = hero.querySelector('[data-lane]');
+    const one = ITEMS.map(o =>
+      '<span class="it"><svg viewBox="0 0 24 24"><path d="' + o.i + '"/></svg>' + o.w + '</span>').join('');
+    lane.innerHTML = one + one;
+    const its = [...lane.children];
+    its.forEach((el, k) => bindTip(el, () => ITEMS[k % ITEMS.length]));
+    /* acende a que estiver mais perto do centro da faixa */
+    const box = hero.querySelector('.tick');
+    (function hot() {
+      const c = box.getBoundingClientRect();
+      const mid = c.left + c.width / 2;
+      let best = null, bd = 1e9;
+      its.forEach(el => {
+        const r = el.getBoundingClientRect();
+        const d = Math.abs(r.left + r.width / 2 - mid);
+        if (d < bd) { bd = d; best = el; }
+      });
+      its.forEach(el => el.classList.toggle('hot', el === best));
+      requestAnimationFrame(hot);
+    })();
+    return;
+  }
+
+  const cap = hero.querySelector('[data-cap]') || null;
+  const slot = hero.querySelector('.slot');
+  const svg = hero.querySelector('[data-icon]');
+  const meta = hero.querySelector('[data-meta]');
+  const dots = hero.querySelector('[data-dots]');
+  if (dots) dots.innerHTML = ITEMS.map((o, k) => '<i class="' + (k === 0 ? 'on' : '') + '"></i>').join('');
+  if (meta) meta.textContent = ITEMS[0].d;
+  rotator(cap, slot, svg, k => {
+    if (meta) { meta.style.opacity = 0; setTimeout(() => { meta.textContent = ITEMS[k].d; meta.style.opacity = 1; }, 200); }
+    if (dots) [...dots.children].forEach((d, n) => d.classList.toggle('on', n === k));
+  });
+});
+document.querySelectorAll('[data-meta]').forEach(m => m.style.transition = 'opacity .3s ease');
+</script>
+</body>
+</html>
