@@ -40,7 +40,11 @@ header p{color:var(--ink-2);max-width:66ch;margin-top:1rem}
   animation:drift 30s ease-in-out infinite alternate}
 @keyframes drift{to{transform:translate3d(-2%,-1.5%,0) scale(1.07)}}
 .hero>*{position:relative;z-index:2}
-.hero h1{font-size:clamp(1.9rem,4.4vw,3.6rem);max-width:19ch;margin-inline:auto}
+.hero h1{font-size:clamp(1.7rem,3.6vw,3.1rem);max-width:none;margin-inline:auto}
+/* a frase tem duas linhas fixas, por isso a capsula nunca salta de linha */
+.hero h1 .l1,.hero h1 .l2{display:block}
+.hero h1 .l2{display:flex;align-items:center;justify-content:center;gap:.28em;flex-wrap:nowrap;
+  white-space:nowrap}
 .sub{max-width:52ch;color:var(--ink-2);margin:1.5rem auto 0;font-size:1rem}
 .btns{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:2rem}
 .btn{display:inline-flex;align-items:center;gap:.85rem;border-radius:999px;
@@ -59,18 +63,16 @@ header p{color:var(--ink-2);max-width:66ch;margin-top:1rem}
 .hl{display:inline-flex;align-items:center;justify-content:center;gap:.26em;
   border:.055em solid var(--ink);color:var(--ink);
   border-radius:999px;padding:.05em .42em .09em .32em;line-height:1;white-space:nowrap;margin:.09em .02em;
-  position:relative;vertical-align:baseline;cursor:pointer;overflow:hidden;
+  position:relative;vertical-align:baseline;cursor:pointer;
   transition:transform .45s var(--spring),background .5s var(--e),color .5s var(--e)}
 .hl svg{width:.6em;height:.6em;flex:none}
-/* a caixa acompanha a palavra e o texto fica sempre centrado, nunca encostado a um lado */
-.word{display:inline-block;position:relative;overflow:hidden;text-align:center;
-  transition:width .68s var(--spring)}
+/* largura fixa pela palavra mais longa: a frase nunca reflui e as letras veem se sempre todas */
+.word{display:inline-block;position:relative;overflow:visible;text-align:center;
+  width:var(--w,auto);transition:filter .34s var(--e)}
 .word i{font-style:normal;display:block;white-space:nowrap;text-align:center}
-/* desfoque de movimento enquanto a caixa se ajusta */
-.word.moving{filter:blur(.028em)}
-.word{transition:width .68s var(--spring),filter .34s var(--e)}
+.word.moving{filter:blur(.03em)}
 .hl.pop{transform:scale(1.045)}
-.hl .sheen{position:absolute;inset:0;border-radius:999px;pointer-events:none;opacity:0;
+.hl .sheen{position:absolute;inset:0;border-radius:999px;pointer-events:none;opacity:0;overflow:hidden;
   background:linear-gradient(105deg,transparent 38%,rgba(10,11,12,.14) 50%,transparent 62%);
   background-size:260% 100%}
 .hl.sweep .sheen{animation:sweep .6s var(--e)}
@@ -83,19 +85,20 @@ header p{color:var(--ink-2);max-width:66ch;margin-top:1rem}
 @keyframes tick{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
 /* --- 1: painel de aeroporto --- */
-.v1 .word i{position:absolute;left:0;right:0;top:0;opacity:0;filter:blur(.045em);transform:translateY(.5em) rotateX(-70deg);
+.v1 .word{overflow:hidden;padding-block:.12em;margin-block:-.12em}
+.v1 .word i{position:absolute;left:0;right:0;top:.12em;opacity:0;filter:blur(.045em);transform:translateY(.5em) rotateX(-70deg);
   transform-origin:top center;transition:opacity .38s var(--e),transform .5s var(--spring)}
 .v1 .word i.on{position:relative;opacity:1;transform:none;filter:none}
 .v1 .word i.out{position:absolute;opacity:0;transform:translateY(-.5em) rotateX(70deg);transform-origin:bottom center}
 
 /* --- 2: rolo contínuo --- */
-.v2 .word{height:1.06em}
+.v2 .word{height:1.06em;overflow:hidden}
 .v2 .roll{display:block;transition:transform .62s var(--spring),filter .3s var(--e)}
 .v2 .roll.moving{filter:blur(.05em)}
 .v2 .roll i{height:1.06em;line-height:1.06em}
 
 /* --- 3: máscara limpa --- */
-.v3 .word{height:1.08em}
+.v3 .word{height:1.08em;overflow:hidden}
 .v3 .word i{position:absolute;left:0;right:0;top:0;opacity:0;filter:blur(.05em);transform:translateY(.85em);
   transition:opacity .3s var(--e),transform .55s var(--e)}
 .v3 .word i.on{position:relative;opacity:1;transform:none;filter:none}
@@ -131,14 +134,14 @@ footer{padding:3rem var(--pad);border-top:1px solid var(--hair);color:var(--ink-
 
 <header>
   <h2>A hero C, em cinco maneiras de trocar a palavra.</h2>
-  <p>O texto e a cápsula são iguais nas cinco. O que muda é como a palavra sai e como a seguinte entra, e como a cápsula se ajusta ao novo comprimento. Deixa a página aberta, os ciclos repetem sozinhos de dois em dois segundos.</p>
+  <p>A cápsula tem largura fixa, medida pela palavra mais comprida, por isso a frase nunca muda de linha nem salta. O que muda nas cinco é a forma como a palavra sai e como a seguinte entra. São sete palavras, trocam de segundo e meio em segundo e meio, e cada uma tem o seu texto quando passas o rato por cima.</p>
 </header>
 
 <div class="lab"><div class="n">Variação 1</div><h3>Painel de aeroporto</h3>
   <p>A palavra tomba para cima e a seguinte roda para o lugar, como os painéis mecânicos dos aeroportos antigos. O ícone dá um salto quando muda. É a que tem mais personalidade e a que mais se nota.</p></div>
 <section class="hero v1" data-v="1">
   <div class="clouds"></div>
-  <h1>Um site que traz <span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</h1>
+  <h1><span class="l1">Um site que traz</span><span class="l2"><span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</span></h1>
   <p class="sub">Tudo o que um site devia fazer e o teu provavelmente não faz.</p>
   <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
     <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
@@ -148,7 +151,7 @@ footer{padding:3rem var(--pad);border-top:1px solid var(--hair);color:var(--ink-
   <p>As palavras estão empilhadas numa tira que desliza para cima, como o contador de quilómetros de um carro. Nunca há um corte, é sempre movimento. É a mais suave das cinco e a que cansa menos ao fim de muito tempo aberta.</p></div>
 <section class="hero v2" data-v="2">
   <div class="clouds"></div>
-  <h1>Um site que traz <span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"><span class="roll"></span></span></span> ao teu negócio.</h1>
+  <h1><span class="l1">Um site que traz</span><span class="l2"><span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"><span class="roll"></span></span></span> ao teu negócio.</span></h1>
   <p class="sub">Tudo o que um site devia fazer e o teu provavelmente não faz.</p>
   <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
     <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
@@ -158,7 +161,7 @@ footer{padding:3rem var(--pad);border-top:1px solid var(--hair);color:var(--ink-
   <p>Sem rotações nem 3D. A palavra sobe e desaparece atrás de um corte invisível, a seguinte sobe de baixo. É a mais sóbria e a que combina melhor com o resto do site, que é todo contido.</p></div>
 <section class="hero v3" data-v="3">
   <div class="clouds"></div>
-  <h1>Um site que traz <span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</h1>
+  <h1><span class="l1">Um site que traz</span><span class="l2"><span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</span></h1>
   <p class="sub">Tudo o que um site devia fazer e o teu provavelmente não faz.</p>
   <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
     <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
@@ -168,7 +171,7 @@ footer{padding:3rem var(--pad);border-top:1px solid var(--hair);color:var(--ink-
   <p>As letras passam por caracteres aleatórios e assentam uma a uma na palavra nova, da esquerda para a direita. A cápsula fica preta para o efeito se ler bem. É a mais técnica e a que dá mais ar de produto digital.</p></div>
 <section class="hero v4" data-v="4">
   <div class="clouds"></div>
-  <h1>Um site que traz <span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</h1>
+  <h1><span class="l1">Um site que traz</span><span class="l2"><span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</span></h1>
   <p class="sub">Tudo o que um site devia fazer e o teu provavelmente não faz.</p>
   <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
     <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
@@ -178,7 +181,7 @@ footer{padding:3rem var(--pad);border-top:1px solid var(--hair);color:var(--ink-
   <p>A palavra sai desfocada e a nova entra a focar, enquanto a cápsula enche de preto por um instante e volta ao contorno. Parece a Dynamic Island do iPhone a mudar de conteúdo. É a mais premium.</p></div>
 <section class="hero v5" data-v="5">
   <div class="clouds"></div>
-  <h1>Um site que traz <span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</h1>
+  <h1><span class="l1">Um site que traz</span><span class="l2"><span class="hl"><span class="sheen"></span><span class="bar"></span><svg data-icon></svg><span class="word"></span></span> ao teu negócio.</span></h1>
   <p class="sub">Tudo o que um site devia fazer e o teu provavelmente não faz.</p>
   <div class="btns"><a class="btn btn-p">Quero mais clientes a ligar
     <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a></div>
@@ -289,15 +292,17 @@ document.querySelectorAll('.hero[data-v]').forEach(hero => {
     if (tipOwner === hl) { tipB.textContent = ITEMS[k].t; tipS.textContent = ITEMS[k].d; }
   };
 
-  const widths = () => WORDS.map(w => measure(w, word));
-  let W = widths();
-  addEventListener('resize', () => { W = widths(); word.style.width = W[i] + 'px'; });
+  /* largura fixa: a mais larga das palavras, com uma folga minima */
+  const maxWidth = () => Math.ceil(Math.max(...WORDS.map(w => measure(w, word)))) + 2;
+  const lock = () => word.style.setProperty('--w', maxWidth() + 'px');
+  lock();
+  addEventListener('resize', lock);
+  document.fonts && document.fonts.ready.then(lock);
 
   /* ---- 2: rolo contínuo ---- */
   if (v === '2') {
     const roll = word.querySelector('.roll');
     roll.innerHTML = WORDS.concat(WORDS[0]).map(w => '<i>' + w + '</i>').join('');
-    word.style.width = W[0] + 'px';
     setIcon(svg, 0, false);
     let k = 0;
     setInterval(() => {
@@ -305,7 +310,6 @@ document.querySelectorAll('.hero[data-v]').forEach(hero => {
       roll.style.transition = 'transform .62s var(--spring)';
       roll.style.transform = `translateY(-${k * 1.06}em)`;
       const next = k % WORDS.length;
-      word.style.width = W[next] + 'px';
       setIcon(svg, next, true); beat(hl, roll); sync(next);
       if (k === WORDS.length) {
         setTimeout(() => { roll.style.transition = 'none'; roll.style.transform = 'none'; k = 0; }, 640);
@@ -319,11 +323,9 @@ document.querySelectorAll('.hero[data-v]').forEach(hero => {
     const CH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#%&';
     word.innerHTML = '<i class="on">' + WORDS[0] + '</i>';
     const cell = word.querySelector('i');
-    word.style.width = W[0] + 'px';
     setIcon(svg, 0, false);
     setInterval(() => {
       const from = WORDS[i], to = WORDS[(i = (i + 1) % WORDS.length)];
-      word.style.width = W[i] + 'px';
       setIcon(svg, i, true); beat(hl, word); sync(i);
       const len = Math.max(from.length, to.length);
       let frame = 0;
@@ -347,7 +349,6 @@ document.querySelectorAll('.hero[data-v]').forEach(hero => {
   /* ---- 1, 3, 5: sai um, entra outro ---- */
   word.innerHTML = WORDS.map((w, k) => '<i class="' + (k === 0 ? 'on' : '') + '">' + w + '</i>').join('');
   const cells = [...word.querySelectorAll('i')];
-  word.style.width = W[0] + 'px';
   setIcon(svg, 0, false);
   setInterval(() => {
     const prev = cells[i];
@@ -356,7 +357,6 @@ document.querySelectorAll('.hero[data-v]').forEach(hero => {
     prev.classList.add('out');
     cells[i].classList.remove('out');
     cells[i].classList.add('on');
-    word.style.width = W[i] + 'px';
     setIcon(svg, i, true); beat(hl, word); sync(i);
     if (v === '5') { hl.classList.add('pulse'); setTimeout(() => hl.classList.remove('pulse'), 520); }
     setTimeout(() => prev.classList.remove('out'), 620);
