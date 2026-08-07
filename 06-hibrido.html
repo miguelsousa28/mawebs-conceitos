@@ -22,6 +22,8 @@
   --soft:0 36px 90px -46px rgba(10,11,12,.28), 0 8px 26px -18px rgba(10,11,12,.09);
   --lift:0 60px 120px -50px rgba(10,11,12,.38);
   --e:cubic-bezier(.22,.61,.20,1);
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --ease-in-out:cubic-bezier(.77,0,.175,1);
   --spring:cubic-bezier(.34,1.24,.38,1);
   --slow:1.4s;
   --pad:clamp(1.25rem,5vw,5rem);
@@ -116,20 +118,80 @@ img{display:block;max-width:100%}
   justify-content:center;text-align:center;padding:clamp(8rem,18vh,11rem) var(--pad) clamp(3rem,7vh,5rem)}
 /* as capsulas ocupam mais altura que o texto normal, por isso a linha tem de abrir */
 .hero h1{font-size:clamp(2.4rem,6.4vw,6rem);max-width:17ch;line-height:1.34}
-/* variacao E: capsula de contorno, enche a preto ao passar o rato */
-.hl{display:inline-flex;align-items:center;gap:.24em;border:.055em solid var(--ink);color:var(--ink);
-  border-radius:999px;padding:.04em .4em .08em .3em;line-height:1;white-space:nowrap;cursor:pointer;
-  margin:.09em .02em;
-  opacity:0;transform:translateY(.08em) scale(.94);
-  transition:opacity .8s var(--e),transform 1s var(--spring),
-             background .55s var(--e),color .55s var(--e),border-color .55s var(--e)}
-h1.in .hl{opacity:1;transform:translateY(.02em) scale(1)}
-h1.in .hl:nth-of-type(1){transition-delay:.42s,.42s,0s,0s,0s}
-h1.in .hl:nth-of-type(2){transition-delay:.58s,.58s,0s,0s,0s}
-h1.in .hl:nth-of-type(3){transition-delay:.74s,.74s,0s,0s,0s}
-.hl:hover{background:var(--ink);color:#fff}
-.hl svg{width:.6em;height:.6em;flex:none;stroke:currentColor;stroke-width:1.8;fill:none;
+
+/* ===== cápsula rotativa da hero ===== */
+h1 .l1,h1 .l2{display:block}
+h1 .l2{margin-top:.1em}
+.cap{display:inline-flex;align-items:center;gap:.3em;position:relative;vertical-align:baseline;
+  padding:.14em .58em .18em .42em;border-radius:999px;line-height:1;white-space:nowrap;cursor:pointer;
+  overflow:hidden;background:var(--ink);color:#fff;border:.05em solid var(--ink);
+  box-shadow:inset 0 .02em 0 rgba(255,255,255,.18), 0 .12em .28em -.14em rgba(10,11,12,.5);
+  transition:transform 240ms var(--ease-out),box-shadow 240ms var(--ease-out)}
+.cap.beat{transform:scale(1.024);
+  box-shadow:inset 0 .02em 0 rgba(255,255,255,.26), 0 .22em .5em -.18em rgba(10,11,12,.62)}
+.cap:active{transform:scale(.985)}
+.cap .sheen{position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);
+  background-size:260% 100%}
+.cap.beat .sheen{animation:sheen 560ms var(--ease-out)}
+@keyframes sheen{0%{opacity:1;background-position:170% 0}100%{opacity:0;background-position:-70% 0}}
+.ico{width:.72em;height:.72em;flex:none;display:grid;place-items:center}
+.ico svg{width:100%;height:100%;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round}
+.capw{display:inline-block;position:relative;box-sizing:content-box;overflow:hidden;
+  height:1.34em;padding-inline:.14em;margin-inline:-.14em;text-align:center;
+  transition:width 420ms var(--ease-out)}
+.capw i{font-style:normal;position:absolute;left:.14em;right:.14em;top:50%;margin-top:-.67em;
+  height:1.34em;line-height:1.34em;white-space:nowrap;text-align:center;
+  opacity:0;transform:translateY(.5em) scale(.96);
+  transition:opacity 200ms var(--ease-out),transform 320ms var(--ease-out)}
+.capw i.on{opacity:1;transform:none}
+.capw i.out{opacity:0;transform:translateY(-.42em) scale(1.02)}
+
+/* gestos dos ícones */
+.ico[data-a="ring"] .hs{transform-origin:30% 78%;animation:ring 1.35s var(--ease-out) .18s 2}
+@keyframes ring{0%{transform:rotate(0)}8%{transform:rotate(-5deg)}
+  18%{transform:rotate(16deg) translateY(-.04em)}27%{transform:rotate(-12deg)}
+  36%{transform:rotate(8deg)}45%{transform:rotate(-5deg)}54%{transform:rotate(2deg)}
+  62%,100%{transform:rotate(0)}}
+.ico[data-a="ring"] .wv{stroke-dasharray:14;stroke-dashoffset:14;opacity:0;
+  animation:wave 1.35s var(--ease-out) .18s 2}
+.ico[data-a="ring"] .wv.w2{animation-delay:.3s}
+@keyframes wave{0%,10%{stroke-dashoffset:14;opacity:0}22%{opacity:1}
+  44%{stroke-dashoffset:0;opacity:1}66%,100%{stroke-dashoffset:0;opacity:0}}
+.ico[data-a="tick"] .box{transform-origin:50% 60%;animation:boxpop .5s var(--ease-out) .1s 1}
+@keyframes boxpop{0%{transform:scale(1)}40%{transform:scale(1.07)}100%{transform:scale(1)}}
+.ico[data-a="tick"] .mark{stroke-dasharray:13;stroke-dashoffset:13;
+  animation:drawline .45s var(--ease-out) .34s forwards}
+@keyframes drawline{to{stroke-dashoffset:0}}
+.ico[data-a="flip"] svg{animation:flip 1.15s var(--ease-in-out) .2s 1;transform-origin:50% 50%}
+@keyframes flip{0%{transform:perspective(160px) rotateY(0) scaleX(1)}
+  25%{transform:perspective(160px) rotateY(90deg) scaleX(.82)}
+  50%{transform:perspective(160px) rotateY(180deg) scaleX(1)}
+  75%{transform:perspective(160px) rotateY(270deg) scaleX(.82)}
+  100%{transform:perspective(160px) rotateY(360deg) scaleX(1)}}
+.ico[data-a="twinkle"] .st{transform-origin:50% 55%;animation:starpop .7s var(--ease-out) .12s 1}
+@keyframes starpop{0%{transform:scale(.86) rotate(-16deg)}
+  55%{transform:scale(1.14) rotate(6deg)}100%{transform:scale(1) rotate(0)}}
+.ico[data-a="twinkle"] .sp{stroke-dasharray:6;stroke-dashoffset:6;opacity:0;
+  animation:spark .8s var(--ease-out) .42s 1}
+@keyframes spark{0%{stroke-dashoffset:6;opacity:0}35%{opacity:1}
+  70%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.ico[data-a="slide"] .b{opacity:0;transform:translateX(-.22em) scale(.9);transform-origin:20% 50%;
+  animation:joinin .62s var(--ease-out) .26s forwards}
+@keyframes joinin{60%{opacity:1;transform:translateX(.03em) scale(1.04)}100%{opacity:1;transform:none}}
+.ico[data-a="lines"] .sheet{transform-origin:50% 100%;animation:lift .55s var(--ease-out) .1s 1}
+@keyframes lift{0%{transform:rotate(0)}45%{transform:rotate(-3.5deg)}100%{transform:rotate(0)}}
+.ico[data-a="lines"] .ln{stroke-dasharray:9;stroke-dashoffset:9;animation:drawline .4s var(--ease-out) forwards}
+.ico[data-a="lines"] .ln.l1{animation-delay:.34s}
+.ico[data-a="lines"] .ln.l2{animation-delay:.5s}
+.ico[data-a="pulse"] .bub{transform-origin:30% 80%;animation:bubpop .6s var(--ease-out) .12s 1}
+@keyframes bubpop{0%{transform:scale(.9)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+.ico[data-a="pulse"] .dot{opacity:0;animation:dotin .34s var(--ease-out) forwards}
+.ico[data-a="pulse"] .dot.d1{animation-delay:.34s}
+.ico[data-a="pulse"] .dot.d2{animation-delay:.46s}
+.ico[data-a="pulse"] .dot.d3{animation-delay:.58s}
+@keyframes dotin{0%{opacity:0;transform:translateY(.06em)}100%{opacity:1;transform:none}}
 
 /* ===== cursor da marca: seta com etiqueta, só sobre elementos marcados ===== */
 @media(pointer:fine){
@@ -617,16 +679,9 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 </header>
 
 <section class="hero">
-  <h1 data-anim>Um site que traz
-    <span class="hl" data-tip="O telefone a tocar"
-      data-tip-d="E não é a tua mãe. É gente que te encontrou no Google e carregou no botão de ligar.">
-      <svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg>telefonemas</span>,
-    <span class="hl" data-tip="Agenda cheia sozinha"
-      data-tip-d="Marcações a entrar enquanto dormes. Tu só apareces e fazes o teu trabalho.">
-      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4M8 15h4"/></svg>reservas</span> e
-    <span class="hl" data-tip="Dinheiro no teu bolso"
-      data-tip-d="No fim é isto que interessa. O resto é conversa bonita para encher chouriços.">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg>dinheiro</span>.
+  <h1 data-anim>
+    <span class="l1">Um site que traz</span>
+    <span class="l2"><span class="cap" id="capHero" data-tip="" data-tip-d=""><span class="sheen"></span><span class="ico"></span><span class="capw"></span></span></span>
   </h1>
   <p data-anim data-d="1">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar. Feito à mão por duas pessoas, mantido por nós.</p>
   <div class="btns" data-anim data-d="2">
@@ -940,6 +995,31 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 </div>
 
 <script>
+const CAP_ITEMS = [
+  { w:'telefonemas', t:'O telefone a tocar', a:'ring',
+    d:'E não é a tua mãe. É gente que te encontrou no Google e carregou no botão de ligar.',
+    svg:'<g class="hs"><path d="M6.2 3.4H3.6A1.4 1.4 0 0 0 2.2 4.9c0 7.9 8.4 16.3 16.3 16.3a1.4 1.4 0 0 0 1.5-1.4v-2.6a1.1 1.1 0 0 0-.9-1.1l-3-.7a1.1 1.1 0 0 0-1.1.3l-1 1.2a13 13 0 0 1-5.3-5.3l1.2-1a1.1 1.1 0 0 0 .3-1.1l-.7-3a1.1 1.1 0 0 0-1.1-.9Z"/></g><path class="wv w1" d="M14.4 3.1a7.4 7.4 0 0 1 5.9 5.9"/><path class="wv w2" d="M14 6.9a3.6 3.6 0 0 1 2.6 2.6"/>' },
+  { w:'reservas', t:'Agenda cheia sozinha', a:'tick',
+    d:'Marcações a entrar enquanto dormes. Tu só apareces e fazes o teu trabalho.',
+    svg:'<g class="box"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></g><path class="mark" d="m8.4 15.3 2.3 2.3 4.9-4.9"/>' },
+  { w:'dinheiro', t:'Dinheiro no teu bolso', a:'flip',
+    d:'No fim é isto que interessa. O resto é conversa bonita para encher chouriços.',
+    svg:'<circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/>' },
+  { w:'avaliações', t:'Cinco estrelas no Google', a:'twinkle',
+    d:'Sem teres de pedir a ninguém. Uma placa no balcão e o cliente faz sozinho.',
+    svg:'<path class="st" d="m12 3.6 2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8z"/><path class="sp" d="M19.6 3.4 21.4 5M20.6 8.2h1.6"/>' },
+  { w:'clientes novos', t:'Gente que nunca te viu', a:'slide',
+    d:'Quem passava à porta sem entrar. Agora encontra te antes de sair de casa.',
+    svg:'<path class="a" d="M15.4 20v-1.6a3.4 3.4 0 0 0-3.4-3.4H6.2a3.4 3.4 0 0 0-3.4 3.4V20M9.1 11.4a3.7 3.7 0 1 0 0-7.4 3.7 3.7 0 0 0 0 7.4"/><path class="b" d="M21.2 20v-1.6a3.4 3.4 0 0 0-2.6-3.3M15.6 4.1a3.4 3.4 0 0 1 0 6.6"/>' },
+  { w:'orçamentos', t:'Pedidos já explicados', a:'lines',
+    d:'Chegam com o trabalho descrito, para não perderes meia hora ao telefone.',
+    svg:'<g class="sheet"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5zM14 2.5v5h5"/></g><path class="ln l1" d="M8.6 13.2h6.2"/><path class="ln l2" d="M8.6 17h4.2"/>' },
+  { w:'mensagens', t:'WhatsApp a apitar', a:'pulse',
+    d:'Com quem quer marcar, não com quem te quer vender seguros.',
+    svg:'<path class="bub" d="M20.5 11.6a8 8 0 0 1-11.9 7L3.5 20l1.4-5a8 8 0 1 1 15.6-3.4"/><circle class="dot d1" cx="8.6" cy="11.6" r=".95" fill="currentColor" stroke="none"/><circle class="dot d2" cx="12" cy="11.6" r=".95" fill="currentColor" stroke="none"/><circle class="dot d3" cx="15.4" cy="11.6" r=".95" fill="currentColor" stroke="none"/>' }
+];
+const CAP_HOLD = 2600;
+
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine=matchMedia('(pointer: fine)').matches;
 
@@ -1198,6 +1278,11 @@ if(fine&&!reduce){
       tip.classList.add('on');
     });
     el.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+    el.addEventListener('tipchange',()=>{
+      if(!tip.classList.contains('on'))return;
+      tipH.textContent=el.dataset.tip;
+      tipD.textContent=el.dataset.tipD||'';
+    });
   });
   let last=performance.now();
   (function loop(now){
@@ -1227,6 +1312,55 @@ if(fine&&!reduce){
       +` skew(${mapRange(tx.v,-1000,1000,-3,3).toFixed(2)}deg,${mapRange(ty.v,-1000,1000,-3,3).toFixed(2)}deg)`;
   })(last);
 }
+
+
+/* ===== cápsula rotativa da hero ===== */
+(function(){
+  const cap = document.getElementById('capHero');
+  if (!cap) return;
+  const ico = cap.querySelector('.ico'), slot = cap.querySelector('.capw');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function measure(word){
+    const g = document.createElement('span'), cs = getComputedStyle(slot);
+    g.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font:' + cs.font +
+      ';letter-spacing:' + cs.letterSpacing;
+    g.textContent = word; document.body.appendChild(g);
+    const w = Math.ceil(g.getBoundingClientRect().width) + 2; g.remove(); return w;
+  }
+  slot.innerHTML = CAP_ITEMS.map((o,k)=>'<i class="'+(k===0?'on':'')+'">'+o.w+'</i>').join('');
+  const cells = [...slot.querySelectorAll('i')];
+  let W = CAP_ITEMS.map(o=>measure(o.w)), i = 0;
+  const fit = k => slot.style.width = W[k] + 'px';
+  function paint(k, animate){
+    ico.innerHTML = '<svg viewBox="0 0 24 24">' + CAP_ITEMS[k].svg + '</svg>';
+    ico.removeAttribute('data-a');
+    if (animate) requestAnimationFrame(()=>ico.setAttribute('data-a', CAP_ITEMS[k].a));
+    else ico.setAttribute('data-a', CAP_ITEMS[k].a);
+  }
+  fit(0); paint(0, true);
+  addEventListener('resize', ()=>{ W = CAP_ITEMS.map(o=>measure(o.w)); fit(i); });
+  if (document.fonts) document.fonts.ready.then(()=>{ W = CAP_ITEMS.map(o=>measure(o.w)); fit(i); });
+
+  /* liga ao tooltip flutuante que ja existe no site */
+  cap.dataset.tip = CAP_ITEMS[0].t;
+  cap.dataset.tipD = CAP_ITEMS[0].d;
+
+  if (reduce) return;
+  setInterval(()=>{
+    const prev = cells[i];
+    i = (i + 1) % CAP_ITEMS.length;
+    prev.classList.remove('on'); prev.classList.add('out');
+    cells[i].classList.remove('out'); cells[i].classList.add('on');
+    fit(i); paint(i, true);
+    cap.dataset.tip = CAP_ITEMS[i].t;
+    cap.dataset.tipD = CAP_ITEMS[i].d;
+    cap.dispatchEvent(new CustomEvent('tipchange'));
+    cap.classList.remove('beat'); void cap.offsetWidth; cap.classList.add('beat');
+    setTimeout(()=>cap.classList.remove('beat'), 320);
+    setTimeout(()=>prev.classList.remove('out'), 400);
+  }, CAP_HOLD);
+})();
 
 /* cookies */
 (function(){
