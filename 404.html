@@ -45,7 +45,7 @@ main{position:relative;z-index:4;flex:1;display:grid;place-items:center;
   display:inline-flex;align-items:center;gap:.02em}
 .code .o{position:relative;display:inline-grid;place-items:center;width:.78em;height:.78em}
 .code .o::before{content:'';position:absolute;inset:0;border-radius:50%;border:.085em solid var(--ink)}
-.code .o img{width:38%;position:relative;animation:spin 9s var(--e) infinite}
+.code .o img{width:38%;position:relative;mix-blend-mode:multiply;animation:spin 9s var(--e) infinite}
 @keyframes spin{0%,72%,100%{transform:rotate(0)}80%{transform:rotate(-9deg)}88%{transform:rotate(9deg)}}
 h1{font-size:clamp(1.5rem,4vw,2.4rem);margin-top:1.4rem}
 main p{color:var(--ink-2);margin-top:1rem;max-width:44ch;margin-inline:auto}
