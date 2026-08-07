@@ -14,7 +14,7 @@ com um gradiente monocromático (`#0A0B0C → #83888D`) dentro das palavras onde
 - **Animação dos anéis do NFC:** removida
 - **Hero das placas NFC:** uma frase, uma linha de apoio, dois botões. Cortei dois terços do texto
 - **Preços novos:** 30€ à unidade com mais 5€ pela personalização, 120€ o pack de 5, 200€ o pack de 10
-- **Falamos 15 minutos:** copy nova, três razões concretas, e o CTA passou a ser o teu número **962 303 550** em destaque mais WhatsApp com mensagem escrita
+- **Falamos 15 minutos:** copy nova, três razões concretas, e o CTA passou a ser o teu número **931 382 219** em destaque mais WhatsApp com mensagem escrita
 - **Fundadores:** secção nova com Miguel e Afonso. Faltam as fotos
 - **Dynamic Island:** fundo branco sólido, sublinhado a saltar nos links
 - **Removidos:** "duas vagas para Agosto" e a faixa de números (30+, 48h, 0, 2)

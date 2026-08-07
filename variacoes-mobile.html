@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MA Webs / 5 experiências mobile</title>
+<link rel="icon" href="img/favicon-128.png">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F3;--card:#fff;--ink:#0A0B0C;--ink-2:rgba(10,11,12,.64);--ink-dim:rgba(10,11,12,.46);
+  --hair:rgba(10,11,12,.09);--soft:0 30px 70px -40px rgba(10,11,12,.3);--lift:0 60px 120px -50px rgba(10,11,12,.4);
+  --e:cubic-bezier(.22,.61,.20,1);--spring:cubic-bezier(.34,1.24,.38,1);--pad:clamp(1.25rem,5vw,4rem)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Geist','Plus Jakarta Sans',-apple-system,sans-serif;
+  font-weight:400;line-height:1.62;letter-spacing:-.011em;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-weight:500;letter-spacing:-.045em;line-height:1.06}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.top{position:sticky;top:0;z-index:40;background:rgba(246,245,243,.93);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--hair);padding:.9rem var(--pad);display:flex;align-items:center;gap:1.2rem}
+.top img{height:16px;mix-blend-mode:multiply}
+.top span{font-size:.85rem;color:var(--ink-2)}
+.top a{margin-left:auto;background:var(--ink);color:#fff;border-radius:999px;padding:.5rem 1.05rem;font-size:.84rem}
+header{padding:clamp(3rem,8vh,5rem) var(--pad) 1rem;max-width:1400px;margin:0 auto}
+header h2{font-size:clamp(1.7rem,4vw,2.8rem);max-width:22ch}
+header p{color:var(--ink-2);max-width:66ch;margin-top:1rem}
+
+.rail{display:flex;gap:clamp(1.5rem,3vw,3rem);overflow-x:auto;padding:2.5rem var(--pad) 4rem;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{height:6px}
+.rail::-webkit-scrollbar-thumb{background:rgba(10,11,12,.18);border-radius:99px}
+.col{flex:0 0 clamp(300px,26vw,352px);scroll-snap-align:center}
+.col .meta{margin-bottom:1.1rem}
+.col .n{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.col h3{font-size:1.15rem;margin:.35rem 0 .5rem}
+.col .meta p{color:var(--ink-2);font-size:.87rem}
+
+/* moldura de telemovel */
+.phone{width:100%;aspect-ratio:9/19.5;border-radius:2.6rem;padding:.5rem;background:linear-gradient(160deg,#2C3136,#111417);
+  box-shadow:var(--lift);position:relative}
+.phone::after{content:'';position:absolute;top:.95rem;left:50%;transform:translateX(-50%);
+  width:32%;height:20px;background:#0C0E10;border-radius:99px;z-index:9}
+.screen{position:relative;width:100%;height:100%;border-radius:2.2rem;overflow:hidden;background:var(--bg);
+  overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.screen::-webkit-scrollbar{display:none}
+
+/* peças comuns dentro do ecrã */
+.s-nav{position:sticky;top:0;z-index:8;display:flex;justify-content:center;padding:.6rem;pointer-events:none}
+.s-cap{pointer-events:auto;display:flex;align-items:center;gap:.55rem;background:#fff;border:1px solid var(--hair);
+  border-radius:999px;padding:.35rem .35rem .35rem .7rem;box-shadow:0 12px 26px -18px rgba(10,11,12,.5);
+  max-width:calc(100% - 1rem)}
+.s-cap img{height:15px;mix-blend-mode:multiply}
+.s-cap b{margin-left:auto;background:var(--ink);color:#fff;border-radius:999px;padding:.34rem .7rem;
+  font-size:.66rem;font-weight:500;white-space:nowrap}
+.s-hero{padding:2.4rem 1.1rem 1.6rem;text-align:center;position:relative}
+.s-hero h4{font-size:1.5rem;letter-spacing:-.05em;line-height:1.28}
+.hl{display:inline-flex;align-items:center;gap:.2em;border:.06em solid var(--ink);border-radius:999px;
+  padding:.03em .32em .06em .24em;margin:.08em 0;line-height:1;white-space:nowrap}
+.hl svg{width:.6em;height:.6em;flex:none}
+.s-hero p{color:var(--ink-2);font-size:.8rem;margin-top:.8rem}
+.s-btn{display:flex;align-items:center;justify-content:space-between;gap:.6rem;background:var(--ink);color:#fff;
+  border-radius:999px;padding:.7rem .7rem .7rem 1.05rem;font-size:.8rem;font-weight:500;margin-top:1.1rem}
+.s-btn i{width:24px;height:24px;border-radius:999px;background:rgba(255,255,255,.18);display:grid;place-items:center;
+  font-style:normal;font-size:.7rem}
+.s-btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--hair)}
+.s-btn.ghost i{background:rgba(10,11,12,.06)}
+.s-sec{padding:1.6rem 1.1rem}
+.s-sec .lab{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
+.s-sec h5{font-size:1.15rem;letter-spacing:-.04em;margin:.4rem 0 .7rem}
+.s-sec p{color:var(--ink-2);font-size:.8rem}
+.s-card{background:#fff;border:1px solid var(--hair);border-radius:1.1rem;padding:1rem;box-shadow:var(--soft);
+  margin-bottom:.7rem}
+.s-card h6{font-size:.95rem;letter-spacing:-.03em}
+.s-card p{color:var(--ink-2);font-size:.76rem;margin-top:.3rem}
+.s-shot{border-radius:1rem;overflow:hidden;border:1px solid var(--hair);background:#EDEBE7;aspect-ratio:16/11;
+  background-size:cover;background-position:top center}
+.clouds{position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(60% 46% at 24% 16%,rgba(10,11,12,.12),transparent 62%),
+             radial-gradient(52% 44% at 82% 70%,rgba(10,11,12,.08),transparent 66%)}
+
+/* ---------- A: barra de ação fixa em baixo ---------- */
+.a-bar{position:sticky;bottom:0;z-index:9;margin-top:auto;padding:.6rem;
+  background:linear-gradient(transparent,rgba(246,245,243,.95) 38%)}
+.a-bar .in{display:flex;gap:.45rem;align-items:center;background:#fff;border:1px solid var(--hair);
+  border-radius:999px;padding:.35rem .35rem .35rem .9rem;box-shadow:0 16px 34px -20px rgba(10,11,12,.55)}
+.a-bar .in span{font-size:.72rem;color:var(--ink-2);line-height:1.2}
+.a-bar .in b{margin-left:auto;background:var(--ink);color:#fff;border-radius:999px;padding:.5rem .85rem;
+  font-size:.72rem;font-weight:500;white-space:nowrap}
+
+/* ---------- B: cartões que encaixam a cada scroll ---------- */
+.b-snap{scroll-snap-type:y mandatory}
+.b-panel{scroll-snap-align:start;min-height:100%;display:flex;flex-direction:column;justify-content:center;
+  padding:2rem 1.1rem;position:relative}
+.b-panel .big{font-size:2.6rem;font-weight:500;letter-spacing:-.06em;line-height:.95}
+.b-panel .num{position:absolute;top:1.2rem;right:1.2rem;font-size:.7rem;color:var(--ink-dim)}
+.b-panel.dark{background:var(--ink);color:#fff}
+.b-panel.dark p{color:rgba(255,255,255,.66)}
+
+/* ---------- C: galeria em snap horizontal ---------- */
+.c-gal{display:flex;gap:.6rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 1.1rem 1rem;
+  scrollbar-width:none}
+.c-gal::-webkit-scrollbar{display:none}
+.c-gal .it{flex:0 0 78%;scroll-snap-align:center;border-radius:1rem;overflow:hidden;border:1px solid var(--hair);
+  background:#fff;box-shadow:var(--soft)}
+.c-gal .it .im{aspect-ratio:16/11;background-size:cover;background-position:top center}
+.c-gal .it .cp{padding:.7rem .85rem .9rem}
+.c-gal .it h6{font-size:.9rem}
+.c-gal .it small{color:var(--ink-dim);font-size:.7rem}
+.c-dots{display:flex;gap:.3rem;justify-content:center;padding-bottom:1.2rem}
+.c-dots i{width:5px;height:5px;border-radius:99px;background:rgba(10,11,12,.18);transition:width .5s var(--e),background .5s var(--e)}
+.c-dots i.on{width:16px;background:var(--ink)}
+
+/* ---------- D: menu em folha que sobe ---------- */
+.d-fab{position:sticky;bottom:0;z-index:12;display:flex;justify-content:center;padding:.7rem;
+  background:linear-gradient(transparent,rgba(246,245,243,.95) 40%)}
+.d-fab button{font:inherit;border:0;cursor:pointer;background:var(--ink);color:#fff;border-radius:999px;
+  padding:.7rem 1.3rem;font-size:.78rem;font-weight:500;display:flex;align-items:center;gap:.5rem;
+  box-shadow:0 18px 34px -18px rgba(10,11,12,.7)}
+.d-sheet{position:absolute;inset:auto 0 0 0;z-index:14;background:#fff;border-radius:1.5rem 1.5rem 0 0;
+  padding:.7rem 1.1rem 1.2rem;box-shadow:0 -20px 50px -30px rgba(10,11,12,.5);
+  transform:translateY(101%);transition:transform .7s var(--spring)}
+.d-sheet.open{transform:none}
+.d-sheet .grip{width:38px;height:4px;border-radius:99px;background:rgba(10,11,12,.16);margin:0 auto .9rem}
+.d-sheet a{display:flex;justify-content:space-between;align-items:center;padding:.7rem 0;
+  border-bottom:1px solid var(--hair);font-size:.9rem}
+.d-sheet a:last-of-type{border-bottom:0}
+.d-veil{position:absolute;inset:0;z-index:13;background:rgba(10,11,12,.4);backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;transition:opacity .6s var(--e)}
+.d-veil.on{opacity:1;pointer-events:auto}
+
+/* ---------- E: hero em ecrã cheio com revelação ---------- */
+.e-hero{position:relative;min-height:100%;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.2rem 1.1rem 1.6rem;color:#fff;overflow:hidden}
+.e-hero .bg{position:absolute;inset:0;background:linear-gradient(160deg,#1A1D20,#08090A)}
+.e-hero .bg::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(55% 42% at 70% 26%,rgba(255,255,255,.13),transparent 66%)}
+.e-hero .ct{position:relative;z-index:2}
+.e-hero h4{font-size:1.9rem;letter-spacing:-.05em;line-height:1.18;color:#fff}
+.e-hero .hl{border-color:#fff;color:#fff}
+.e-hero p{color:rgba(255,255,255,.7);font-size:.8rem;margin-top:.7rem}
+.e-hero .s-btn{background:#fff;color:var(--ink)}
+.e-hero .s-btn i{background:rgba(10,11,12,.08)}
+.e-scroll{position:relative;z-index:2;display:flex;align-items:center;gap:.4rem;justify-content:center;
+  color:rgba(255,255,255,.5);font-size:.66rem;margin-top:1.1rem}
+.e-scroll b{width:1px;height:18px;background:rgba(255,255,255,.35);animation:drop 2s var(--e) infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}
+  55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+.note{max-width:1400px;margin:0 auto;padding:0 var(--pad) 5rem}
+.note .box{background:#fff;border:1px solid var(--hair);border-radius:1.4rem;padding:1.6rem 1.8rem;box-shadow:var(--soft)}
+.note h3{font-size:1.15rem;margin-bottom:.7rem}
+.note ul{margin-left:1.1rem;color:var(--ink-2);font-size:.92rem}
+.note li{margin-bottom:.35rem}
+footer{padding:2.5rem var(--pad);border-top:1px solid var(--hair);color:var(--ink-dim);font-size:.85rem;
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;max-width:1400px;margin:0 auto}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top"><img src="img/logo-lockup-2x.png" alt="MA Webs"><span>Cinco experiências mobile</span>
+  <a href="06-hibrido.html">Voltar ao site</a></div>
+
+<header>
+  <h2>Cinco formas de o site funcionar no telemóvel.</h2>
+  <p>Cada telemóvel aqui em baixo é interativo, faz scroll lá dentro como se fosse a sério. O que muda é a forma de navegar e o efeito principal, porque no telemóvel não há rato nem hover, e o polegar só chega à parte de baixo do ecrã.</p>
+</header>
+
+<div class="rail">
+
+  <!-- A -->
+  <div class="col">
+    <div class="meta"><div class="n">Mobile A</div><h3>Barra de ação sempre à mão</h3>
+      <p>O site normal, mas com uma barra fina colada em baixo que nunca desaparece. O polegar chega sempre ao botão sem ter de voltar ao topo. É a que mais contactos gera.</p></div>
+    <div class="phone"><div class="screen" style="display:flex;flex-direction:column">
+      <div class="s-nav"><div class="s-cap"><img src="img/logo-mono-2x.png" alt=""><b>Marcar</b></div></div>
+      <div class="s-hero"><div class="clouds"></div>
+        <h4>Um site que traz
+          <span class="hl"><svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg>telefonemas</span>,
+          <span class="hl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>reservas</span> e
+          <span class="hl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg>dinheiro</span>.
+        </h4>
+        <p>Feito à mão por duas pessoas, mantido por nós.</p>
+      </div>
+      <div class="s-sec"><div class="lab">Trabalho</div><h5>Sites reais, no ar.</h5>
+        <div class="s-shot" style="background-image:url('img/sites/mr-burger-topo.jpg')"></div></div>
+      <div class="s-sec" style="padding-top:0"><div class="s-card"><h6>Website</h6><p>Institucional, landing ou menu digital.</p></div>
+        <div class="s-card"><h6>Placas NFC</h6><p>Avaliações no Google todos os dias.</p></div>
+        <div class="s-card"><h6>Conteúdo</h6><p>Fotografia e vídeo do teu espaço.</p></div></div>
+      <div class="a-bar"><div class="in"><span>15 min por Zoom<br>sem compromisso</span><b>Marcar</b></div></div>
+    </div></div>
+  </div>
+
+  <!-- B -->
+  <div class="col">
+    <div class="meta"><div class="n">Mobile B</div><h3>Ecrãs que encaixam</h3>
+      <p>Cada secção ocupa o ecrã todo e encaixa sozinha quando paras de deslizar, como nos stories. Alterna claro e escuro. É a mais impressionante e a que se percorre mais depressa.</p></div>
+    <div class="phone"><div class="screen b-snap">
+      <div class="s-nav"><div class="s-cap"><img src="img/logo-mono-2x.png" alt=""><b>Marcar</b></div></div>
+      <div class="b-panel"><span class="num">01</span><div class="clouds"></div>
+        <div class="big">Telefonemas.<br>Reservas.<br>Dinheiro.</div>
+        <p style="color:var(--ink-2);font-size:.84rem;margin-top:1rem">É para isto que serve um site. O resto é decoração.</p>
+        <a class="s-btn">Quero mais clientes <i>&#8599;</i></a></div>
+      <div class="b-panel dark"><span class="num" style="color:rgba(255,255,255,.4)">02</span>
+        <div class="big">Uma placa.<br>Avaliações<br>todos os dias.</div>
+        <p style="font-size:.84rem;margin-top:1rem">O cliente encosta o telemóvel enquanto paga.</p>
+        <a class="s-btn" style="background:#fff;color:var(--ink)">Ver as placas <i style="background:rgba(10,11,12,.08)">&#8599;</i></a></div>
+      <div class="b-panel"><span class="num">03</span>
+        <div class="big">Sites<br>reais,<br>no ar.</div>
+        <div class="s-shot" style="margin-top:1rem;background-image:url('img/sites/gama-topo.jpg')"></div></div>
+      <div class="b-panel dark"><span class="num" style="color:rgba(255,255,255,.4)">04</span>
+        <div class="big">Falamos<br>15 minutos?</div>
+        <p style="font-size:.84rem;margin-top:1rem">Por Zoom. Escolhes a hora no calendário.</p>
+        <a class="s-btn" style="background:#fff;color:var(--ink)">Escolher horário <i style="background:rgba(10,11,12,.08)">&#8599;</i></a></div>
+    </div></div>
+  </div>
+
+  <!-- C -->
+  <div class="col">
+    <div class="meta"><div class="n">Mobile C</div><h3>Galeria que desliza de lado</h3>
+      <p>O trabalho passa a um carrossel que encaixa em cada projeto, com pontinhos por baixo. É o gesto que toda a gente já conhece do Instagram, e mostra muitos projetos sem alongar a página.</p></div>
+    <div class="phone"><div class="screen">
+      <div class="s-nav"><div class="s-cap"><img src="img/logo-mono-2x.png" alt=""><b>Marcar</b></div></div>
+      <div class="s-hero"><div class="clouds"></div>
+        <h4>Sites reais,<br>no ar, feitos<br>por nós.</h4>
+        <p>Desliza para o lado para os veres todos.</p></div>
+      <div class="c-gal" id="cgal">
+        <div class="it"><div class="im" style="background-image:url('img/sites/mr-burger-topo.jpg')"></div>
+          <div class="cp"><h6>Mr. Burger</h6><small>Site e menu</small></div></div>
+        <div class="it"><div class="im" style="background-image:url('img/sites/gama-topo.jpg')"></div>
+          <div class="cp"><h6>O Gama</h6><small>Barbearia</small></div></div>
+        <div class="it"><div class="im" style="background-image:url('img/sites/zenith-topo.jpg')"></div>
+          <div class="cp"><h6>Zenith</h6><small>Estética</small></div></div>
+        <div class="it"><div class="im" style="background-image:url('img/sites/casadarocha-topo.jpg')"></div>
+          <div class="cp"><h6>Casa da Rocha</h6><small>Construção</small></div></div>
+      </div>
+      <div class="c-dots" id="cdots"><i class="on"></i><i></i><i></i><i></i></div>
+      <div class="s-sec" style="padding-top:0"><a class="s-btn">Ver portfólio completo <i>&#8599;</i></a></div>
+    </div></div>
+  </div>
+
+  <!-- D -->
+  <div class="col">
+    <div class="meta"><div class="n">Mobile D</div><h3>Menu em folha que sobe</h3>
+      <p>Sem hamburguer no canto. Um botão no fundo, ao alcance do polegar, que abre uma folha com tudo: secções, WhatsApp e marcação. É a mais confortável de usar com uma mão.</p></div>
+    <div class="phone"><div class="screen" id="dscreen" style="display:flex;flex-direction:column">
+      <div class="s-nav"><div class="s-cap"><img src="img/logo-mono-2x.png" alt=""><b>Marcar</b></div></div>
+      <div class="s-hero"><div class="clouds"></div>
+        <h4>Um site que traz o que interessa.</h4>
+        <p>Telefonemas, reservas e dinheiro.</p>
+        <a class="s-btn">Quero mais clientes <i>&#8599;</i></a></div>
+      <div class="s-sec"><div class="lab">Serviços</div>
+        <div class="s-card"><h6>Website</h6><p>Feito à mão, rápido no telemóvel.</p></div>
+        <div class="s-card"><h6>Placas NFC</h6><p>Nove segundos entre pagar e avaliar.</p></div>
+        <div class="s-card"><h6>Conteúdo</h6><p>Publicado sem tu tocares em nada.</p></div>
+        <div class="s-card"><h6>Manutenção</h6><p>Escreves, tratamos no mesmo dia.</p></div></div>
+      <div class="d-fab"><button id="dbtn">Menu <svg viewBox="0 0 24 24" width="14" height="14"><path d="M4 8h16M4 16h16"/></svg></button></div>
+      <div class="d-veil" id="dveil"></div>
+      <div class="d-sheet" id="dsheet"><div class="grip"></div>
+        <a>Serviços <span>&#8594;</span></a><a>Processo <span>&#8594;</span></a><a>Trabalho <span>&#8594;</span></a>
+        <a>Portfólio <span>&#8594;</span></a><a>Placas NFC <span>&#8594;</span></a>
+        <a style="background:var(--ink);color:#fff;border-radius:999px;padding:.7rem 1rem;margin-top:.8rem;
+          justify-content:center;gap:.5rem;border:0">Marcar chamada <span>&#8599;</span></a></div>
+    </div></div>
+  </div>
+
+  <!-- E -->
+  <div class="col">
+    <div class="meta"><div class="n">Mobile E</div><h3>Abertura em ecrã cheio</h3>
+      <p>O primeiro ecrã é todo escuro e ocupa o telemóvel inteiro, com o teu vídeo por trás. O texto assenta em baixo, onde o polegar chega. Depois o site continua claro. É a mais cinematográfica.</p></div>
+    <div class="phone"><div class="screen">
+      <div class="e-hero"><div class="bg"></div>
+        <div class="s-nav" style="position:absolute;top:0;left:0;right:0">
+          <div class="s-cap" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.2);backdrop-filter:blur(10px)">
+            <img src="img/logo-mono-2x.png" alt="" style="filter:invert(1);mix-blend-mode:normal">
+            <b style="background:#fff;color:var(--ink)">Marcar</b></div></div>
+        <div class="ct">
+          <h4>Um site que traz
+            <span class="hl"><svg viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.2 1.2 0 0 0-.9-1.2l-3.3-.8a1.2 1.2 0 0 0-1.2.4l-1.1 1.3a14 14 0 0 1-5.7-5.7l1.3-1.1a1.2 1.2 0 0 0 .4-1.2l-.8-3.3A1.2 1.2 0 0 0 6.5 3Z"/></svg>telefonemas</span>
+            e <span class="hl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M15.5 8.6a4.6 4.6 0 0 0-6.6 1.2 5.5 5.5 0 0 0 0 4.4 4.6 4.6 0 0 0 6.6 1.2M7.4 11h5.4M7.4 13.4h5.4"/></svg>dinheiro</span>.
+          </h4>
+          <p>Feito à mão por duas pessoas.</p>
+          <a class="s-btn">Quero mais clientes <i>&#8599;</i></a>
+          <div class="e-scroll"><b></b> desliza</div>
+        </div>
+      </div>
+      <div class="s-sec"><div class="lab">Serviços</div><h5>Cada um existe para trazer alguma coisa.</h5>
+        <div class="s-card" style="margin-top:.8rem"><h6>Website</h6><p>Traz contactos.</p></div>
+        <div class="s-card"><h6>Placas NFC</h6><p>Trazem avaliações.</p></div>
+        <div class="s-card"><h6>Conteúdo</h6><p>Faz com que se lembrem de ti.</p></div></div>
+    </div></div>
+  </div>
+</div>
+
+<div class="note"><div class="box">
+  <h3>O que muda no telemóvel, seja qual for a que escolheres</h3>
+  <ul>
+    <li>O cursor personalizado desliga-se, porque não há rato. Os efeitos passam a ser de scroll e de toque.</li>
+    <li>O desfoque nas entradas sai, é o que mais consome bateria. Fica deslocamento e opacidade.</li>
+    <li>Um render de fundo em vez de dois, com metade da densidade de pixéis.</li>
+    <li>Todos os botões com pelo menos 44 pixéis de altura e os principais com a largura toda.</li>
+    <li>A secção do processo deixa de agarrar o ecrã e passa a coluna, porque prender o scroll em telemóvel irrita.</li>
+  </ul>
+</div></div>
+
+<footer><span>&copy; 2026 MA Webs</span><a href="06-hibrido.html">Voltar ao site</a></footer>
+
+<script>
+/* pontinhos da galeria C */
+const gal=document.getElementById('cgal'),dots=[...document.getElementById('cdots').children];
+gal.addEventListener('scroll',()=>{
+  const i=Math.round(gal.scrollLeft/(gal.scrollWidth/dots.length));
+  dots.forEach((d,k)=>d.classList.toggle('on',k===Math.min(i,dots.length-1)));
+},{passive:true});
+
+/* folha da variacao D */
+const sheet=document.getElementById('dsheet'),veil=document.getElementById('dveil');
+document.getElementById('dbtn').onclick=()=>{sheet.classList.add('open');veil.classList.add('on')};
+veil.onclick=()=>{sheet.classList.remove('open');veil.classList.remove('on')};
+</script>
+</body>
+</html>

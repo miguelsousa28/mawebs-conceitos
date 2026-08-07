@@ -113,10 +113,12 @@ img{display:block;max-width:100%}
 /* ===== HERO ===== */
 .hero{position:relative;z-index:2;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;padding:clamp(8rem,18vh,11rem) var(--pad) clamp(3rem,7vh,5rem)}
-.hero h1{font-size:clamp(2.4rem,6.4vw,6rem);max-width:17ch}
+/* as capsulas ocupam mais altura que o texto normal, por isso a linha tem de abrir */
+.hero h1{font-size:clamp(2.4rem,6.4vw,6rem);max-width:17ch;line-height:1.34}
 /* variacao E: capsula de contorno, enche a preto ao passar o rato */
 .hl{display:inline-flex;align-items:center;gap:.24em;border:.055em solid var(--ink);color:var(--ink);
   border-radius:999px;padding:.04em .4em .08em .3em;line-height:1;white-space:nowrap;cursor:pointer;
+  margin:.09em .02em;
   opacity:0;transform:translateY(.08em) scale(.94);
   transition:opacity .8s var(--e),transform 1s var(--spring),
              background .55s var(--e),color .55s var(--e),border-color .55s var(--e)}
@@ -128,23 +130,23 @@ h1.in .hl:nth-of-type(3){transition-delay:.74s,.74s,0s,0s,0s}
 .hl svg{width:.6em;height:.6em;flex:none;stroke:currentColor;stroke-width:1.8;fill:none;
   stroke-linecap:round;stroke-linejoin:round}
 
-/* ===== cursor da marca, portado do @unlumen-ui/cursor ===== */
+/* ===== cursor da marca: seta com etiqueta, só sobre elementos marcados ===== */
 @media(pointer:fine){
-  html.ma-cursor,html.ma-cursor *{cursor:none!important}
-  html.ma-cursor input,html.ma-cursor textarea,html.ma-cursor select{cursor:text!important}
+  [data-cursor],[data-cursor] *{cursor:none}
 }
-#maCursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;width:34px;height:34px;
-  will-change:transform;opacity:0;transition:opacity .4s var(--e)}
+#maCursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;width:26px;height:26px;
+  will-change:transform;opacity:0;transform-origin:4.5% 11%;
+  transition:opacity .3s var(--e)}
 #maCursor.on{opacity:1}
-#maCursor .tile{width:100%;height:100%;border-radius:10px;background:var(--ink);display:grid;place-items:center;
-  box-shadow:0 10px 22px -10px rgba(10,11,12,.65)}
-#maCursor .tile img{width:60%;filter:invert(1)}
-#maCursor .tip{position:absolute;top:-1px;left:-1px;width:11px;height:11px;background:var(--ink);
-  clip-path:polygon(0 0,100% 0,0 100%);border-radius:2px 0 0 0}
+#maCursor svg{width:100%;height:100%;display:block;fill:var(--ink);
+  filter:drop-shadow(0 4px 10px rgba(10,11,12,.35))}
+#maCursor.inv svg{fill:#fff;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
 #maFollow{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;
-  background:var(--ink);color:#fff;border-radius:8px;padding:.3rem .6rem;font-size:.78rem;font-weight:500;
-  white-space:nowrap;will-change:transform;opacity:0;transition:opacity .35s var(--e)}
+  background:var(--ink);color:#fff;border-radius:8px;padding:.32rem .62rem;font-size:.78rem;font-weight:500;
+  white-space:nowrap;will-change:transform;opacity:0;transform-origin:0 0;
+  transition:opacity .3s var(--e)}
 #maFollow.on{opacity:1}
+#maFollow.inv{background:#fff;color:var(--ink)}
 
 /* ===== tooltip flutuante, portado do @unlumen-ui/floating-tooltip ===== */
 #maTip{position:fixed;top:0;left:0;z-index:9997;pointer-events:none;
@@ -156,19 +158,21 @@ h1.in .hl:nth-of-type(3){transition-delay:.74s,.74s,0s,0s,0s}
 #maTip .d{display:block;max-width:28ch;font-size:.8rem;line-height:1.35;font-weight:400;opacity:.7;margin-top:.2rem}
 
 /* ===== halo dos botoes, portado do @unlumen-ui/glow ===== */
+/* halo parado, sem rotacao. So um brilho suave por tras que respira ao passar o rato */
 .glow{position:relative;display:inline-flex;isolation:isolate}
-.glow>.halo{position:absolute;inset:-2px;z-index:-1;border-radius:999px;pointer-events:none;
-  filter:blur(14px);opacity:.55;transform:scale(1);
-  transition:opacity .7s var(--e),transform .7s var(--spring)}
-.glow>.halo i{position:absolute;inset:0;border-radius:999px;
-  background:conic-gradient(from 0deg at 50% 50%,#0A0B0C,#8B9096,#FFFFFF,#5B6167,#0A0B0C);
-  animation:halo 5s linear infinite}
-@keyframes halo{to{transform:rotate(360deg)}}
-.glow:hover>.halo{opacity:.9;transform:scale(1.06)}
+.glow>.halo{position:absolute;inset:-3px;z-index:-1;border-radius:999px;pointer-events:none;
+  filter:blur(15px);opacity:.42;transform:scale(1);
+  transition:opacity .8s var(--e),transform .8s var(--e)}
+.glow>.halo i{position:absolute;inset:0;border-radius:999px;background:#0A0B0C}
+.glow:hover>.halo{opacity:.7;transform:scale(1.04)}
 /* sobre fundo escuro o halo tem de ser claro para se ver */
-.glow.light>.halo i{background:conic-gradient(from 0deg at 50% 50%,#FFFFFF,#9AA0A5,#FFFFFF,#6B7075,#FFFFFF)}
-.glow.light>.halo{opacity:.4}
-.glow.light:hover>.halo{opacity:.75}
+.glow.light>.halo i{background:#FFFFFF}
+.glow.light>.halo{opacity:.3}
+.glow.light:hover>.halo{opacity:.55}
+/* o da cápsula do topo é mais contido, para não borrar a barra branca */
+.cta-glow{margin-left:auto}
+.cta-glow>.halo{inset:-2px;filter:blur(10px);opacity:.3}
+.cta-glow:hover>.halo{opacity:.5;transform:scale(1.03)}
 .hero>p{max-width:54ch;color:var(--ink-2);margin:1.9rem auto 0;font-size:1.08rem;letter-spacing:-.014em}
 .btns{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:2.3rem}
 .btn{display:inline-flex;align-items:center;gap:.65rem;border-radius:999px;padding:.88rem .88rem .88rem 1.55rem;
@@ -605,7 +609,8 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       <a href="portfolio.html">Portfólio</a><a href="#nfc">Placas NFC</a>
     </nav>
     <span class="isl-live"><b></b> <em id="islSec">Início</em></span>
-    <a href="#contacto" class="cta-mini"><em>Marcar chamada</em> <span>&#8599;</span></a>
+    <span class="glow cta-glow"><span class="halo"><i></i></span>
+      <a href="#contacto" class="cta-mini" data-cursor="Marcar"><em>Marcar chamada</em> <span>&#8599;</span></a></span>
   </div>
 </header>
 
@@ -624,8 +629,8 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
   <p data-anim data-d="1">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar. Feito à mão por duas pessoas, mantido por nós.</p>
   <div class="btns" data-anim data-d="2">
     <span class="glow"><span class="halo"><i></i></span>
-      <a href="#contacto" class="btn btn-p" data-follow="Marcar">Quero mais clientes a ligar <i>&#8599;</i></a></span>
-    <a href="#trabalho" class="btn btn-s" data-follow="Ver">Ver trabalho <i>&#8595;</i></a>
+      <a href="#contacto" class="btn btn-p" data-cursor="Marcar">Quero mais clientes a ligar <i>&#8599;</i></a></span>
+    <a href="#trabalho" class="btn btn-s" data-cursor="Ver">Ver trabalho <i>&#8595;</i></a>
   </div>
 
   <div class="slot" data-anim data-d="3">
@@ -761,16 +766,16 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
     <div data-anim><span class="eyebrow">Trabalho</span><h2 class="h2">Negócios que passaram a aparecer.</h2>
       <p class="lead">Não são imagens de exemplo. São capturas dos sites verdadeiros, no ar neste momento. Passa o rato por cima de qualquer um para o percorreres de cima a baixo.</p></div>
     <div class="works" id="works">
-      <article class="work" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/mr-burger-full.jpg')"></div></div><div class="cap"><h4>Mr. Burger</h4><span>Site e menu</span></div></article>
-      <article class="work" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/raizes-do-sobreiro-full.jpg')"></div></div><div class="cap"><h4>Raízes do Sobreiro</h4><span>Restaurante</span></div></article>
-      <article class="work" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/gama-full.jpg')"></div></div><div class="cap"><h4>O Gama</h4><span>Barbearia e conteúdo</span></div></article>
-      <article class="work" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/malveira-full.jpg')"></div></div><div class="cap"><h4>Escola de Música da Malveira</h4><span>Plataforma</span></div></article>
-      <article class="work" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/zenith-full.jpg')"></div></div><div class="cap"><h4>Zenith Beauty Space</h4><span>Estética</span></div></article>
-      <article class="work" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/casadarocha-full.jpg')"></div></div><div class="cap"><h4>Casa da Rocha</h4><span>Construção</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/mr-burger-full.jpg')"></div></div><div class="cap"><h4>Mr. Burger</h4><span>Site e menu</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/raizes-do-sobreiro-full.jpg')"></div></div><div class="cap"><h4>Raízes do Sobreiro</h4><span>Restaurante</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/gama-full.jpg')"></div></div><div class="cap"><h4>O Gama</h4><span>Barbearia e conteúdo</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/malveira-full.jpg')"></div></div><div class="cap"><h4>Escola de Música da Malveira</h4><span>Plataforma</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/zenith-full.jpg')"></div></div><div class="cap"><h4>Zenith Beauty Space</h4><span>Estética</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/casadarocha-full.jpg')"></div></div><div class="cap"><h4>Casa da Rocha</h4><span>Construção</span></div></article>
     </div>
     <div class="more">
       <span class="glow"><span class="halo"><i></i></span>
-        <a href="portfolio.html" class="btn btn-p" data-follow="Abrir">Ver portfólio completo <i>&#8599;</i></a></span>
+        <a href="portfolio.html" class="btn btn-p" data-cursor="Abrir">Ver portfólio completo <i>&#8599;</i></a></span>
     </div>
   </div>
 </section>
@@ -871,9 +876,9 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       </div>
       <div class="btns">
         <span class="glow light"><span class="halo"><i></i></span>
-          <a href="https://cal.com/ma-webs/15min" target="_blank" rel="noopener" class="btn btn-p" data-follow="Marcar">Escolher horário <i>&#8599;</i></a></span>
+          <a href="https://cal.com/ma-webs/15min" target="_blank" rel="noopener" class="btn btn-p" data-cursor="Marcar">Escolher horário <i>&#8599;</i></a></span>
       </div>
-      <a class="phonelink" href="https://wa.me/351962303550?text=Ol%C3%A1%2C%20vim%20do%20site%20da%20MA%20Webs%20e%20queria%20marcar%20a%20chamada%20de%2015%20minutos." target="_blank" rel="noopener">&#9993; ou fala connosco no <b>WhatsApp</b></a>
+      <a class="phonelink" href="https://wa.me/351928412799?text=Ol%C3%A1%2C%20vim%20do%20site%20da%20MA%20Webs%20e%20queria%20marcar%20a%20chamada%20de%2015%20minutos." target="_blank" rel="noopener">&#9993; ou fala connosco no <b>WhatsApp</b></a>
       <div class="fine">
         <span><b></b> Resposta no próprio dia</span>
         <span><b></b> Duas vagas por semana</span>
@@ -902,7 +907,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       <div class="foot-col" data-anim data-d="3">
         <h5>Contacto</h5>
         <a href="#contacto">Marcar chamada</a>
-        <a href="https://wa.me/351962303550" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://wa.me/351928412799" target="_blank" rel="noopener">WhatsApp</a>
         <a href="mailto:mawebsitespt@gmail.com">Email</a>
         <a href="#">Instagram</a>
       </div>
@@ -1140,14 +1145,29 @@ const mapRange=(v,a,b,c,d)=>{
 };
 
 if(fine&&!reduce){
-  /* ---------- @unlumen-ui/cursor ---------- */
-  document.documentElement.classList.add('ma-cursor');
+  /* ---------- @unlumen-ui/cursor: seta com etiqueta, só onde interessa ---------- */
   const cur=document.createElement('div');
   cur.id='maCursor';
-  cur.innerHTML='<span class="tip"></span><span class="tile"><img src="img/logo-mono-2x.png" alt=""></span>';
+  cur.innerHTML='<svg viewBox="0 0 40 40"><path d="M1.8 4.4 7 36.2c.3 1.8 2.6 2.3 3.6.8l3.9-5.7c1.7-2.5 4.5-4.1 7.5-4.3l6.9-.5c1.8-.1 2.5-2.4 1.1-3.5L5 2.5c-1.4-1.1-3.5 0-3.3 1.9Z"/></svg>';
   const fol=document.createElement('div');
   fol.id='maFollow';
   document.body.append(cur,fol);
+
+  /* aparece só sobre os elementos marcados com data-cursor */
+  let armed=false;
+  document.querySelectorAll('[data-cursor]').forEach(el=>{
+    const dark=el.closest('.nfc,.callcard,.card.dark,.svc-all')!==null;
+    el.addEventListener('mouseenter',()=>{
+      armed=true;
+      fol.textContent=el.dataset.cursor||'';
+      cur.classList.toggle('inv',dark);fol.classList.toggle('inv',dark);
+      cur.classList.add('on');
+      if(el.dataset.cursor)fol.classList.add('on');
+    });
+    el.addEventListener('mouseleave',()=>{
+      armed=false;cur.classList.remove('on');fol.classList.remove('on');
+    });
+  });
 
   /* ---------- @unlumen-ui/floating-tooltip ---------- */
   const tip=document.createElement('div');
@@ -1165,11 +1185,8 @@ if(fine&&!reduce){
   let mx=innerWidth/2,my=innerHeight/2,started=false;
   addEventListener('mousemove',e=>{
     mx=e.clientX;my=e.clientY;
-    if(!started){started=true;cx.jump(mx);cy.jump(my);fx.jump(mx);fy.jump(my);tx.jump(mx);ty.jump(my);
-      cur.classList.add('on')}
+    if(!started){started=true;cx.jump(mx);cy.jump(my);fx.jump(mx);fy.jump(my);tx.jump(mx);ty.jump(my)}
   },{passive:true});
-  addEventListener('mouseleave',()=>cur.classList.remove('on'));
-  addEventListener('mouseenter',()=>{if(started)cur.classList.add('on')});
 
   /* gatilhos */
   document.querySelectorAll('[data-tip]').forEach(el=>{
@@ -1181,11 +1198,6 @@ if(fine&&!reduce){
     });
     el.addEventListener('mouseleave',()=>tip.classList.remove('on'));
   });
-  document.querySelectorAll('[data-follow]').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{fol.textContent=el.dataset.follow;fol.classList.add('on')});
-    el.addEventListener('mouseleave',()=>fol.classList.remove('on'));
-  });
-
   let last=performance.now();
   (function loop(now){
     requestAnimationFrame(loop);
@@ -1203,7 +1215,7 @@ if(fine&&!reduce){
 
     fx.set(mx);fy.set(my);
     const lx=fx.step(dt),ly=fy.step(dt);
-    fol.style.transform=`translate3d(${lx+16}px,${ly+22}px,0)`
+    fol.style.transform=`translate3d(${lx+20}px,${ly+24}px,0)`
       +` scale(${mapRange(fx.v,-1000,1000,.9,1.15).toFixed(3)},${mapRange(fy.v,-1000,1000,1.15,.9).toFixed(3)})`
       +` skew(${mapRange(fx.v,-1000,1000,-3,3).toFixed(2)}deg,${mapRange(fy.v,-1000,1000,-3,3).toFixed(2)}deg)`;
 
