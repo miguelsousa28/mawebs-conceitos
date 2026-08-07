@@ -117,13 +117,16 @@ img{display:block;max-width:100%}
 .hero{position:relative;z-index:2;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;padding:clamp(8rem,18vh,11rem) var(--pad) clamp(3rem,7vh,5rem)}
 /* as capsulas ocupam mais altura que o texto normal, por isso a linha tem de abrir */
-.hero h1{font-size:clamp(2.4rem,6.4vw,6rem);max-width:17ch;line-height:1.34}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3.6rem);max-width:none;line-height:1.24}
 
 /* ===== cápsula rotativa da hero ===== */
 h1 .l1,h1 .l2{display:block}
-h1 .l2{margin-top:.1em}
-.cap{display:inline-flex;align-items:center;gap:.3em;position:relative;vertical-align:baseline;
-  padding:.14em .58em .18em .42em;border-radius:999px;line-height:1;white-space:nowrap;cursor:pointer;
+h1 .l2{margin-top:.06em}
+h1 .l3{display:block;margin-top:.02em}
+.cap{display:inline-flex;align-items:center;gap:.26em;position:relative;vertical-align:baseline;
+  /* um pouco mais pequena que o titulo, senao domina a hero toda */
+  font-size:.86em;padding:.12em .48em .16em .34em;
+  border-radius:999px;line-height:1;white-space:nowrap;cursor:pointer;
   overflow:hidden;background:var(--ink);color:#fff;border:.05em solid var(--ink);
   box-shadow:inset 0 .02em 0 rgba(255,255,255,.18), 0 .12em .28em -.14em rgba(10,11,12,.5);
   transition:transform 240ms var(--ease-out),box-shadow 240ms var(--ease-out)}
@@ -135,7 +138,9 @@ h1 .l2{margin-top:.1em}
   background-size:260% 100%}
 .cap.beat .sheen{animation:sheen 560ms var(--ease-out)}
 @keyframes sheen{0%{opacity:1;background-position:170% 0}100%{opacity:0;background-position:-70% 0}}
-.ico{width:.72em;height:.72em;flex:none;display:grid;place-items:center}
+.ico svg{animation:icoIn 220ms var(--ease-out)}
+@keyframes icoIn{from{opacity:0}to{opacity:1}}
+.ico{width:.68em;height:.68em;flex:none;display:grid;place-items:center}
 .ico svg{width:100%;height:100%;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round}
 .capw{display:inline-block;position:relative;box-sizing:content-box;overflow:hidden;
@@ -682,6 +687,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
   <h1 data-anim>
     <span class="l1">Um site que traz</span>
     <span class="l2"><span class="cap" id="capHero" data-tip="" data-tip-d=""><span class="sheen"></span><span class="ico"></span><span class="capw"></span></span></span>
+    <span class="l3">ao teu negócio.</span>
   </h1>
   <p data-anim data-d="1">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar. Feito à mão por duas pessoas, mantido por nós.</p>
   <div class="btns" data-anim data-d="2">
