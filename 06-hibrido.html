@@ -127,7 +127,8 @@ h1.in .hl:nth-of-type(3){transition-delay:.74s,.74s,0s,0s,0s}
 
 /* ===== cursor da marca: seta com etiqueta, só sobre elementos marcados ===== */
 @media(pointer:fine){
-  [data-cursor],[data-cursor] *{cursor:none}
+  html.ma-cursor,html.ma-cursor *{cursor:none!important}
+  html.ma-cursor input,html.ma-cursor textarea,html.ma-cursor select{cursor:text!important}
 }
 #maCursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;width:26px;height:26px;
   will-change:transform;opacity:0;transform-origin:4.5% 11%;
@@ -1151,21 +1152,18 @@ if(fine&&!reduce){
   fol.id='maFollow';
   document.body.append(cur,fol);
 
-  /* aparece só sobre os elementos marcados com data-cursor */
-  let armed=false;
-  document.querySelectorAll('[data-cursor]').forEach(el=>{
-    const dark=el.closest('.nfc,.callcard,.card.dark,.svc-all')!==null;
-    el.addEventListener('mouseenter',()=>{
-      armed=true;
-      fol.textContent=el.dataset.cursor||'';
-      cur.classList.toggle('inv',dark);fol.classList.toggle('inv',dark);
-      cur.classList.add('on');
-      if(el.dataset.cursor)fol.classList.add('on');
-    });
-    el.addEventListener('mouseleave',()=>{
-      armed=false;cur.classList.remove('on');fol.classList.remove('on');
-    });
+  /* a seta substitui o cursor do sistema em todo o site */
+  document.documentElement.classList.add('ma-cursor');
+  cur.classList.add('on');
+  document.addEventListener('mouseover',e=>{
+    const el=e.target.closest('[data-cursor]');
+    const dark=e.target.closest('.nfc,.callcard,.card.dark,.svc-all')!==null;
+    cur.classList.toggle('inv',dark);fol.classList.toggle('inv',dark);
+    if(el&&el.dataset.cursor){fol.textContent=el.dataset.cursor;fol.classList.add('on')}
+    else fol.classList.remove('on');
   });
+  addEventListener('mouseleave',()=>{cur.classList.remove('on');fol.classList.remove('on')});
+  addEventListener('mouseenter',()=>cur.classList.add('on'));
 
   /* ---------- @unlumen-ui/floating-tooltip ---------- */
   const tip=document.createElement('div');
