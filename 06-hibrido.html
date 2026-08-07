@@ -123,35 +123,35 @@ img{display:block;max-width:100%}
 h1 .l1,h1 .l2{display:block}
 h1 .l2{margin-top:.06em}
 h1 .l3{display:block;margin-top:.02em}
-.cap{display:inline-flex;align-items:center;gap:.26em;position:relative;vertical-align:baseline;
+.hcap{display:inline-flex;align-items:center;gap:.26em;position:relative;vertical-align:baseline;
   /* um pouco mais pequena que o titulo, senao domina a hero toda */
   font-size:.86em;padding:.12em .48em .16em .34em;
   border-radius:999px;line-height:1;white-space:nowrap;cursor:pointer;
   overflow:hidden;background:var(--ink);color:#fff;border:.05em solid var(--ink);
   box-shadow:inset 0 .02em 0 rgba(255,255,255,.18), 0 .12em .28em -.14em rgba(10,11,12,.5);
   transition:transform 240ms var(--ease-out),box-shadow 240ms var(--ease-out)}
-.cap.beat{transform:scale(1.024);
+.hcap.beat{transform:scale(1.024);
   box-shadow:inset 0 .02em 0 rgba(255,255,255,.26), 0 .22em .5em -.18em rgba(10,11,12,.62)}
-.cap:active{transform:scale(.985)}
-.cap .sheen{position:absolute;inset:0;pointer-events:none;opacity:0;border-radius:999px;overflow:hidden;
+.hcap:active{transform:scale(.985)}
+.hcap .sheen{position:absolute;inset:0;pointer-events:none;opacity:0;border-radius:999px;overflow:hidden;
   background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);
   background-size:260% 100%}
-.cap.beat .sheen{animation:sheen 560ms var(--ease-out)}
+.hcap.beat .sheen{animation:sheen 560ms var(--ease-out)}
 @keyframes sheen{0%{opacity:1;background-position:170% 0}100%{opacity:0;background-position:-70% 0}}
 .ico svg{animation:icoIn 220ms var(--ease-out)}
 @keyframes icoIn{from{opacity:0}to{opacity:1}}
 .ico{width:.68em;height:.68em;flex:none;display:grid;place-items:center}
 .ico svg{width:100%;height:100%;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round}
-.capw{display:inline-block;position:relative;box-sizing:content-box;overflow:hidden;
+.hcapw{display:inline-block;position:relative;box-sizing:content-box;overflow:hidden;
   height:1.34em;padding-inline:.14em;margin-inline:-.14em;text-align:center;
   transition:width 420ms var(--ease-out)}
-.capw i{font-style:normal;position:absolute;left:.14em;right:.14em;top:50%;margin-top:-.67em;
+.hcapw i{font-style:normal;position:absolute;left:.14em;right:.14em;top:50%;margin-top:-.67em;
   height:1.34em;line-height:1.34em;white-space:nowrap;text-align:center;
   opacity:0;transform:translateY(.5em) scale(.96);
   transition:opacity 200ms var(--ease-out),transform 320ms var(--ease-out)}
-.capw i.on{opacity:1;transform:none}
-.capw i.out{opacity:0;transform:translateY(-.42em) scale(1.02)}
+.hcapw i.on{opacity:1;transform:none}
+.hcapw i.out{opacity:0;transform:translateY(-.42em) scale(1.02)}
 
 /* gestos dos ícones — cada um conta a sua história, não é só um pop */
 .ico svg text{fill:currentColor;stroke:none;font-size:10.5px;font-weight:700;text-anchor:middle}
@@ -470,9 +470,14 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
   transition:opacity .8s var(--e),transform .8s var(--spring)}
 .work:hover .live{opacity:1;transform:none}
 .work .live b{width:5px;height:5px;border-radius:99px;background:var(--ink)}
-.work .cap{padding:1.1rem 1.3rem 1.35rem;display:flex;justify-content:space-between;align-items:baseline;gap:.8rem}
-.work h4{font-size:1.03rem}
-.work .cap span{color:var(--ink-dim);font-size:.78rem}
+.work .meta{padding:1.15rem 1.3rem 1.3rem;display:flex;justify-content:space-between;
+  align-items:baseline;gap:.9rem}
+.work h4{font-size:1.03rem;letter-spacing:-.014em;
+  transition:transform 320ms var(--ease-out)}
+.work .meta span{flex:none;font-size:.72rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink-dim);transition:color 320ms var(--ease-out)}
+.work:hover h4{transform:translateX(.14rem)}
+.work:hover .meta span{color:var(--ink)}
 .work.hid{display:none}
 .more{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-top:2.4rem}
 @media(max-width:1000px){.works{grid-template-columns:repeat(2,1fr)}}
@@ -782,7 +787,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 <section class="hero">
   <h1 data-anim>
     <span class="l1">Um site que traz</span>
-    <span class="l2"><span class="cap" id="capHero" data-tip="" data-tip-d=""><span class="sheen"></span><span class="ico"></span><span class="capw"></span></span></span>
+    <span class="l2"><span class="hcap" id="capHero" data-tip="" data-tip-d=""><span class="sheen"></span><span class="ico"></span><span class="hcapw"></span></span></span>
     <span class="l3">ao teu negócio.</span>
   </h1>
   <p data-anim data-d="1">Não é um cartão de visita bonito. É a peça que faz o cliente decidir entrar em vez de continuar a andar. Feito à mão por duas pessoas, mantido por nós.</p>
@@ -924,12 +929,12 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
     <div data-anim><span class="eyebrow">Trabalho</span><h2 class="h2">Negócios que passaram a aparecer.</h2>
       <p class="lead">Não são imagens de exemplo. São capturas dos sites verdadeiros, no ar neste momento. Passa o rato por cima de qualquer um para o percorreres de cima a baixo.</p></div>
     <div class="works" id="works">
-      <article class="work" data-cursor="Abrir" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/mr-burger-full.jpg')"></div></div><div class="cap"><h4>Mr. Burger</h4><span>Site e menu</span></div></article>
-      <article class="work" data-cursor="Abrir" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/raizes-do-sobreiro-full.jpg')"></div></div><div class="cap"><h4>Raízes do Sobreiro</h4><span>Restaurante</span></div></article>
-      <article class="work" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/gama-full.jpg')"></div></div><div class="cap"><h4>O Gama</h4><span>Barbearia e conteúdo</span></div></article>
-      <article class="work" data-cursor="Abrir" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/malveira-full.jpg')"></div></div><div class="cap"><h4>Escola de Música da Malveira</h4><span>Plataforma</span></div></article>
-      <article class="work" data-cursor="Abrir" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/zenith-full.jpg')"></div></div><div class="cap"><h4>Zenith Beauty Space</h4><span>Estética</span></div></article>
-      <article class="work" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/casadarocha-full.jpg')"></div></div><div class="cap"><h4>Casa da Rocha</h4><span>Construção</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/mr-burger-full.jpg')"></div></div><div class="meta"><h4>Mr. Burger</h4><span>Site e menu</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/raizes-do-sobreiro-full.jpg')"></div></div><div class="meta"><h4>Raízes do Sobreiro</h4><span>Restaurante</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/gama-full.jpg')"></div></div><div class="meta"><h4>O Gama</h4><span>Barbearia e conteúdo</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/malveira-full.jpg')"></div></div><div class="meta"><h4>Escola de Música da Malveira</h4><span>Plataforma</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/zenith-full.jpg')"></div></div><div class="meta"><h4>Zenith Beauty Space</h4><span>Estética</span></div></article>
+      <article class="work" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/casadarocha-full.jpg')"></div></div><div class="meta"><h4>Casa da Rocha</h4><span>Construção</span></div></article>
     </div>
     <div class="more">
       <a href="portfolio.html" class="btn btn-p" data-cursor="Abrir">Ver portfólio completo <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
@@ -1420,7 +1425,7 @@ if(fine&&!reduce){
 (function(){
   const cap = document.getElementById('capHero');
   if (!cap) return;
-  const ico = cap.querySelector('.ico'), slot = cap.querySelector('.capw');
+  const ico = cap.querySelector('.ico'), slot = cap.querySelector('.hcapw');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function measure(word){
