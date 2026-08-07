@@ -306,11 +306,11 @@ h1 .l3{display:block;margin-top:.02em}
 }
 #maCursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;width:26px;height:26px;
   will-change:transform;opacity:0;transform-origin:4.5% 11%;
-  transition:opacity .3s var(--e)}
+  mix-blend-mode:difference;transition:opacity .3s var(--e)}
 #maCursor.on{opacity:1}
-#maCursor svg{width:100%;height:100%;display:block;fill:var(--ink);
-  filter:drop-shadow(0 4px 10px rgba(10,11,12,.35))}
-#maCursor.inv svg{fill:#fff;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+/* branca + difference: sobre claro sai escura, sobre escuro sai clara,
+   e numa fronteira cada pedaco da seta decide por si */
+#maCursor svg{width:100%;height:100%;display:block;fill:#fff}
 #maFollow{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;
   background:var(--ink);color:#fff;border-radius:8px;padding:.32rem .62rem;font-size:.78rem;font-weight:500;
   white-space:nowrap;will-change:transform;opacity:0;transform-origin:0 0;
@@ -516,12 +516,12 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
   height:clamp(360px,42vw,480px);display:flex;align-items:center;justify-content:flex-end;
   transform:rotateY(-15deg) rotateX(5deg);transition:transform .8s var(--e)}
 .plate{position:absolute;left:0;top:50%;width:42%;aspect-ratio:1/1;border-radius:1.15rem;
-  background:#fff;display:grid;place-items:center;overflow:hidden;
+  background:var(--ink);display:grid;place-items:center;overflow:hidden;
   box-shadow:0 30px 50px -22px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.5);
   transform:translateY(-50%) translateZ(-60px) rotateY(9deg)}
 .plate .pl-svg{width:100%;height:100%;display:block}
 /* as ondas e as estrelas so acendem quando o telemovel encosta */
-.plate .pw{opacity:.24;transform-box:fill-box;transform-origin:left center;
+.plate .pw{opacity:1;transform-box:fill-box;transform-origin:left center;
   transition:opacity .3s var(--ease-out)}
 .rig.tap .plate .pw{opacity:1}
 .rig.tap .plate .pw.p1,.rig.tap .plate .pw.p3{animation:plWave .85s var(--ease-out)}
@@ -536,6 +536,25 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
 .rig.tap .plate .ps.s5{animation-delay:.48s}
 @keyframes plStar{0%{transform:scale(.3) rotate(-30deg)}60%{transform:scale(1.22) rotate(6deg)}100%{transform:none}}
 /* explicacao curta: quem chega aqui nao faz ideia do que e NFC */
+
+/* placas desenhadas para cada negocio */
+.plq{margin-top:clamp(3rem,7vh,4.5rem)}
+.plq-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;
+  margin-bottom:clamp(1.6rem,3vh,2.2rem)}
+.plq-head h3{font-size:clamp(1.25rem,2.4vw,1.7rem);font-weight:500;letter-spacing:-.038em;color:#fff}
+.plq-head p{color:rgba(255,255,255,.5);font-size:.92rem;max-width:44ch;margin-top:.5rem}
+.plq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.9rem,1.8vw,1.4rem)}
+.plq-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:1.1rem;
+  padding:clamp(.9rem,1.6vw,1.2rem);
+  transition:transform .5s var(--e),background .5s var(--e),border-color .5s var(--e)}
+.plq-card:hover{transform:translateY(-5px);background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)}
+.plq-card .pl-svg{width:100%;height:auto;display:block;border-radius:.7rem}
+.plq-card b{display:block;margin-top:.9rem;font-weight:500;font-size:.94rem;letter-spacing:-.028em;color:#fff}
+.plq-card span{display:block;margin-top:.22rem;font-size:.68rem;font-weight:500;letter-spacing:.05em;
+  text-transform:uppercase;color:rgba(255,255,255,.42)}
+@media(max-width:900px){.plq-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.plq-grid{grid-template-columns:1fr 1fr;gap:.7rem}
+  .plq-card{padding:.7rem}.plq-card b{font-size:.86rem}}
 .nfc-expl{color:rgba(255,255,255,.6);max-width:48ch;margin-top:1rem;font-size:1rem}
 .plate::after{content:'';position:absolute;inset:0;border-radius:1.15rem;pointer-events:none;
   box-shadow:0 0 0 0 rgba(255,255,255,0);transition:box-shadow .35s var(--e)}
@@ -804,7 +823,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       <a href="portfolio.html">Portfólio</a><a href="#nfc">Placas NFC</a>
     </nav>
     <span class="isl-live"><b></b> <em id="islSec">Início</em></span>
-    <a href="#contacto" class="cta-mini" data-cursor="Marcar">Marcar chamada <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
+    <a href="https://cal.com/ma-webs/15min" target="_blank" rel="noopener" class="cta-mini" data-cursor="Marcar">Marcar chamada <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
   </div>
 </header>
 
@@ -953,12 +972,12 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
     <div data-anim><span class="eyebrow">Trabalho</span><h2 class="h2">Negócios que passaram a aparecer.</h2>
       <p class="lead">Não são imagens de exemplo. São capturas dos sites verdadeiros, no ar neste momento. Passa o rato por cima de qualquer um para o percorreres de cima a baixo.</p></div>
     <div class="works" id="works">
-      <article class="work" data-cursor="Abrir" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/mr-burger-full.jpg')"></div></div><div class="meta"><h4>Mr. Burger</h4><span>Site e menu</span></div></article>
-      <article class="work" data-cursor="Abrir" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/raizes-do-sobreiro-full.jpg')"></div></div><div class="meta"><h4>Raízes do Sobreiro</h4><span>Restaurante</span></div></article>
-      <article class="work" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/gama-full.jpg')"></div></div><div class="meta"><h4>O Gama</h4><span>Barbearia e conteúdo</span></div></article>
-      <article class="work" data-cursor="Abrir" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/malveira-full.jpg')"></div></div><div class="meta"><h4>Escola de Música da Malveira</h4><span>Plataforma</span></div></article>
-      <article class="work" data-cursor="Abrir" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/zenith-full.jpg')"></div></div><div class="meta"><h4>Zenith Beauty Space</h4><span>Estética</span></div></article>
-      <article class="work" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/casadarocha-full.jpg')"></div></div><div class="meta"><h4>Casa da Rocha</h4><span>Construção</span></div></article>
+      <a class="work" href="https://projetos.mawebs.com/mr-burger/" target="_blank" rel="noopener" data-cursor="Abrir" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/mr-burger-full.jpg')"></div></div><div class="meta"><h4>Mr. Burger</h4><span>Site e menu</span></div></a>
+      <a class="work" href="https://projetos.mawebs.com/raizes-do-sobreiro/" target="_blank" rel="noopener" data-cursor="Abrir" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/raizes-do-sobreiro-full.jpg')"></div></div><div class="meta"><h4>Raízes do Sobreiro</h4><span>Restaurante</span></div></a>
+      <a class="work" href="https://ogamabarber.lovable.app" target="_blank" rel="noopener" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/gama-full.jpg')"></div></div><div class="meta"><h4>O Gama</h4><span>Barbearia e conteúdo</span></div></a>
+      <a class="work" href="https://escolamusicamalveira.lovable.app" target="_blank" rel="noopener" data-cursor="Abrir" data-anim><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/malveira-full.jpg')"></div></div><div class="meta"><h4>Escola de Música da Malveira</h4><span>Plataforma</span></div></a>
+      <a class="work" href="https://zenith-beauty-space.lovable.app" target="_blank" rel="noopener" data-cursor="Abrir" data-anim data-d="1"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/zenith-full.jpg')"></div></div><div class="meta"><h4>Zenith Beauty Space</h4><span>Estética</span></div></a>
+      <a class="work" href="https://casadarocha.lovable.app" target="_blank" rel="noopener" data-cursor="Abrir" data-anim data-d="2"><div class="shot"><span class="live"><b></b> No ar</span><div class="im" style="background-image:url('img/sites/casadarocha-full.jpg')"></div></div><div class="meta"><h4>Casa da Rocha</h4><span>Construção</span></div></a>
     </div>
     <div class="more">
       <a href="portfolio.html" class="btn btn-p" data-cursor="Abrir">Ver portfólio completo <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
@@ -988,7 +1007,7 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       <div data-anim data-d="1">
         <div class="stage">
           <div class="rig" id="rig">
-            <div class="plate" data-cursor="Toca"><svg class="pl-svg" viewBox="0 0 200 200" role="img" aria-label="Placa NFC de avaliacoes no Google"><g fill="none" stroke-width="15" stroke-linecap="butt"><path stroke="#EA4335" d="M38 7.5h124a30 30 0 0 1 30 30"/><path stroke="#4285F4" d="M192.5 38v124a30 30 0 0 1-30 30"/><path stroke="#34A853" d="M162 192.5H38a30 30 0 0 1-30-30"/><path stroke="#FBBC05" d="M7.5 162V38a30 30 0 0 1 30-30"/></g><rect x="16" y="16" width="168" height="168" rx="22" fill="#fff"/><rect x="27" y="27" width="146" height="146" rx="14" fill="none" stroke="#0A0B0C" stroke-opacity=".16" stroke-width="1.6"/><g fill="none" stroke-linecap="round" stroke-width="4.2"><path class="pw p1" stroke="#EA4335" d="M62 47a26 26 0 0 0 0 26"/><path class="pw p2" stroke="#FBBC05" d="M53 42a37 37 0 0 0 0 36"/><path class="pw p3" stroke="#4285F4" d="M138 47a26 26 0 0 1 0 26"/><path class="pw p4" stroke="#34A853" d="M147 42a37 37 0 0 1 0 36"/></g><g transform="translate(76 36)"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></g><g fill="#FBBC05"><g transform="translate(55 98) scale(.92)"><path class="ps s1" d="M0-9 2.65-3.1 9-2.35 4.3 2.05 5.6 8.5 0 5.3-5.6 8.5-4.3 2.05-9-2.35-2.65-3.1Z"/></g><g transform="translate(77.5 98) scale(.92)"><path class="ps s2" d="M0-9 2.65-3.1 9-2.35 4.3 2.05 5.6 8.5 0 5.3-5.6 8.5-4.3 2.05-9-2.35-2.65-3.1Z"/></g><g transform="translate(100 98) scale(.92)"><path class="ps s3" d="M0-9 2.65-3.1 9-2.35 4.3 2.05 5.6 8.5 0 5.3-5.6 8.5-4.3 2.05-9-2.35-2.65-3.1Z"/></g><g transform="translate(122.5 98) scale(.92)"><path class="ps s4" d="M0-9 2.65-3.1 9-2.35 4.3 2.05 5.6 8.5 0 5.3-5.6 8.5-4.3 2.05-9-2.35-2.65-3.1Z"/></g><g transform="translate(145 98) scale(.92)"><path class="ps s5" d="M0-9 2.65-3.1 9-2.35 4.3 2.05 5.6 8.5 0 5.3-5.6 8.5-4.3 2.05-9-2.35-2.65-3.1Z"/></g></g><text x="100" y="131" text-anchor="middle" fill="#0A0B0C" font-size="13.5" font-weight="600" letter-spacing="-.3">Avaliações no Google</text><text x="100" y="147" text-anchor="middle" fill="#0A0B0C" fill-opacity=".5" font-size="9.4" font-weight="500" letter-spacing=".7">ENCOSTA O TELEMÓVEL</text><g transform="translate(70 152)" fill="none" stroke="#0A0B0C" stroke-opacity=".5" stroke-width="2.2" stroke-linecap="round"><path d="M2 2a10 10 0 0 1 0 9"/><path d="M7.5-1a16 16 0 0 1 0 15"/><path d="M13-4a22 22 0 0 1 0 21"/><circle cx="-3.5" cy="6.5" r="2.4" fill="#0A0B0C" fill-opacity=".5" stroke="none"/></g><text x="92" y="163" text-anchor="start" fill="#0A0B0C" fill-opacity=".42" font-size="8.4" font-weight="600" letter-spacing="1.5">MA WEBS</text></svg></div>
+            <div class="plate" data-cursor="Toca"><svg class="pl-svg" viewBox="0 0 200 200" role="img" aria-label="Placa NFC de avaliacoes"><rect width="200" height="200" rx="26" fill="#0A0B0C"/><rect x="13" y="13" width="174" height="174" rx="17" fill="none" stroke="#fff" stroke-opacity=".16"/><g transform="translate(78 46) scale(.92)"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></g><g transform="translate(66 112)"><path class="ps s1" fill="#fff" d="M0-7.6 2.24-2.62 7.6-1.98 3.63 1.73 4.73 7.18 0 4.48-4.73 7.18-3.63 1.73-7.6-1.98-2.24-2.62Z"/></g><g transform="translate(83 112)"><path class="ps s2" fill="#fff" d="M0-7.6 2.24-2.62 7.6-1.98 3.63 1.73 4.73 7.18 0 4.48-4.73 7.18-3.63 1.73-7.6-1.98-2.24-2.62Z"/></g><g transform="translate(100 112)"><path class="ps s3" fill="#fff" d="M0-7.6 2.24-2.62 7.6-1.98 3.63 1.73 4.73 7.18 0 4.48-4.73 7.18-3.63 1.73-7.6-1.98-2.24-2.62Z"/></g><g transform="translate(117 112)"><path class="ps s4" fill="#fff" d="M0-7.6 2.24-2.62 7.6-1.98 3.63 1.73 4.73 7.18 0 4.48-4.73 7.18-3.63 1.73-7.6-1.98-2.24-2.62Z"/></g><g transform="translate(134 112)"><path class="ps s5" fill="#fff" d="M0-7.6 2.24-2.62 7.6-1.98 3.63 1.73 4.73 7.18 0 4.48-4.73 7.18-3.63 1.73-7.6-1.98-2.24-2.62Z"/></g><text x="100" y="146" text-anchor="middle" fill="#fff" fill-opacity=".62" font-size="10.4" font-weight="500" letter-spacing="1.9">AVALIAÇÕES</text><g transform="translate(94 162)" fill="none" stroke="#fff" stroke-opacity=".34" stroke-width="2.2" stroke-linecap="round"><path class="pw p1" d="M1 2a10 10 0 0 1 0 9"/><path class="pw p2" d="M6.5-1a16 16 0 0 1 0 15"/><path class="pw p3" d="M12-4a22 22 0 0 1 0 21"/><circle cx="-4.5" cy="6.5" r="2.3" fill="#fff" fill-opacity=".34" stroke="none"/></g></svg></div>
             <div class="phone"><div class="scr" id="scr"></div></div>
           </div>
         </div>
@@ -1011,6 +1030,21 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
       </div>
     </div>
 
+
+    <div class="plq" data-anim>
+      <div class="plq-head">
+        <div>
+          <h3>Cada placa é desenhada para o negócio.</h3>
+          <p>A tua marca, a tua cor e o destino que faz sentido para ti. Estes são desenhos nossos, um por tipo de negócio.</p>
+        </div>
+      </div>
+      <div class="plq-grid">
+        <div class="plq-card" data-anim><div><svg class="pl-svg" viewBox="0 0 200 200" role="img" aria-label="Placa de AVALIAÇÕES"><rect width="200" height="200" rx="26" fill="#0A0B0C"/><rect x="13" y="13" width="174" height="174" rx="17" fill="none" stroke="#fff" stroke-opacity=".16"/><g transform="translate(78 46) scale(.92)"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></g><g transform="translate(66 112)"><path fill="#fff" d="M0-7.6 2.24-2.62 7.6-1.98 3.63 1.73 4.73 7.18 0 4.48-4.73 7.18-3.63 1.73-7.6-1.98-2.24-2.62Z"/></g><g transform="translate(83 112)"><path fill="#fff" d="M0-7.6 2.24-2.62 7.6-1.98 3.63 1.73 4.73 7.18 0 4.48-4.73 7.18-3.63 1.73-7.6-1.98-2.24-2.62Z"/></g><g transform="translate(100 112)"><path fill="#fff" d="M0-7.6 2.24-2.62 7.6-1.98 3.63 1.73 4.73 7.18 0 4.48-4.73 7.18-3.63 1.73-7.6-1.98-2.24-2.62Z"/></g><g transform="translate(117 112)"><path fill="#fff" d="M0-7.6 2.24-2.62 7.6-1.98 3.63 1.73 4.73 7.18 0 4.48-4.73 7.18-3.63 1.73-7.6-1.98-2.24-2.62Z"/></g><g transform="translate(134 112)"><path fill="#fff" d="M0-7.6 2.24-2.62 7.6-1.98 3.63 1.73 4.73 7.18 0 4.48-4.73 7.18-3.63 1.73-7.6-1.98-2.24-2.62Z"/></g><text x="100" y="146" text-anchor="middle" fill="#fff" fill-opacity=".62" font-size="10.4" font-weight="500" letter-spacing="1.9">AVALIAÇÕES</text><g transform="translate(94 162)" fill="none" stroke="#fff" stroke-opacity=".34" stroke-width="2.2" stroke-linecap="round"><path d="M1 2a10 10 0 0 1 0 9"/><path d="M6.5-1a16 16 0 0 1 0 15"/><path d="M12-4a22 22 0 0 1 0 21"/><circle cx="-4.5" cy="6.5" r="2.3" fill="#fff" fill-opacity=".34" stroke="none"/></g></svg></div><b>Avaliações no Google</b><span>Barbearia</span></div>
+        <div class="plq-card" data-anim><div><svg class="pl-svg" viewBox="0 0 200 200" role="img" aria-label="Placa de MENU"><rect width="200" height="200" rx="26" fill="#0A0B0C"/><rect x="13" y="13" width="174" height="174" rx="17" fill="none" stroke="#fff" stroke-opacity=".16"/><text x="100" y="72" text-anchor="middle" fill="#fff" font-size="26" font-weight="600" letter-spacing="-1.2">Mr. B</text><g transform="translate(100 108)" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"><rect x="-15" y="-20" width="30" height="39" rx="5"/><path d="M-7-10h14M-7-1h14M-7 8h8"/></g><text x="100" y="146" text-anchor="middle" fill="#fff" fill-opacity=".62" font-size="10.4" font-weight="500" letter-spacing="1.9">MENU</text><g transform="translate(94 162)" fill="none" stroke="#fff" stroke-opacity=".34" stroke-width="2.2" stroke-linecap="round"><path d="M1 2a10 10 0 0 1 0 9"/><path d="M6.5-1a16 16 0 0 1 0 15"/><path d="M12-4a22 22 0 0 1 0 21"/><circle cx="-4.5" cy="6.5" r="2.3" fill="#fff" fill-opacity=".34" stroke="none"/></g></svg></div><b>Menu digital à mesa</b><span>Restaurante</span></div>
+        <div class="plq-card" data-anim><div><svg class="pl-svg" viewBox="0 0 200 200" role="img" aria-label="Placa de MARCAR"><rect width="200" height="200" rx="26" fill="#0A0B0C"/><rect x="13" y="13" width="174" height="174" rx="17" fill="none" stroke="#fff" stroke-opacity=".16"/><text x="100" y="72" text-anchor="middle" fill="#fff" font-size="26" font-weight="600" letter-spacing="-1.2">Zenith</text><g transform="translate(100 108)" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"><rect x="-19" y="-16" width="38" height="34" rx="5"/><path d="M-19-6h38M-9-22v8M9-22v8M-7 6l4.6 4.6L8 1"/></g><text x="100" y="146" text-anchor="middle" fill="#fff" fill-opacity=".62" font-size="10.4" font-weight="500" letter-spacing="1.9">MARCAR</text><g transform="translate(94 162)" fill="none" stroke="#fff" stroke-opacity=".34" stroke-width="2.2" stroke-linecap="round"><path d="M1 2a10 10 0 0 1 0 9"/><path d="M6.5-1a16 16 0 0 1 0 15"/><path d="M12-4a22 22 0 0 1 0 21"/><circle cx="-4.5" cy="6.5" r="2.3" fill="#fff" fill-opacity=".34" stroke="none"/></g></svg></div><b>Marcações diretas</b><span>Estética</span></div>
+        <div class="plq-card" data-anim><div><svg class="pl-svg" viewBox="0 0 200 200" role="img" aria-label="Placa de SEGUIR"><rect width="200" height="200" rx="26" fill="#0A0B0C"/><rect x="13" y="13" width="174" height="174" rx="17" fill="none" stroke="#fff" stroke-opacity=".16"/><text x="100" y="72" text-anchor="middle" fill="#fff" font-size="26" font-weight="600" letter-spacing="-1.2">Brah</text><g transform="translate(100 108)" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round"><rect x="-19" y="-19" width="38" height="38" rx="11"/><circle cx="0" cy="0" r="9"/><circle cx="11.5" cy="-11.5" r="1.6" fill="#fff"/></g><text x="100" y="146" text-anchor="middle" fill="#fff" fill-opacity=".62" font-size="10.4" font-weight="500" letter-spacing="1.9">SEGUIR</text><g transform="translate(94 162)" fill="none" stroke="#fff" stroke-opacity=".34" stroke-width="2.2" stroke-linecap="round"><path d="M1 2a10 10 0 0 1 0 9"/><path d="M6.5-1a16 16 0 0 1 0 15"/><path d="M12-4a22 22 0 0 1 0 21"/><circle cx="-4.5" cy="6.5" r="2.3" fill="#fff" fill-opacity=".34" stroke="none"/></g></svg></div><b>Instagram do espaço</b><span>Smash burgers</span></div>
+      </div>
+    </div>
     <div class="nfc-foot">
       <p>Dez dias úteis a contar da encomenda ao nosso fornecedor, cerca de duas semanas. Feitas em acrílico. Se quiseres QR code impresso no verso, é possível, mas o código tem de vir do teu lado.</p>
       <a href="#contacto" class="btn btn-p">Quero as minhas placas <i class="arw"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i></a>
@@ -1098,7 +1132,6 @@ section{padding:clamp(5rem,14vh,11rem) var(--pad);position:relative;z-index:2}
         <h5>Contacto</h5>
         <a href="#contacto">Marcar chamada</a>
         <a href="https://wa.me/351928412799" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="tel:+351962003550">962 003 550</a>
         <a href="mailto:mawebsitespt@gmail.com">Email</a>
         <a href="#">Instagram</a>
       </div>
@@ -1406,7 +1439,7 @@ function fundoEscuro(x,y){
     requestAnimationFrame(corDoFundo);
     if(++fq%3)return;
     const d=fundoEscuro(mx,my);
-    if(d!==escuro){escuro=d;cur.classList.toggle('inv',d);fol.classList.toggle('inv',d)}
+    if(d!==escuro){escuro=d;fol.classList.toggle('inv',d)}
   })();
   addEventListener('mouseleave',()=>{cur.classList.remove('on');fol.classList.remove('on')});
   addEventListener('mouseenter',()=>cur.classList.add('on'));
